@@ -1,34 +1,7 @@
 
-import { Rocket, Database, LineChart, UserCheck } from "lucide-react";
+import { LineChart, TrendingUp } from "lucide-react";
 
 const HowItWorks = () => {
-  const steps = [
-    {
-      icon: <Database className="h-8 w-8 text-white" />,
-      title: "Data Integration",
-      description: "We integrate with your existing player data and combine it with our comprehensive football database.",
-      delay: 100
-    },
-    {
-      icon: <LineChart className="h-8 w-8 text-white" />,
-      title: "AI Analysis",
-      description: "Our algorithms analyze how player attributes will perform within your specific tactical setup and league context.",
-      delay: 300
-    },
-    {
-      icon: <UserCheck className="h-8 w-8 text-white" />,
-      title: "Value Prediction",
-      description: "We generate precise forecasts of how a player will impact your team's performance metrics.",
-      delay: 500
-    },
-    {
-      icon: <Rocket className="h-8 w-8 text-white" />,
-      title: "Strategic Decisions",
-      description: "Make confident transfer decisions backed by data-driven insights tailored to your club's unique needs.",
-      delay: 700
-    }
-  ];
-
   return (
     <section id="how-it-works" className="py-20 bg-gray-50">
       <div className="container px-4 md:px-6">
@@ -40,30 +13,44 @@ const HowItWorks = () => {
             How SquadAssist Works
           </h2>
           <p className="text-lg text-gray-600 animate-fade-up" style={{ animationDelay: "200ms" }}>
-            Our platform uses a systematic approach to transform raw data into actionable transfer intelligence.
+            Our system predicts the On Field Value and the Future Transfer Fee using 2 separate AI-systems.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <div 
-              key={index} 
-              className="flex flex-col items-center text-center animate-fade-up"
-              style={{ animationDelay: `${step.delay}ms` }}
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-black rounded-full opacity-10 blur-lg transform scale-110"></div>
-                <div className="bg-black rounded-full p-5 relative z-10 mb-6">
-                  {step.icon}
-                </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 left-full w-full h-0.5 bg-gray-200 -translate-y-1/2 z-0"></div>
-                )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          {/* On Field Value */}
+          <div 
+            className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-sm animate-fade-up border border-gray-100"
+            style={{ animationDelay: "300ms" }}
+          >
+            <div className="relative mb-6">
+              <div className="absolute inset-0 bg-black rounded-full opacity-10 blur-lg transform scale-110"></div>
+              <div className="bg-black rounded-full p-5 relative z-10">
+                <LineChart className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-600">{step.description}</p>
             </div>
-          ))}
+            <h3 className="text-2xl font-semibold mb-4">On Field Value</h3>
+            <p className="text-gray-600">
+              SquadAssist predicts how your expected sportive outcomes change by adding the player while taking all squads of all competitors into account.
+            </p>
+          </div>
+
+          {/* Future Transfer Fee */}
+          <div 
+            className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-sm animate-fade-up border border-gray-100"
+            style={{ animationDelay: "500ms" }}
+          >
+            <div className="relative mb-6">
+              <div className="absolute inset-0 bg-black rounded-full opacity-10 blur-lg transform scale-110"></div>
+              <div className="bg-black rounded-full p-5 relative z-10">
+                <TrendingUp className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-semibold mb-4">Future Transfer Fee</h3>
+            <p className="text-gray-600">
+              SquadAssist predicts the transfer value of the player in a few years time by finding past players who were most similar in terms of growth potential.
+            </p>
+          </div>
         </div>
       </div>
     </section>
