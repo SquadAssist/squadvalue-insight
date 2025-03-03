@@ -1,3 +1,4 @@
+
 import { Brain, TrendingUp, Users, DollarSign } from "lucide-react";
 
 const Features = () => {
@@ -13,8 +14,8 @@ const Features = () => {
     delay: 200
   }, {
     icon: <Users className="h-8 w-8" />,
-    title: "Squad Compatibility",
-    description: "Evaluate how well a player will integrate with your existing team dynamics and tactics.",
+    title: "Squad-aware",
+    description: "SquadAssist takes your entire squad into account - and those of your competitors as well",
     delay: 300
   }, {
     icon: <DollarSign className="h-8 w-8" />,
