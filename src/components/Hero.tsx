@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -26,7 +25,7 @@ const imageSequence = [
     delay: 1800,
   },
   {
-    url: "https://images.unsplash.com/photo-1521731978332-9e9e714bdd20", // Stadium view
+    url: "https://images.unsplash.com/photo-1508098682722-e99c643e7485", // Stadium filled with fans
     alt: "Football stadium match day",
     delay: 1600,
   },
@@ -51,8 +50,8 @@ const imageSequence = [
     delay: 800,
   },
   {
-    url: "https://images.unsplash.com/photo-1461696114087-397271a7aedc", // Championship celebration
-    alt: "Team celebrating with trophy",
+    url: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e", // Team celebrating with trophy
+    alt: "Football team celebrating with trophy",
     delay: 0, // Final image stays
   },
 ];
