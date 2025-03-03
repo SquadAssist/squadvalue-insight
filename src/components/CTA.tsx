@@ -13,12 +13,9 @@ const CTA = () => {
           <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             Join the leading clubs that are using data-driven insights to make smarter transfer decisions and gain a competitive edge.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-              Request a Demo
-            </Button>
+          <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
             <Button size="lg" className="bg-white text-black hover:bg-gray-100 group">
-              Get Started <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              Contact Us <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
         </div>
