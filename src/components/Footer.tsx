@@ -1,5 +1,6 @@
 
 import { Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -27,7 +28,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li><a href="#about" className="text-gray-600 hover:text-black transition-colors">About Us</a></li>
               <li><a href="#team" className="text-gray-600 hover:text-black transition-colors">Our Team</a></li>
-              <li><a href="#contact" className="text-gray-600 hover:text-black transition-colors">Contact</a></li>
+              <li><Link to="/contact" className="text-gray-600 hover:text-black transition-colors">Contact</Link></li>
             </ul>
           </div>
           
