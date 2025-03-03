@@ -26,8 +26,8 @@ const imageSequence = [
     delay: 1800,
   },
   {
-    url: "https://images.unsplash.com/photo-1508098682722-e99c643e7485", // Stadium filled with fans
-    alt: "Football stadium match day",
+    url: "https://images.unsplash.com/photo-1486286701208-1d58e9338013", // Alternative stadium image
+    alt: "Football stadium with fans",
     delay: 1600,
   },
   {
@@ -36,8 +36,8 @@ const imageSequence = [
     delay: 1400,
   },
   {
-    url: "https://images.unsplash.com/photo-1626248801378-38a7942f8b5e", // Goal
-    alt: "Goal being scored",
+    url: "https://images.unsplash.com/photo-1521731299294-9b27e08028c1", // Alternative goal image
+    alt: "Football goal celebration",
     delay: 1200,
   },
   {
@@ -51,8 +51,8 @@ const imageSequence = [
     delay: 800,
   },
   {
-    url: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81", // Adult team with trophy
-    alt: "Football team of adults celebrating with trophy",
+    url: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81", // Alternative final image
+    alt: "Football team celebrating success",
     delay: 0, // Final image stays
   },
 ];
