@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,20 +31,23 @@ const Navbar = () => {
     >
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <a href="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
               alt="SquadAssist Logo" 
               className="h-8 md:h-10"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
             <a href="#how-it-works" className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
             <a href="#testimonials" className="text-gray-800 hover:text-black font-medium button-transition">Testimonials</a>
-            <Button variant="outline" className="mr-2">Contact Us</Button>
+            <Link to="/contact" className="text-gray-800 hover:text-black font-medium button-transition">Contact</Link>
+            <Button variant="outline" className="mr-2">
+              <Link to="/contact">Contact Us</Link>
+            </Button>
             <Button>Get Started</Button>
           </div>
 
@@ -88,8 +92,17 @@ const Navbar = () => {
           >
             Testimonials
           </a>
+          <Link 
+            to="/contact"
+            className="text-xl font-medium text-gray-800"
+            onClick={() => setIsOpen(false)}
+          >
+            Contact
+          </Link>
           <div className="flex flex-col space-y-4 pt-6">
-            <Button variant="outline" onClick={() => setIsOpen(false)}>Contact Us</Button>
+            <Button variant="outline" onClick={() => setIsOpen(false)}>
+              <Link to="/contact">Contact Us</Link>
+            </Button>
             <Button onClick={() => setIsOpen(false)}>Get Started</Button>
           </div>
         </div>
