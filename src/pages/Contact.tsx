@@ -57,7 +57,7 @@ const Contact = () => {
                 Get in Touch
               </h1>
               <p className="text-lg md:text-xl text-gray-300 animate-fade-up" style={{ animationDelay: "200ms" }}>
-                Have questions about SquadAssist? We're here to help you transform your transfer strategy.
+                Questions? We're here to help you transform your transfer strategy.
               </p>
             </div>
           </div>
@@ -158,10 +158,10 @@ const Contact = () => {
                   <h3 className="text-lg font-semibold mb-4">Other Ways to Reach Us</h3>
                   <div className="space-y-2">
                     <p className="text-gray-600">
-                      <span className="font-medium">Email:</span> info@squadassist.com
+                      <span className="font-medium">Email:</span> hello@squadassist.ai
                     </p>
                     <p className="text-gray-600">
-                      <span className="font-medium">Location:</span> London, United Kingdom
+                      <span className="font-medium">Location:</span> Leuven, Belgium
                     </p>
                   </div>
                 </div>
