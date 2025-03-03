@@ -1,4 +1,5 @@
-import { Brain, TrendingUp, Users, Target, Award, DollarSign } from "lucide-react";
+import { Brain, TrendingUp, Users, DollarSign } from "lucide-react";
+
 const Features = () => {
   const features = [{
     icon: <Brain className="h-8 w-8" />,
@@ -16,21 +17,12 @@ const Features = () => {
     description: "Evaluate how well a player will integrate with your existing team dynamics and tactics.",
     delay: 300
   }, {
-    icon: <Target className="h-8 w-8" />,
-    title: "Targeted Recruitment",
-    description: "Identify the exact player profiles that will maximize value for your specific needs.",
-    delay: 400
-  }, {
-    icon: <Award className="h-8 w-8" />,
-    title: "Competitive Edge",
-    description: "Gain insights on how transfers will impact your standing against league competitors.",
-    delay: 500
-  }, {
     icon: <DollarSign className="h-8 w-8" />,
     title: "Budget Optimization",
     description: "Maximize return on investment by identifying undervalued players ideal for your team.",
-    delay: 600
+    delay: 400
   }];
+  
   return <section id="features" className="py-20 bg-white">
       <div className="container px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -61,4 +53,5 @@ const Features = () => {
       </div>
     </section>;
 };
+
 export default Features;
