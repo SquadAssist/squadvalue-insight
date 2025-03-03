@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -50,8 +51,8 @@ const imageSequence = [
     delay: 800,
   },
   {
-    url: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e", // Team celebrating with trophy
-    alt: "Football team celebrating with trophy",
+    url: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81", // Adult team with trophy
+    alt: "Football team of adults celebrating with trophy",
     delay: 0, // Final image stays
   },
 ];
