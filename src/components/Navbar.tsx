@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -43,7 +42,6 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
             <a href="#how-it-works" className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
-            <Link to="/contact" className="text-gray-800 hover:text-black font-medium button-transition">Contact</Link>
             <Button>
               <Link to="/contact">Contact Us</Link>
             </Button>
@@ -83,13 +81,6 @@ const Navbar = () => {
           >
             How It Works
           </a>
-          <Link 
-            to="/contact"
-            className="text-xl font-medium text-gray-800"
-            onClick={() => setIsOpen(false)}
-          >
-            Contact
-          </Link>
           <div className="flex flex-col space-y-4 pt-6">
             <Button onClick={() => setIsOpen(false)}>
               <Link to="/contact">Contact Us</Link>
