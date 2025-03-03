@@ -37,11 +37,6 @@ const imageSequence = [{
   delay: 1400
 }, {
   url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
-  // Trophy
-  alt: "Championship trophy",
-  delay: 800
-}, {
-  url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
   // Trophy as final image
   alt: "Championship trophy",
   delay: 0 // Final image stays
@@ -80,7 +75,8 @@ const Hero = () => {
               {/* Overlay with heading positioned on top of the image */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                 <div className="text-center max-w-3xl px-4">
-                  <div className="inline-block animate-fade-in">
+                  {/* Position the badge lower on mobile devices */}
+                  <div className="inline-block animate-fade-in mt-4 md:mt-0">
                     <div className="py-1 px-3 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-white mb-2 md:mb-4">
                       AI-Powered Transfer Intelligence
                     </div>
