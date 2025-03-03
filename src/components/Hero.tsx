@@ -1,8 +1,79 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BarChart3, DollarSign, Trophy } from "lucide-react";
+import { useEffect, useState } from "react";
+
+// Image sequence with football journey from analysis to trophy
+const imageSequence = [
+  {
+    url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71", // Data visualization
+    alt: "Football data analysis",
+    delay: 3000, // 3 second initial delay
+  },
+  {
+    url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c", // Laptops with analysis
+    alt: "Laptop analysis for football recruitment",
+    delay: 2500,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018", // Training
+    alt: "Football team training",
+    delay: 2000,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1577223625816-7546f13df25d", // Team huddle
+    alt: "Football team huddle",
+    delay: 1800,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1521731978332-9e9e714bdd20", // Stadium view
+    alt: "Football stadium match day",
+    delay: 1600,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55", // Shot being taken
+    alt: "Football player taking a shot",
+    delay: 1400,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1626248801378-38a7942f8b5e", // Goal
+    alt: "Goal being scored",
+    delay: 1200,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1517466787929-bc90951d0974", // Celebration
+    alt: "Players celebrating a goal",
+    delay: 1000,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed", // Trophy
+    alt: "Championship trophy",
+    delay: 800,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1461696114087-397271a7aedc", // Championship celebration
+    alt: "Team celebrating with trophy",
+    delay: 0, // Final image stays
+  },
+];
 
 const Hero = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [animationComplete, setAnimationComplete] = useState(false);
+
+  useEffect(() => {
+    // Start the image sequence with the initial delay
+    if (currentImageIndex < imageSequence.length - 1) {
+      const timer = setTimeout(() => {
+        setCurrentImageIndex(prevIndex => prevIndex + 1);
+      }, imageSequence[currentImageIndex].delay);
+
+      return () => clearTimeout(timer);
+    } else if (currentImageIndex === imageSequence.length - 1 && !animationComplete) {
+      setAnimationComplete(true);
+    }
+  }, [currentImageIndex, animationComplete]);
+
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden hero-gradient">
       <div className="container px-4 md:px-6">
@@ -35,20 +106,20 @@ const Hero = () => {
               <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-xl">
                 <div className="absolute inset-0 w-full h-full">
                   <div className="relative w-full h-full">
-                    {/* Main image */}
+                    {/* Main image with transition */}
                     <img 
-                      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" 
-                      alt="Football data analysis" 
-                      className="w-full h-full object-cover rounded-xl animate-fade-in"
-                      style={{ animationDelay: "1000ms" }}
+                      src={imageSequence[currentImageIndex].url} 
+                      alt={imageSequence[currentImageIndex].alt} 
+                      className="w-full h-full object-cover rounded-xl transition-opacity duration-500"
                     />
                     
-                    {/* Overlay image that slides in */}
-                    <div className="absolute bottom-4 -right-2 w-1/2 h-1/2 transform translate-x-0 transition-transform duration-700 hover:translate-x-4 animate-slide-in-right" style={{ animationDelay: "1200ms" }}>
-                      <img 
-                        src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81" 
-                        alt="Player recruitment analysis" 
-                        className="w-full h-full object-cover rounded-lg shadow-lg"
+                    {/* Progress bar indicating sequence progress */}
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-black/10">
+                      <div 
+                        className="h-full bg-black transition-all duration-300 ease-out"
+                        style={{ 
+                          width: `${(currentImageIndex / (imageSequence.length - 1)) * 100}%`,
+                        }}
                       />
                     </div>
                   </div>
