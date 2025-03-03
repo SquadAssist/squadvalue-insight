@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -34,11 +35,6 @@ const imageSequence = [{
   // Shot being taken
   alt: "Football player taking a shot",
   delay: 1400
-}, {
-  url: "https://images.unsplash.com/photo-1517466787929-bc90951d0974",
-  // Celebration
-  alt: "Players celebrating a goal",
-  delay: 1000
 }, {
   url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
   // Trophy
@@ -85,28 +81,28 @@ const Hero = () => {
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                 <div className="text-center max-w-3xl px-4">
                   <div className="inline-block animate-fade-in">
-                    <div className="py-1 px-3 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-4">
+                    <div className="py-1 px-3 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-white mb-2 md:mb-4">
                       AI-Powered Transfer Intelligence
                     </div>
                   </div>
                   
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white animate-fade-up" style={{
+                  <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white animate-fade-up" style={{
                   animationDelay: "200ms"
                 }}>
                     Revolutionize your transfer strategy
                   </h1>
                   
-                  <p className="text-lg md:text-xl text-white/90 mt-4 animate-fade-up" style={{
+                  <p className="text-sm md:text-xl text-white/90 mt-2 md:mt-4 animate-fade-up px-2 md:px-0" style={{
                   animationDelay: "400ms"
                 }}>Predict how much value a specific player brings to your specific club so that you know who is the best value-for-money</p>
                   
-                  <div className="mt-8 animate-fade-up" style={{
+                  <div className="mt-4 md:mt-8 animate-fade-up" style={{
                   animationDelay: "600ms"
                 }}>
                     <Link to="/contact">
-                      <Button size="lg" className="bg-white text-black hover:bg-white/90 group">
+                      <Button size="sm" className="bg-white text-black hover:bg-white/90 group md:size-lg">
                         Contact Us
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-3 w-3 md:h-4 md:w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
                   </div>
@@ -116,34 +112,34 @@ const Hero = () => {
           </div>
           
           {/* Content section below the image */}
-          <div className="w-full max-w-3xl text-center space-y-6 animate-fade-up" style={{
+          <div className="w-full max-w-3xl text-center space-y-4 md:space-y-6 animate-fade-up" style={{
           animationDelay: "800ms"
         }}>
-            <p className="text-lg md:text-xl text-gray-600">
+            <p className="text-base md:text-xl text-gray-600 px-2 md:px-0">
               SquadAssist helps football clubs make data-driven transfer decisions by analyzing how players will perform within your specific team context.
             </p>
             
             {/* Feature cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="glass-card p-6 rounded-lg animate-fade-up" style={{
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
+              <div className="glass-card p-4 md:p-6 rounded-lg animate-fade-up" style={{
               animationDelay: "1000ms"
             }}>
-                <h3 className="font-semibold mb-2">Value Optimization</h3>
-                <p className="text-sm text-gray-600">Identify the best players within your transfer budget</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Value Optimization</h3>
+                <p className="text-xs md:text-sm text-gray-600">Identify the best players within your transfer budget</p>
               </div>
               
-              <div className="glass-card p-6 rounded-lg animate-fade-up" style={{
+              <div className="glass-card p-4 md:p-6 rounded-lg animate-fade-up" style={{
               animationDelay: "1200ms"
             }}>
-                <h3 className="font-semibold mb-2">Player Comparison</h3>
-                <p className="text-sm text-gray-600">Compare players to see who is most worth his money</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Player Comparison</h3>
+                <p className="text-xs md:text-sm text-gray-600">Compare players to see who is most worth his money</p>
               </div>
               
-              <div className="glass-card p-6 rounded-lg animate-fade-up" style={{
+              <div className="glass-card p-4 md:p-6 rounded-lg animate-fade-up" style={{
               animationDelay: "1400ms"
             }}>
-                <h3 className="font-semibold mb-2">Player Assessment</h3>
-                <p className="text-sm text-gray-600">Unsure if a player is worth his cost? Check his value!</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Player Assessment</h3>
+                <p className="text-xs md:text-sm text-gray-600">Unsure if a player is worth his cost? Check his value!</p>
               </div>
             </div>
           </div>
