@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Image sequence with football journey from analysis to trophy
 const imageSequence = [{
@@ -106,10 +107,12 @@ const Hero = () => {
                   <div className="mt-8 animate-fade-up" style={{
                   animationDelay: "600ms"
                 }}>
-                    <Button size="lg" className="bg-white text-black hover:bg-white/90 group">
-                      Contact Us
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <Link to="/contact">
+                      <Button size="lg" className="bg-white text-black hover:bg-white/90 group">
+                        Contact Us
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
