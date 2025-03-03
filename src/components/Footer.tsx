@@ -34,8 +34,8 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4">Resources</h3>
             <ul className="space-y-3">
-              <li><a href="#privacy" className="text-gray-600 hover:text-black transition-colors">Privacy Policy</a></li>
-              <li><a href="#terms" className="text-gray-600 hover:text-black transition-colors">Terms of Service</a></li>
+              <li><a href="/privacy-policy" className="text-gray-600 hover:text-black transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms-of-service" className="text-gray-600 hover:text-black transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>
@@ -44,8 +44,8 @@ const Footer = () => {
           <p className="text-gray-600 text-sm">© {new Date().getFullYear()} SquadAssist. All rights reserved.</p>
           <div className="mt-4 md:mt-0">
             <ul className="flex space-x-6 text-sm">
-              <li><a href="#privacy" className="text-gray-600 hover:text-black transition-colors">Privacy</a></li>
-              <li><a href="#terms" className="text-gray-600 hover:text-black transition-colors">Terms</a></li>
+              <li><a href="/privacy-policy" className="text-gray-600 hover:text-black transition-colors">Privacy</a></li>
+              <li><a href="/terms-of-service" className="text-gray-600 hover:text-black transition-colors">Terms</a></li>
               <li><a href="#cookies" className="text-gray-600 hover:text-black transition-colors">Cookies</a></li>
             </ul>
           </div>
