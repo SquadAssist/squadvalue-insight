@@ -9,8 +9,8 @@ const Features = () => {
     delay: 100
   }, {
     icon: <TrendingUp className="h-8 w-8" />,
-    title: "Performance Prediction",
-    description: "Forecast how a player's skills will translate to on-field performance with your squad.",
+    title: "Growth Potential",
+    description: "SquadAssist predicts how the player will improve so that you know what the player will be worth in a few years time",
     delay: 200
   }, {
     icon: <Users className="h-8 w-8" />,
