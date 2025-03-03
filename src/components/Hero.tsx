@@ -51,8 +51,8 @@ const imageSequence = [
     delay: 800,
   },
   {
-    url: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81", // Alternative final image
-    alt: "Football team celebrating success",
+    url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed", // Trophy as final image
+    alt: "Championship trophy",
     delay: 0, // Final image stays
   },
 ];
