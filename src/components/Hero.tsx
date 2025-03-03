@@ -36,8 +36,8 @@ const imageSequence = [
     delay: 1400,
   },
   {
-    url: "https://images.unsplash.com/photo-1521731299294-9b27e08028c1", // Alternative goal image
-    alt: "Football goal celebration",
+    url: "public/lovable-uploads/26b32ae7-c70d-49fa-b14f-9cdaaff03f04.png", // Team celebration - using the uploaded image
+    alt: "Football team celebrating a goal",
     delay: 1200,
   },
   {
