@@ -9,7 +9,7 @@ const Team = () => {
       name: "Wout Pauwels",
       role: "Co-Founder",
       bio: "Former data scientist specialized in developing AI models for sports analytics. Expert in transfer market valuations and player performance predictions.",
-      image: "/lovable-uploads/6b73ce30-b23b-4063-b425-5c848f728e67.png", // Updated Wout's image with the new photo
+      image: "/lovable-uploads/6b73ce30-b23b-4063-b425-5c848f728e67.png",
       linkedin: "https://www.linkedin.com/in/wout-pauwels/",
       email: "wout.pauwels@squadassist.ai"
     },
@@ -17,7 +17,7 @@ const Team = () => {
       name: "Maarten Wyns",
       role: "Co-Founder",
       bio: "Seasoned technology leader with extensive experience in AI and machine learning. Drives the development of SquadAssist's predictive algorithms and technical infrastructure.",
-      image: "/lovable-uploads/110bfb43-36ff-426c-b34b-037cf03b3f83.png", // Keeping Maarten's image the same
+      image: "/lovable-uploads/e22c27b7-6ae5-46e8-8ab0-c5e51e4831bf.png", // Updated with the new Maarten image
       linkedin: "https://www.linkedin.com/in/maartenwyns/",
       email: "maarten.wyns@squadassist.ai"
     }
@@ -53,7 +53,7 @@ const Team = () => {
                 <img 
                   src={member.image} 
                   alt={member.name} 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-top" // Changed from object-center to object-top for better face display
                 />
               </div>
               <div className="p-8 text-center">
