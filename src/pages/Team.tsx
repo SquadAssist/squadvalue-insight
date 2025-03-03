@@ -10,7 +10,7 @@ const Team = () => {
     {
       name: "Wout Pauwels",
       role: "Co-Founder",
-      bio: "Former data scientist specialized in developing AI models for sports analytics. Expert in transfer market valuations and player performance predictions.",
+      bio: "Data scientist (summa cum laude from KU Leuven) with strategy experience from McKinsey&Company",
       image: "/lovable-uploads/6b73ce30-b23b-4063-b425-5c848f728e67.png",
       linkedin: "https://www.linkedin.com/in/wout-pauwels/",
       email: "wout.pauwels@squadassist.ai"
@@ -18,7 +18,7 @@ const Team = () => {
     {
       name: "Maarten Wyns",
       role: "Co-Founder",
-      bio: "Seasoned technology leader with extensive experience in AI and machine learning. Drives the development of SquadAssist's predictive algorithms and technical infrastructure.",
+      bio: "Computer Engineer (magna cum laude from KU Leuven) with an MBA from Vlerick and experience at a FinTech scale-up",
       image: "/lovable-uploads/e22c27b7-6ae5-46e8-8ab0-c5e51e4831bf.png", 
       linkedin: "https://www.linkedin.com/in/maartenwyns/",
       email: "maarten.wyns@squadassist.ai"
