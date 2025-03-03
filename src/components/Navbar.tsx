@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,15 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Helper function to determine the correct link path
+  const getLinkPath = (anchor: string) => {
+    if (location.pathname === '/') {
+      return `#${anchor}`;
+    } else {
+      return `/#${anchor}`;
+    }
+  };
 
   return (
     <nav
@@ -41,8 +51,8 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
-            <a href="#how-it-works" className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
+            <a href={getLinkPath("features")} className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
+            <a href={getLinkPath("how-it-works")} className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
             <Link to="/team" className="text-gray-800 hover:text-black font-medium button-transition">Our Team</Link>
             <Button>
               <Link to="/contact">Contact Us</Link>
@@ -70,14 +80,14 @@ const Navbar = () => {
       >
         <div className="flex flex-col space-y-6">
           <a 
-            href="#features" 
+            href={getLinkPath("features")} 
             className="text-xl font-medium text-gray-800" 
             onClick={() => setIsOpen(false)}
           >
             Features
           </a>
           <a 
-            href="#how-it-works" 
+            href={getLinkPath("how-it-works")} 
             className="text-xl font-medium text-gray-800" 
             onClick={() => setIsOpen(false)}
           >
