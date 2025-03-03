@@ -56,7 +56,7 @@ const Hero = () => {
       setAnimationComplete(true);
     }
   }, [currentImageIndex, animationComplete]);
-  return <section className="pt-16 pb-16 md:pt-24 md:pb-24 overflow-hidden hero-gradient">
+  return <section className="pt-16 pb-16 md:pt-24 md:pb-24 mb-8 md:mb-0 overflow-hidden hero-gradient">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center">
           {/* Full-width image sequence container */}
