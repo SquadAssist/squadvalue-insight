@@ -35,11 +35,6 @@ const imageSequence = [{
   alt: "Football player taking a shot",
   delay: 1400
 }, {
-  url: "public/lovable-uploads/26b32ae7-c70d-49fa-b14f-9cdaaff03f04.png",
-  // Team celebration - using the uploaded image
-  alt: "Football team celebrating a goal",
-  delay: 1200
-}, {
   url: "https://images.unsplash.com/photo-1517466787929-bc90951d0974",
   // Celebration
   alt: "Players celebrating a goal",
@@ -55,6 +50,7 @@ const imageSequence = [{
   alt: "Championship trophy",
   delay: 0 // Final image stays
 }];
+
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [animationComplete, setAnimationComplete] = useState(false);
