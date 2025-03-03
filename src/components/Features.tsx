@@ -1,5 +1,5 @@
 
-import { Brain, TrendingUp, Users, DollarSign } from "lucide-react";
+import { Brain, TrendingUp, Users, DollarSign, PiggyBank, Award } from "lucide-react";
 
 const Features = () => {
   const features = [{
@@ -22,6 +22,16 @@ const Features = () => {
     title: "Budget Optimization",
     description: "Maximize return on investment by identifying undervalued players ideal for your team.",
     delay: 400
+  }, {
+    icon: <PiggyBank className="h-8 w-8" />,
+    title: "Recommended Position Spend",
+    description: "SquadAssist can detect how much you should ideally spend on each position given your total budget",
+    delay: 500
+  }, {
+    icon: <Award className="h-8 w-8" />,
+    title: "More Than A Tool",
+    description: "SquadAssist consists of top-level talent willing to provide the additional service you deserve",
+    delay: 600
   }];
   
   return <section id="features" className="py-20 bg-white">
