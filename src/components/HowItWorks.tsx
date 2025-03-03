@@ -13,9 +13,7 @@ const HowItWorks = () => {
           </h2>
           <p className="text-lg text-gray-600 animate-fade-up" style={{
           animationDelay: "200ms"
-        }}>
-            Our system predicts the On Field Value and the Future Transfer Fee using 2 separate AI-systems.
-          </p>
+        }}>We predict the On Field Value and the Future Transfer Fee through 2 AI-systems</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
