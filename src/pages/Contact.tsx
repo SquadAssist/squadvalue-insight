@@ -12,6 +12,8 @@ import emailjs from 'emailjs-com';
 const EMAILJS_USER_ID = "bUCGB5LFQr3DeMJDx"; // Replace with your actual EmailJS User ID
 const EMAILJS_SERVICE_ID = "service_hg6yrla"; // Replace with your actual EmailJS Service ID
 const EMAILJS_TEMPLATE_ID = "template_emk333g"; // Replace with your actual EmailJS Template ID
+const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx";
+const EMAILJS_PRIVATE_KEY = "GJBFZYVVtC7B5b304LEGF";
 
 const Contact = () => {
   const [email, setEmail] = useState("");
@@ -33,12 +35,17 @@ const Contact = () => {
     };
 
     try {
+
       // Send email using EmailJS
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams,
-        EMAILJS_USER_ID
+        {
+        publicKey: EMAILJS_PUBLIC_KEY,
+        privateKey: EMAILJS_PRIVATE_KEY
+        }
+        //EMAILJS_USER_ID
       );
       
       // Success
