@@ -9,9 +9,9 @@ import emailjs from 'emailjs-com';
 
 // Initialize EmailJS with your User ID
 // In a production app, these should come from environment variables
-const EMAILJS_USER_ID = "YOUR_USER_ID"; // Replace with your actual EmailJS User ID
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // Replace with your actual EmailJS Service ID
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // Replace with your actual EmailJS Template ID
+const EMAILJS_USER_ID = "bUCGB5LFQr3DeMJDx"; // Replace with your actual EmailJS User ID
+const EMAILJS_SERVICE_ID = "service_hg6yrla"; // Replace with your actual EmailJS Service ID
+const EMAILJS_TEMPLATE_ID = "template_emk333g"; // Replace with your actual EmailJS Template ID
 
 const Contact = () => {
   const [email, setEmail] = useState("");
