@@ -11,7 +11,7 @@ import emailjs from 'emailjs-com';
 // In a production app, these should come from environment variables
 const EMAILJS_USER_ID = "bUCGB5LFQr3DeMJDx"; // Replace with your actual EmailJS User ID
 const EMAILJS_SERVICE_ID = "service_hg6yrla"; // Replace with your actual EmailJS Service ID
-const EMAILJS_TEMPLATE_ID = "template_emk333g"; // Replace with your actual EmailJS Template ID
+const EMAILJS_TEMPLATE_ID = "template_vk5c7m9"; // Replace with your actual EmailJS Template ID
 const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx";
 const EMAILJS_PRIVATE_KEY = "GJBFZYVVtC7B5b304LEGF";
 
