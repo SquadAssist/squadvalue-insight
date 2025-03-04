@@ -5,6 +5,13 @@ import Footer from "@/components/Footer";
 import { Mail, Send, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from 'emailjs-com';
+
+// Initialize EmailJS with your User ID
+// In a production app, these should come from environment variables
+const EMAILJS_USER_ID = "YOUR_USER_ID"; // Replace with your actual EmailJS User ID
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // Replace with your actual EmailJS Service ID
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // Replace with your actual EmailJS Template ID
 
 const Contact = () => {
   const [email, setEmail] = useState("");
@@ -17,10 +24,22 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
+    // Prepare template parameters for EmailJS
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      to_email: "hello@squadassist.ai",
+      message: message,
+    };
+
     try {
-      // In a real implementation, this would be a fetch to your backend
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_USER_ID
+      );
       
       // Success
       toast({
@@ -34,6 +53,7 @@ const Contact = () => {
       setName("");
       setMessage("");
     } catch (error) {
+      console.error("Failed to send email:", error);
       // Error
       toast({
         title: "Something went wrong",
