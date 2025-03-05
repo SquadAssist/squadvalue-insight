@@ -46,12 +46,12 @@ const Team = () => {
             {teamMembers.map((member, index) => <div key={index} className="flex flex-col items-center bg-white rounded-xl shadow-subtle border border-gray-100 overflow-hidden animate-fade-up" style={{
             animationDelay: `${300 + index * 200}ms`
           }}>
-                <div className="w-full h-80 relative overflow-hidden">
+                <div className="w-full aspect-square relative overflow-hidden bg-gray-50">
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    className="w-full h-full object-contain object-center" 
-                    style={{ objectPosition: "center 30%" }}
+                    className="w-full h-full object-contain" 
+                    style={{ objectPosition: "center 40%" }}
                   />
                 </div>
                 <div className="p-8 text-center">
