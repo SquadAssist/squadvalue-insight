@@ -50,7 +50,8 @@ const Team = () => {
                   <img 
                     src={member.image} 
                     alt={member.name} 
-                    className="w-full h-full object-cover object-center" 
+                    className="w-full h-full object-contain object-center" 
+                    style={{ objectPosition: "center 30%" }}
                   />
                 </div>
                 <div className="p-8 text-center">
