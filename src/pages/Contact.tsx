@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,7 +12,6 @@ const EMAILJS_USER_ID = "bUCGB5LFQr3DeMJDx"; // Replace with your actual EmailJS
 const EMAILJS_SERVICE_ID = "service_hg6yrla"; // Replace with your actual EmailJS Service ID
 const EMAILJS_TEMPLATE_ID = "template_vk5c7m9"; // Replace with your actual EmailJS Template ID
 const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx";
-const EMAILJS_PRIVATE_KEY = "GJBFZYVVtC7B5b304LEGF";
 
 const Contact = () => {
   const [email, setEmail] = useState("");
@@ -35,29 +33,14 @@ const Contact = () => {
     };
 
     try {
-        emailjs.init({
-          publicKey: EMAILJS_PUBLIC_KEY,
-          // Do not allow headless browsers
-          blockHeadless: true,
-          blockList: {
-            // Block the suspended emails
-            list: ['foo@emailjs.com', 'bar@emailjs.com'],
-            // The variable contains the email address
-            watchVariable: 'userEmail',
-          },
-          limitRate: {
-            // Set the limit rate for the application
-            id: 'app',
-            // Allow 1 request per 10s
-            throttle: 10000,
-          },
-      });
+        // Initialize EmailJS with just the public key as a string
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+        
       // Send email using EmailJS
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams
-        //EMAILJS_USER_ID
       );
       
       // Success
