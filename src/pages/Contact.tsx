@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,10 +9,9 @@ import emailjs from 'emailjs-com';
 
 // Initialize EmailJS with your User ID
 // In a production app, these should come from environment variables
-const EMAILJS_USER_ID = "bUCGB5LFQr3DeMJDx"; // Replace with your actual EmailJS User ID
 const EMAILJS_SERVICE_ID = "service_hg6yrla"; // Replace with your actual EmailJS Service ID
 const EMAILJS_TEMPLATE_ID = "template_vk5c7m9"; // Replace with your actual EmailJS Template ID
-const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx";
+const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx"; 
 
 const Contact = () => {
   const [email, setEmail] = useState("");
@@ -33,15 +33,17 @@ const Contact = () => {
     };
 
     try {
-        // Initialize EmailJS with just the public key as a string
-        emailjs.init(EMAILJS_PUBLIC_KEY);
-        
+      // Initialize EmailJS with the public key
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      
       // Send email using EmailJS
-      await emailjs.send(
+      const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams
       );
+      
+      console.log('Email successfully sent!', response);
       
       // Success
       toast({
