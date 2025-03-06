@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -55,13 +56,13 @@ const Hero = () => {
       setAnimationComplete(true);
     }
   }, [currentImageIndex, animationComplete]);
-  return <section className="mt-16 md:mt-0 pt-16 pb-16 md:pt-24 md:pb-24 overflow-hidden hero-gradient">
+  return <section className="mt-16 md:mt-0 pt-16 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-gradient-to-b from-white to-gray-50">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center">
-          {/* Full-width image sequence container */}
+          {/* Full-width image sequence container with reduced margins */}
           <div className="w-full mb-12 relative">
             <div className="aspect-[16/9] rounded-xl overflow-hidden shadow-xl mx-auto max-w-6xl">
-              {/* Main image with transition */}
+              {/* Main image with transition - removed excess margins */}
               <img src={imageSequence[currentImageIndex].url} alt={imageSequence[currentImageIndex].alt} className="w-full h-full object-cover rounded-xl transition-opacity duration-500" />
               
               {/* Progress bar indicating sequence progress */}
