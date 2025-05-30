@@ -59,8 +59,8 @@ const Hero = () => {
         <div className="flex flex-col items-center">
           {/* Full-width image sequence container with no shadows or borders */}
           <div className="w-full mb-12 relative">
-            <div className="aspect-[16/9] rounded-xl overflow-hidden mx-auto max-w-6xl">
-              {/* Main image with transition - removed all shadows and borders */}
+            <div className="h-[400px] md:h-[500px] rounded-xl overflow-hidden mx-auto max-w-6xl">
+              {/* Main image with transition - removed aspect ratio to prevent gray areas */}
               <img 
                 src={imageSequence[currentImageIndex].url} 
                 alt={imageSequence[currentImageIndex].alt} 
