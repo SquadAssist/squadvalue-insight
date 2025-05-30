@@ -57,10 +57,10 @@ const Hero = () => {
     <section className="mt-16 md:mt-0 pt-16 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-gradient-to-b from-white to-gray-50">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center">
-          {/* Full-width image sequence container with reduced margins */}
+          {/* Full-width image sequence container with no shadows or borders */}
           <div className="w-full mb-12 relative">
-            <div className="aspect-[16/9] rounded-xl overflow-hidden shadow-xl mx-auto max-w-6xl">
-              {/* Main image with transition - removed borders and grey boxes */}
+            <div className="aspect-[16/9] rounded-xl overflow-hidden mx-auto max-w-6xl">
+              {/* Main image with transition - removed all shadows and borders */}
               <img 
                 src={imageSequence[currentImageIndex].url} 
                 alt={imageSequence[currentImageIndex].alt} 
