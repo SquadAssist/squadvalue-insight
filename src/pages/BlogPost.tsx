@@ -1,21 +1,14 @@
-
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const BlogPost = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container flex h-16 items-center px-4 md:px-6">
           <Link to="/" className="flex items-center space-x-2">
-            <img 
-              src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
-              alt="SquadAssist Logo" 
-              className="h-8"
-            />
+            <img src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" alt="SquadAssist Logo" className="h-8" />
           </Link>
           <div className="ml-auto">
             <Link to="/blog">
@@ -45,11 +38,7 @@ const BlogPost = () => {
             How AI & Analytics Improve Decision-Making in Player Recruitment Compared to Traditional Scouting
           </h1>
           <div className="aspect-video relative overflow-hidden rounded-lg mb-8">
-            <img 
-              src="/lovable-uploads/4f3f69f5-c537-41eb-a946-9ba68d273f92.png" 
-              alt="AI Analytics in Football Scouting"
-              className="w-full h-full object-cover"
-            />
+            <img alt="AI Analytics in Football Scouting" className="w-full h-full object-cover" src="/lovable-uploads/f18de699-0ea1-406a-a653-98cb6f8ffcd9.png" />
           </div>
         </div>
 
@@ -138,8 +127,6 @@ const BlogPost = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default BlogPost;
