@@ -1,98 +1,65 @@
 
-import { useEffect, useState } from "react";
-
 interface DataPoint {
   id: number;
   x: number;
   y: number;
   opacity: number;
   size: number;
-  speed: number;
 }
 
 const DataVisualization = () => {
-  const [dataPoints, setDataPoints] = useState<DataPoint[]>([]);
-  const [connections, setConnections] = useState<Array<[number, number]>>([]);
+  // Static data points for subtle background pattern
+  const staticPoints: DataPoint[] = [
+    { id: 1, x: 15, y: 20, opacity: 0.1, size: 4 },
+    { id: 2, x: 75, y: 15, opacity: 0.15, size: 6 },
+    { id: 3, x: 25, y: 80, opacity: 0.08, size: 3 },
+    { id: 4, x: 85, y: 70, opacity: 0.12, size: 5 },
+    { id: 5, x: 45, y: 35, opacity: 0.06, size: 2 },
+    { id: 6, x: 65, y: 85, opacity: 0.1, size: 4 },
+  ];
 
-  useEffect(() => {
-    // Generate floating data points
-    const points: DataPoint[] = Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      opacity: Math.random() * 0.6 + 0.2,
-      size: Math.random() * 8 + 4,
-      speed: Math.random() * 2 + 1
-    }));
-
-    // Generate connections between nearby points
-    const conns: Array<[number, number]> = [];
-    for (let i = 0; i < points.length; i++) {
-      for (let j = i + 1; j < points.length; j++) {
-        const distance = Math.sqrt(
-          Math.pow(points[i].x - points[j].x, 2) + 
-          Math.pow(points[i].y - points[j].y, 2)
-        );
-        if (distance < 30 && Math.random() > 0.6) {
-          conns.push([i, j]);
-        }
-      }
-    }
-
-    setDataPoints(points);
-    setConnections(conns);
-
-    // Animate data points
-    const interval = setInterval(() => {
-      setDataPoints(prev => prev.map(point => ({
-        ...point,
-        x: (point.x + point.speed * 0.1) % 100,
-        y: point.y + Math.sin(Date.now() * 0.001 + point.id) * 0.1,
-        opacity: 0.2 + 0.4 * Math.sin(Date.now() * 0.002 + point.id)
-      })));
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
+  const connections: Array<[number, number]> = [
+    [0, 1], [1, 3], [2, 5], [0, 4]
+  ];
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-30">
+      {/* Subtle geometric grid */}
+      <div className="absolute inset-0 opacity-20">
         <svg width="100%" height="100%" className="absolute inset-0">
           <defs>
-            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="hsl(var(--tech-blue))" strokeWidth="0.5" opacity="0.3"/>
+            <pattern id="professional-grid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(var(--navy-primary))" strokeWidth="0.3" opacity="0.4"/>
             </pattern>
-            <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="hsl(var(--navy-primary))" stopOpacity="0.1"/>
-              <stop offset="50%" stopColor="hsl(var(--tech-blue))" stopOpacity="0.2"/>
-              <stop offset="100%" stopColor="hsl(var(--navy-primary))" stopOpacity="0.1"/>
+            <linearGradient id="subtle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="hsl(var(--navy-primary))" stopOpacity="0.03"/>
+              <stop offset="50%" stopColor="hsl(var(--tech-blue))" stopOpacity="0.05"/>
+              <stop offset="100%" stopColor="hsl(var(--navy-primary))" stopOpacity="0.02"/>
             </linearGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" className="animate-pulse-premium"/>
+          <rect width="100%" height="100%" fill="url(#professional-grid)"/>
+          <rect width="100%" height="100%" fill="url(#subtle-gradient)"/>
         </svg>
       </div>
 
-      {/* Floating data points */}
+      {/* Static professional data points */}
       <svg width="100%" height="100%" className="absolute inset-0">
-        {/* Connection lines */}
+        {/* Subtle connection lines */}
         {connections.map(([i, j], index) => (
           <line
             key={`connection-${index}`}
-            x1={`${dataPoints[i]?.x}%`}
-            y1={`${dataPoints[i]?.y}%`}
-            x2={`${dataPoints[j]?.x}%`}
-            y2={`${dataPoints[j]?.y}%`}
-            stroke="hsl(var(--tech-blue))"
-            strokeWidth="1"
-            opacity="0.2"
-            className="animate-pulse-soft"
+            x1={`${staticPoints[i]?.x}%`}
+            y1={`${staticPoints[i]?.y}%`}
+            x2={`${staticPoints[j]?.x}%`}
+            y2={`${staticPoints[j]?.y}%`}
+            stroke="hsl(var(--navy-primary))"
+            strokeWidth="0.5"
+            opacity="0.1"
           />
         ))}
         
-        {/* Data points */}
-        {dataPoints.map((point) => (
+        {/* Static data points */}
+        {staticPoints.map((point) => (
           <circle
             key={point.id}
             cx={`${point.x}%`}
@@ -100,29 +67,12 @@ const DataVisualization = () => {
             r={point.size}
             fill="hsl(var(--navy-primary))"
             opacity={point.opacity}
-            className="animate-pulse-premium"
           />
         ))}
       </svg>
 
-      {/* Flowing data streams */}
-      <div className="absolute inset-0">
-        {[...Array(3)].map((_, i) => (
-          <div
-            key={`stream-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent animate-data-flow"
-            style={{
-              top: `${20 + i * 30}%`,
-              width: '200%',
-              animationDelay: `${i * 2}s`,
-              animationDuration: '8s'
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Subtle geometric patterns */}
-      <div className="absolute inset-0 tech-pattern opacity-40" />
+      {/* Professional overlay pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-navy-primary/5"></div>
     </div>
   );
 };
