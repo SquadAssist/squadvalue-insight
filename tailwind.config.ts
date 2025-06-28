@@ -62,19 +62,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Premium color system
-				navy: {
-					deep: 'hsl(var(--navy-deep))',
-					primary: 'hsl(var(--navy-primary))',
-					light: 'hsl(var(--navy-light))'
-				},
-				tech: {
-					blue: 'hsl(var(--tech-blue))'
-				},
-				gray: {
-					premium: 'hsl(var(--gray-premium))',
-					subtle: 'hsl(var(--gray-subtle))'
 				}
 			},
 			borderRadius: {
@@ -84,8 +71,6 @@ export default {
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				poppins: ['Poppins', 'sans-serif'],
-				inter: ['Inter', 'sans-serif'],
 				mono: ['Roboto Mono', 'monospace'],
 			},
 			keyframes: {
@@ -124,22 +109,6 @@ export default {
 				'pulse-soft': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.8' }
-				},
-				'data-flow': {
-					'0%': { transform: 'translateX(-100%) translateY(-100%)' },
-					'100%': { transform: 'translateX(100%) translateY(100%)' }
-				},
-				'float-gentle': {
-					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-					'50%': { transform: 'translateY(-20px) rotate(2deg)' }
-				},
-				'pulse-premium': {
-					'0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-					'50%': { opacity: '0.8', transform: 'scale(1.05)' }
-				},
-				'gradient-shift': {
-					'0%, 100%': { backgroundPosition: '0% 50%' },
-					'50%': { backgroundPosition: '100% 50%' }
 				}
 			},
 			animation: {
@@ -151,11 +120,7 @@ export default {
 				'slide-in-left': 'slide-in-left 0.6s ease-out',
 				'scale': 'scale 0.6s ease-out',
 				'float': 'float 6s ease-in-out infinite',
-				'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
-				'data-flow': 'data-flow 8s linear infinite',
-				'float-gentle': 'float-gentle 6s ease-in-out infinite',
-				'pulse-premium': 'pulse-premium 4s ease-in-out infinite',
-				'gradient-shift': 'gradient-shift 8s ease-in-out infinite'
+				'pulse-soft': 'pulse-soft 3s ease-in-out infinite'
 			},
 			backdropFilter: {
 				'none': 'none',
@@ -164,8 +129,6 @@ export default {
 			boxShadow: {
 				'subtle': '0 2px 15px rgba(0, 0, 0, 0.06)',
 				'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
-				'premium': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-				'premium-lg': '0 35px 60px -12px rgba(0, 0, 0, 0.3)',
 			},
 		}
 	},

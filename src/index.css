@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -36,15 +35,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    /* Premium Color System */
-    --navy-deep: 15 23% 12%;
-    --navy-primary: 217 91% 60%;
-    --navy-light: 213 97% 87%;
-    --tech-blue: 221 83% 53%;
-    --gray-premium: 220 13% 91%;
-    --gray-subtle: 210 20% 98%;
-    --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 
   .dark {
@@ -89,115 +79,116 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins font-bold tracking-tight;
-  }
-
-  p, span, div {
-    @apply font-inter;
+    @apply font-sans font-bold tracking-tight;
   }
 }
 
 @layer components {
-  .glass-premium {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl;
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-glass;
   }
   
-  .glass-dark-premium {
-    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-800/20 shadow-2xl;
+  .glass-dark {
+    @apply bg-black/60 backdrop-blur-md border border-black/20 shadow-glass;
   }
 
-  .heading-premium {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900;
+  .heading-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-500;
   }
 
-  .button-premium {
-    @apply transition-all duration-500 ease-out hover:scale-105 hover:shadow-xl;
+  .button-transition {
+    @apply transition-all duration-300 ease-in-out;
   }
   
-  .premium-gradient {
-    background: linear-gradient(135deg, 
-      hsl(var(--gray-subtle)) 0%, 
-      hsl(var(--navy-light)) 50%, 
-      hsl(var(--gray-subtle)) 100%);
+  .hero-gradient {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 240, 1) 100%);
   }
   
-  .tech-pattern {
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(var(--tech-blue))/0.1 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(var(--navy-primary))/0.1 0%, transparent 50%);
+  .feature-card-hover {
+    @apply transition-all duration-300 ease-in-out hover:shadow-lg hover:translate-y-[-5px];
   }
   
-  .card-premium {
-    @apply bg-white/60 backdrop-blur-sm border border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-500 hover:bg-white/80;
+  .image-transition {
+    @apply transition-all duration-500 ease-in-out transform hover:scale-105;
   }
   
-  .floating-element {
-    @apply animate-float;
-  }
-  
-  .data-visualization {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .data-visualization::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%),
-      linear-gradient(0deg, transparent 0%, rgba(15, 23, 42, 0.05) 50%, transparent 100%);
-    animation: data-flow 8s linear infinite;
-  }
-  
-  .premium-shadow {
-    box-shadow: var(--shadow-premium);
+  .image-overlay {
+    @apply absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 hover:opacity-100 flex items-center justify-center text-white font-medium;
   }
 }
 
 @layer animations {
-  @keyframes data-flow {
-    0% { transform: translateX(-100%) translateY(-100%); }
-    100% { transform: translateX(100%) translateY(100%); }
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
-  @keyframes float-gentle {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(2deg); }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
-  @keyframes pulse-premium {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.05); }
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  @keyframes slide-in-premium {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 
-  @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+  @keyframes slide-in-left {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 
-  .animate-float-gentle {
-    animation: float-gentle 6s ease-in-out infinite;
+  @keyframes scale {
+    0% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
-  .animate-pulse-premium {
-    animation: pulse-premium 4s ease-in-out infinite;
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
-  .animate-slide-in-premium {
-    animation: slide-in-premium 0.8s ease-out forwards;
-  }
-
-  .animate-gradient-shift {
-    animation: gradient-shift 8s ease-in-out infinite;
-    background-size: 200% 200%;
+  @keyframes pulse-soft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
   }
 }
