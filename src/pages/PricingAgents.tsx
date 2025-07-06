@@ -95,7 +95,7 @@ const PricingAgents = () => {
                           target="_blank" 
                           rel="noopener noreferrer"
                         >
-                          {tier.name === 'Free' ? 'Get Started' : 'Contact Sales'}
+                          Get Started
                         </a>
                       </Button>
                     </div>
