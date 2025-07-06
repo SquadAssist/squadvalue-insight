@@ -1,3 +1,4 @@
+
 import {
   Accordion,
   AccordionContent,
@@ -12,20 +13,12 @@ const FAQ = () => {
       answer: "SquadAssist is an AI-powered football transfer intelligence platform that helps clubs and agents make data-driven recruitment decisions. We use advanced machine learning to predict player performance in your specific team context and forecast future transfer values.",
     },
     {
-      question: "How accurate are SquadAssist's player value predictions?",
-      answer: "Our AI models analyze vast amounts of historical data, player performance metrics, and market trends to provide highly accurate predictions. The platform considers your specific squad composition and competitive environment to deliver personalized insights.",
-    },
-    {
       question: "What makes SquadAssist different from traditional scouting?",
       answer: "Unlike traditional scouting that relies on subjective observations, SquadAssist provides objective, data-driven analysis. Our platform can analyze thousands of players simultaneously, predict future performance, and calculate precise value-for-money metrics that human scouts cannot match.",
     },
     {
       question: "Who can benefit from using SquadAssist?",
       answer: "Football clubs of all sizes, sporting directors, heads of recruitment, football agents, and data analysts can benefit from our platform. Whether you're managing transfer budgets or representing players, SquadAssist provides the intelligence you need.",
-    },
-    {
-      question: "How does SquadAssist predict future transfer fees?",
-      answer: "Our AI system analyzes historical transfer data and identifies patterns in player development trajectories. By finding similar players from the past and tracking their career progression, we can accurately forecast future market values and transfer fees.",
     },
     {
       question: "Can SquadAssist help with budget optimization?",
