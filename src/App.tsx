@@ -14,6 +14,7 @@ import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import PricingAgents from "./pages/PricingAgents";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/ai-analytics-vs-traditional-scouting" element={<BlogPost />} />
+          <Route path="/pricing/agents" element={<PricingAgents />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
