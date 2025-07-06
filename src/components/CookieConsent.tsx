@@ -25,7 +25,7 @@ const CookieConsent = () => {
     const storedPreferences = localStorage.getItem('cookie_preferences');
     if (storedPreferences) {
       setPreferences(JSON.parse(storedPreferences));
-      // Consent already given, don't show banner
+      setShowBanner(false);
     } else {
       // No consent yet, show banner after a short delay
       const timer = setTimeout(() => {
@@ -116,13 +116,10 @@ const CookieConsent = () => {
     setOpen(true);
   };
 
-  // For testing/debugging purposes, let's force show the banner if no preferences exist
-  const hasPreferences = localStorage.getItem('cookie_preferences');
-
   return (
     <>
       {/* Cookie Banner */}
-      {(showBanner || !hasPreferences) && (
+      {showBanner && (
         <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white shadow-2xl border-t-2 border-blue-600">
           <div className="container mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="flex-1">
