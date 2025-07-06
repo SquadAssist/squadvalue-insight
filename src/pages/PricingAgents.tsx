@@ -91,7 +91,7 @@ const PricingAgents = () => {
                           variant="outline"
                           asChild
                         >
-                          <a href="https://product.squadassist.ai/sign-up" target="_blank" rel="noopener noreferrer">
+                          <a href="https://product.squadassist.ai/sign-up?type=agent" target="_blank" rel="noopener noreferrer">
                             Get Started
                           </a>
                         </Button>
