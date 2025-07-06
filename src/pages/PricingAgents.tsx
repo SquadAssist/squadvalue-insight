@@ -31,7 +31,8 @@ const PricingAgents = () => {
       price: "€5000/year",
       features: [
         "Sell a player: Unlimited",
-        "Find a club: Unlimited"
+        "Find a club: Unlimited",
+        "Find a player: Unlimited"
       ],
       popular: false
     }
