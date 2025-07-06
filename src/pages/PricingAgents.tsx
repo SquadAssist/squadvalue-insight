@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -84,12 +85,27 @@ const PricingAgents = () => {
                     </ul>
                     
                     <div className="pt-4">
-                      <Button 
-                        className={`w-full ${tier.popular ? 'bg-primary hover:bg-primary/90' : 'variant-outline'}`}
-                        variant={tier.popular ? 'default' : 'outline'}
-                      >
-                        {tier.name === 'Free' ? 'Get Started' : 'Contact Sales'}
-                      </Button>
+                      {tier.name === 'Free' ? (
+                        <Button 
+                          className="w-full"
+                          variant="outline"
+                          asChild
+                        >
+                          <a href="https://product.squadassist.ai/sign-up" target="_blank" rel="noopener noreferrer">
+                            Get Started
+                          </a>
+                        </Button>
+                      ) : (
+                        <Button 
+                          className={`w-full ${tier.popular ? 'bg-primary hover:bg-primary/90' : ''}`}
+                          variant={tier.popular ? 'default' : 'outline'}
+                          asChild
+                        >
+                          <Link to="/contact">
+                            Contact Sales
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
