@@ -116,28 +116,46 @@ const CookieConsent = () => {
     setOpen(true);
   };
 
+  // For testing/debugging purposes, let's force show the banner if no preferences exist
+  const hasPreferences = localStorage.getItem('cookie_preferences');
+
   return (
     <>
       {/* Cookie Banner */}
-      {showBanner && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white shadow-lg border-t border-gray-200">
-          <div className="container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      {(showBanner || !hasPreferences) && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white shadow-2xl border-t-2 border-blue-600">
+          <div className="container mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="flex-1">
-              <h3 className="font-semibold text-lg">Cookie Consent</h3>
-              <p className="text-gray-600 text-sm mt-1">
-                We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic.
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                <h3 className="font-semibold text-lg text-gray-900">We Value Your Privacy</h3>
+              </div>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                We use cookies to enhance your browsing experience, provide personalized content, and analyze our traffic.
                 By clicking "Accept All", you consent to our use of cookies. Read our{' '}
-                <Link to="/cookie-policy" className="text-blue-600 hover:underline">Cookie Policy</Link> for more information.
+                <Link to="/cookie-policy" className="text-blue-600 hover:text-blue-800 font-medium underline">Cookie Policy</Link>{' '}
+                for more information.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 shrink-0">
-              <Button variant="outline" onClick={handleRejectAll}>
+              <Button 
+                variant="outline" 
+                onClick={handleRejectAll}
+                className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
                 Reject All
               </Button>
-              <Button variant="outline" onClick={openPreferences}>
-                Preferences
+              <Button 
+                variant="outline" 
+                onClick={openPreferences}
+                className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              >
+                Customize
               </Button>
-              <Button onClick={handleAcceptAll}>
+              <Button 
+                onClick={handleAcceptAll}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
                 Accept All
               </Button>
             </div>
@@ -149,46 +167,48 @@ const CookieConsent = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Cookie Preferences</DialogTitle>
-            <DialogDescription>
-              Customize your cookie preferences. Essential cookies cannot be disabled as they are necessary for the website to function properly.
+            <DialogTitle className="text-xl font-semibold text-gray-900">Cookie Preferences</DialogTitle>
+            <DialogDescription className="text-gray-600">
+              Customize your cookie settings. Essential cookies are required for the website to function properly and cannot be disabled.
             </DialogDescription>
           </DialogHeader>
           
           <div className="space-y-4 py-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
               <div>
-                <p className="font-medium">Essential Cookies</p>
-                <p className="text-sm text-gray-500">Required for the website to function</p>
+                <p className="font-medium text-gray-900">Essential Cookies</p>
+                <p className="text-sm text-gray-600">Required for website functionality</p>
               </div>
-              <Switch checked={true} disabled />
+              <Switch checked={true} disabled className="data-[state=checked]:bg-blue-600" />
             </div>
             
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200">
               <div>
-                <p className="font-medium">Analytics Cookies</p>
-                <p className="text-sm text-gray-500">Help us improve our website</p>
+                <p className="font-medium text-gray-900">Analytics Cookies</p>
+                <p className="text-sm text-gray-600">Help us improve our website performance</p>
               </div>
               <Switch 
                 checked={preferences.analytics} 
-                onCheckedChange={() => handleToggleChange('analytics')} 
+                onCheckedChange={() => handleToggleChange('analytics')}
+                className="data-[state=checked]:bg-blue-600"
               />
             </div>
             
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200">
               <div>
-                <p className="font-medium">Marketing Cookies</p>
-                <p className="text-sm text-gray-500">Personalized ads and content</p>
+                <p className="font-medium text-gray-900">Marketing Cookies</p>
+                <p className="text-sm text-gray-600">Enable personalized content and ads</p>
               </div>
               <Switch 
                 checked={preferences.marketing} 
-                onCheckedChange={() => handleToggleChange('marketing')} 
+                onCheckedChange={() => handleToggleChange('marketing')}
+                className="data-[state=checked]:bg-blue-600"
               />
             </div>
             
-            <div className="pt-4 text-sm text-gray-500">
-              For more details, please read our{' '}
-              <Link to="/cookie-policy" className="text-blue-600 hover:underline" onClick={() => setOpen(false)}>
+            <div className="pt-4 text-sm text-gray-500 bg-gray-50 p-3 rounded-lg">
+              For detailed information about our data practices, please read our{' '}
+              <Link to="/cookie-policy" className="text-blue-600 hover:text-blue-800 font-medium underline" onClick={() => setOpen(false)}>
                 Cookie Policy
               </Link>
               .
@@ -196,8 +216,19 @@ const CookieConsent = () => {
           </div>
           
           <DialogFooter className="flex flex-col-reverse sm:flex-row sm:space-x-2">
-            <Button variant="outline" onClick={handleRejectAll}>Reject All</Button>
-            <Button onClick={handleAcceptSelected}>Save Preferences</Button>
+            <Button 
+              variant="outline" 
+              onClick={handleRejectAll}
+              className="border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              Reject All
+            </Button>
+            <Button 
+              onClick={handleAcceptSelected}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Save Preferences
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
