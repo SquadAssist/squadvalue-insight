@@ -4,33 +4,33 @@ import { Brain, TrendingUp, Users, DollarSign, PiggyBank, Award } from "lucide-r
 const Features = () => {
   const features = [{
     icon: <Brain className="h-8 w-8" />,
-    title: "AI-Powered Analysis",
-    description: "Advanced machine learning models predict player performance in your specific team context.",
+    title: "AI-Powered Player Analysis",
+    description: "Advanced machine learning models predict player performance and value within your specific team context and competitive environment.",
     delay: 100
   }, {
     icon: <TrendingUp className="h-8 w-8" />,
-    title: "Growth Potential",
-    description: "SquadAssist predicts how the player will improve so that you know what the player will be worth in a few years time",
+    title: "Future Transfer Value Prediction",
+    description: "SquadAssist predicts how players will develop and what they'll be worth in future transfer windows, helping you invest in tomorrow's stars today",
     delay: 200
   }, {
     icon: <Users className="h-8 w-8" />,
-    title: "Squad-aware",
-    description: "SquadAssist takes your entire squad into account - and those of your competitors as well",
+    title: "Squad-Aware Analytics",
+    description: "Our platform analyzes your entire squad composition and compares it against competitors, ensuring optimal team balance and strategic advantage",
     delay: 300
   }, {
     icon: <DollarSign className="h-8 w-8" />,
-    title: "Budget Optimization",
-    description: "Maximize return on investment by identifying undervalued players ideal for your team.",
+    title: "Transfer Budget Optimization",
+    description: "Maximize your return on investment by identifying undervalued players who offer the best value-for-money within your budget constraints.",
     delay: 400
   }, {
     icon: <PiggyBank className="h-8 w-8" />,
-    title: "Recommended Position Spend",
-    description: "SquadAssist can detect how much you should ideally spend on each position given your total budget",
+    title: "Strategic Position Investment",
+    description: "SquadAssist analyzes your squad needs and recommends optimal budget allocation across positions to maximize team performance and value",
     delay: 500
   }, {
     icon: <Award className="h-8 w-8" />,
-    title: "More Than A Tool",
-    description: "SquadAssist consists of top-level talent willing to provide the additional service you deserve",
+    title: "Expert Consultation Service",
+    description: "Beyond our AI platform, SquadAssist provides access to top-level football analytics experts who offer personalized consulting and strategic guidance",
     delay: 600
   }];
   
@@ -43,11 +43,11 @@ const Features = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up" style={{
           animationDelay: "100ms"
         }}>
-            Data-Driven Transfer Intelligence
+            Advanced Football Transfer Intelligence
           </h2>
           <p className="text-lg text-gray-600 animate-fade-up" style={{
           animationDelay: "200ms"
-        }}>SquadAssist uses advanced AI to make your transfer decisions easier and better</p>
+        }}>SquadAssist uses cutting-edge AI and machine learning to revolutionize football transfer decisions. Our platform provides comprehensive player analysis, transfer value predictions, and strategic insights to help clubs and agents make smarter recruitment choices.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

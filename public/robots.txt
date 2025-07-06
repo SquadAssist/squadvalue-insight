@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://squadassist.ai/sitemap.xml
+
+# Disallow admin areas and API endpoints if any
+Disallow: /admin/
+Disallow: /api/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

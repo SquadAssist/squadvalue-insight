@@ -9,14 +9,14 @@ const Team = () => {
   const teamMembers = [{
     name: "Wout Pauwels",
     role: "Co-Founder",
-    bio: "Data scientist (summa cum laude from KU Leuven) with strategy experience from McKinsey&Company",
+    bio: "Data Scientist and AI expert (summa cum laude from KU Leuven) with strategic consulting experience from McKinsey & Company. Specializes in machine learning applications for sports analytics and transfer market intelligence.",
     image: "/lovable-uploads/4f3f69f5-c537-41eb-a946-9ba68d273f92.png",
     linkedin: "https://www.linkedin.com/in/wout-pauwels/",
     email: "wout.pauwels@squadassist.ai"
   }, {
     name: "Maarten Wyns",
     role: "Co-Founder",
-    bio: "Computer Engineer (magna cum laude from KU Leuven) with an MBA from Vlerick and experience at a FinTech scale-up",
+    bio: "Computer Engineer and Technology Leader (magna cum laude from KU Leuven) with an MBA from Vlerick Business School. Brings extensive experience in fintech scaling and software development to football analytics.",
     image: "/lovable-uploads/6ede69f2-1346-4897-9f8d-cd82ed409d9d.png",
     linkedin: "https://www.linkedin.com/in/maartenwyns/",
     email: "maarten.wyns@squadassist.ai"
@@ -33,12 +33,12 @@ const Team = () => {
             <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-up" style={{
             animationDelay: "100ms"
           }}>
-              The People Behind SquadAssist
+              Meet the SquadAssist Team
             </h1>
             <p className="text-lg text-gray-600 animate-fade-up" style={{
             animationDelay: "200ms"
           }}>
-              Combining expertise in sports analytics, AI, and technology to revolutionize football transfers
+              Combining expertise in sports analytics, AI, and technology to revolutionize football transfer intelligence. Our team brings together cutting-edge data science and deep football industry knowledge.
             </p>
           </div>
 
@@ -49,7 +49,7 @@ const Team = () => {
                 <div className="w-full aspect-square relative overflow-hidden bg-gray-50">
                   <img 
                     src={member.image} 
-                    alt={member.name} 
+                    alt={`${member.name} - ${member.role} at SquadAssist, AI-powered football transfer analytics platform`} 
                     className="w-full h-full object-contain" 
                     style={{ objectPosition: "center 40%" }}
                   />

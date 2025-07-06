@@ -48,7 +48,7 @@ const Blog = () => {
             SquadAssist Blog
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Insights on AI-powered football analytics, transfer market trends, and the future of player recruitment
+            Insights on AI-powered football analytics, transfer market trends, and the future of player recruitment. <a href="/" className="text-blue-600 hover:underline">Back to SquadAssist platform</a>.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ const Blog = () => {
               <div className="aspect-video relative overflow-hidden rounded-t-lg">
                 <img 
                   src={article.image} 
-                  alt={article.title}
+                  alt={`${article.title} - Football analytics and AI transfer intelligence insights`}
                   className="w-full h-full object-cover"
                 />
               </div>

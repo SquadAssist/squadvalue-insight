@@ -78,10 +78,10 @@ const Contact = () => {
           <div className="container px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
-                Get in Touch
+                Contact SquadAssist
               </h1>
               <p className="text-lg md:text-xl text-gray-300 animate-fade-up" style={{ animationDelay: "200ms" }}>
-                Questions? We're here to help you transform your transfer strategy.
+                Ready to revolutionize your football transfer strategy? Get in touch with our team to learn how AI-powered analytics can transform your recruitment process.
               </p>
             </div>
           </div>
@@ -92,7 +92,7 @@ const Contact = () => {
           <div className="container px-4 md:px-6">
             <div className="max-w-2xl mx-auto">
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-                <h2 className="text-2xl font-semibold mb-6">Contact Us</h2>
+                <h2 className="text-2xl font-semibold mb-6">Contact Our Football Analytics Team</h2>
                 
                 <form onSubmit={handleSubmit}>
                   <div className="space-y-6">
@@ -149,7 +149,7 @@ const Contact = () => {
                         required
                         rows={5}
                         className="block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm"
-                        placeholder="How can we help you?"
+                        placeholder="How can we help with your transfer strategy?"
                       />
                     </div>
                     
@@ -179,13 +179,16 @@ const Contact = () => {
                 </form>
                 
                 <div className="mt-8 pt-8 border-t border-gray-200">
-                  <h3 className="text-lg font-semibold mb-4">Other Ways to Reach Us</h3>
+                  <h3 className="text-lg font-semibold mb-4">Ready to Get Started?</h3>
                   <div className="space-y-2">
                     <p className="text-gray-600">
                       <span className="font-medium">Email:</span> hello@squadassist.ai
                     </p>
                     <p className="text-gray-600">
                       <span className="font-medium">Location:</span> Leuven, Belgium
+                    </p>
+                    <p className="text-gray-600 mt-4">
+                      Learn more about our <a href="/team" className="text-blue-600 hover:underline">expert team</a> or explore our <a href="/blog" className="text-blue-600 hover:underline">insights on football analytics</a>.
                     </p>
                   </div>
                 </div>

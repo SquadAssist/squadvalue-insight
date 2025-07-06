@@ -9,11 +9,11 @@ const HowItWorks = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up" style={{
           animationDelay: "100ms"
         }}>
-            How SquadAssist Works
+            How SquadAssist's AI Analytics Work
           </h2>
           <p className="text-lg text-gray-600 animate-fade-up" style={{
           animationDelay: "200ms"
-        }}>We predict the On Field Value and the Future Transfer Fee through 2 AI-systems</p>
+        }}>We leverage two sophisticated AI systems to predict On-Field Value and Future Transfer Fees, providing comprehensive insights for football transfer decision-making</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
@@ -27,8 +27,8 @@ const HowItWorks = () => {
                 <LineChart className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-4">On Field Value</h3>
-            <p className="text-gray-600">SquadAssist predicts your expected sportive outcomes with and without the player. We take the full squads of all your competitors into account while simulating the competition.</p>
+            <h3 className="text-2xl font-semibold mb-4">On-Field Value Analysis</h3>
+            <p className="text-gray-600">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios by analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
           </div>
 
           {/* Future Transfer Fee */}
@@ -41,9 +41,9 @@ const HowItWorks = () => {
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-4">Future Transfer Fee</h3>
+            <h3 className="text-2xl font-semibold mb-4">Future Transfer Value Prediction</h3>
             <p className="text-gray-600">
-              SquadAssist predicts the transfer value of the player in a few years time by finding past players who were most similar in terms of growth potential.
+              SquadAssist forecasts players' transfer values in future windows by analyzing historical data from similar players. Our machine learning models identify patterns in player development and market valuations to predict long-term investment potential.
             </p>
           </div>
         </div>

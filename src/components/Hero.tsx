@@ -63,7 +63,7 @@ const Hero = () => {
               {/* Main image with transition - removed aspect ratio to prevent gray areas */}
               <img 
                 src={imageSequence[currentImageIndex].url} 
-                alt={imageSequence[currentImageIndex].alt} 
+                alt={`${imageSequence[currentImageIndex].alt} - SquadAssist AI football transfer analysis platform`} 
                 className="w-full h-full object-cover transition-opacity duration-500" 
               />
               
@@ -87,14 +87,13 @@ const Hero = () => {
                     </div>
                   </div>
                   
-                  <h1 
-                    className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white animate-fade-up" 
-                    style={{
-                      animationDelay: "200ms"
-                    }}
-                  >
-                    Revolutionize your transfer strategy
-                  </h1>
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white animate-fade-up" 
+                style={{
+                  animationDelay: "200ms"
+                }}
+              >
+                Revolutionize Your Football Transfer Strategy
+              </h1>
                   
                   <p 
                     className="text-sm md:text-xl text-white/90 mt-2 md:mt-4 animate-fade-up px-2 md:px-0" 
@@ -102,7 +101,7 @@ const Hero = () => {
                       animationDelay: "400ms"
                     }}
                   >
-                    Predict how much value a specific player brings to your specific club so that you know who is the best value-for-money
+                    AI-powered football transfer intelligence: Predict player value for your specific club context and make data-driven recruitment decisions
                   </p>
                   
                   <div 
@@ -131,7 +130,7 @@ const Hero = () => {
             }}
           >
             <p className="text-base md:text-xl text-gray-600 px-2 md:px-0">
-              SquadAssist helps football clubs make data-driven transfer decisions by analyzing how players will perform within your specific team context.
+              SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within your specific team context. Our AI-powered platform predicts both on-field value and future transfer fees, giving you the competitive edge in football recruitment.
             </p>
             
             {/* Feature cards */}
@@ -142,8 +141,8 @@ const Hero = () => {
                   animationDelay: "1000ms"
                 }}
               >
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Value Optimization</h3>
-                <p className="text-xs md:text-sm text-gray-600">Identify the best players within your transfer budget</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Transfer Value Optimization</h3>
+                <p className="text-xs md:text-sm text-gray-600">Identify the best value-for-money players within your transfer budget and squad needs</p>
               </div>
               
               <div 
