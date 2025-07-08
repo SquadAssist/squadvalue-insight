@@ -22,7 +22,8 @@ const PricingAgents = () => {
       price: "€2000/year",
       features: [
         "Sell a player: 20/day",
-        "Find a club: 3/week"
+        "Find a club: 3/week",
+        "More premium data sources used"
       ],
       popular: true
     },
@@ -32,7 +33,8 @@ const PricingAgents = () => {
       features: [
         "Sell a player: Unlimited",
         "Find a club: Unlimited",
-        "Find a player: Unlimited"
+        "Find a player: Unlimited",
+        "More premium data sources used"
       ],
       popular: false
     }
@@ -76,14 +78,16 @@ const PricingAgents = () => {
                   </CardHeader>
                   
                   <CardContent className="space-y-4">
-                    <ul className="space-y-3">
-                      {tier.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-3">
-                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                     <ul className="space-y-3">
+                       {tier.features.map((feature, featureIndex) => (
+                         <li key={featureIndex} className="flex items-start gap-3">
+                           <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                           <span className={`text-sm ${feature === 'More premium data sources used' ? 'text-muted-foreground/70 text-xs' : 'text-muted-foreground'}`}>
+                             {feature}
+                           </span>
+                         </li>
+                       ))}
+                     </ul>
                     
                     <div className="pt-4">
                       <Button 
