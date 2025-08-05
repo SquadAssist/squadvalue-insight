@@ -55,7 +55,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <a href={getLinkPath("features")} className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
             <a href={getLinkPath("how-it-works")} className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
-            <Link to="/team" className="text-gray-800 hover:text-black font-medium button-transition">Our Team</Link>
+            {/* <Link to="/team" className="text-gray-800 hover:text-black font-medium button-transition">Our Team</Link> */}
             <Button>
               <Link to="/contact">Contact Us</Link>
             </Button>
@@ -79,9 +79,9 @@ const Navbar = () => {
           <a href={getLinkPath("how-it-works")} className="text-xl font-medium text-gray-800" onClick={() => setIsOpen(false)}>
             How It Works
           </a>
-          <Link to="/team" className="text-xl font-medium text-gray-800" onClick={() => setIsOpen(false)}>
+          {/* <Link to="/team" className="text-xl font-medium text-gray-800" onClick={() => setIsOpen(false)}>
             Our Team
-          </Link>
+          </Link> */}
           <div className="flex flex-col space-y-4 pt-6">
             <Button onClick={() => setIsOpen(false)}>
               <Link to="/contact">Contact Us</Link>
