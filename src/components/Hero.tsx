@@ -81,7 +81,7 @@ const Hero = () => {
                   
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-3 sm:mt-4 md:mt-6 animate-fade-up max-w-4xl mx-auto" style={{
                   animationDelay: "400ms"
-                }}>AI-powered football transfer intelligence: Predict future transfer value and sportive impact to help make the best possible transfer decisions</p>
+                }}>Predict the future transfer value and sportive impact tof a player to make the best possible transfer decisions by leveraging AI-powered football transfer intelligence </p>
                   
                   <div className="mt-6 sm:mt-8 animate-fade-up" style={{
                   animationDelay: "600ms"
