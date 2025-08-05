@@ -27,8 +27,8 @@ const HowItWorks = () => {
                 <LineChart className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-4">On-Field Value Analysis</h3>
-            <p className="text-gray-600">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios by analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
+            <h3 className="text-2xl font-semibold mb-4">On-Field Value</h3>
+            <p className="text-gray-600">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios while analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
           </div>
 
           {/* Future Transfer Fee */}
@@ -41,10 +41,8 @@ const HowItWorks = () => {
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-4">Future Transfer Value Prediction</h3>
-            <p className="text-gray-600">
-              SquadAssist forecasts players' transfer values in future windows by analyzing historical data from similar players. Our machine learning models identify patterns in player development and market valuations to predict long-term investment potential.
-            </p>
+            <h3 className="text-2xl font-semibold mb-4">Future Transfer Value</h3>
+            <p className="text-gray-600">SquadAssist forecasts players' transfer values 3 years ahead by analyzing historical data from similar players. Our machine learning models identify patterns in player development and market valuations to predict long-term investment potential.</p>
           </div>
         </div>
       </div>
