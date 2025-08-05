@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { DollarSign, Users, Target } from "lucide-react";
+import { FeatureInquiryModal } from "./FeatureInquiryModal";
 
 const LinearStyleFeatures = () => {
+  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
   const features = [
     {
       icon: <DollarSign className="h-12 w-12" />,
@@ -67,14 +70,17 @@ const LinearStyleFeatures = () => {
                 {feature.description}
               </p>
 
-              {/* Hover effect arrow */}
+              {/* Hover effect button */}
               <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="flex items-center text-blue-400 text-sm font-medium">
-                  Learn more
+                <button 
+                  onClick={() => setSelectedFeature(feature.title)}
+                  className="flex items-center text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors duration-200"
+                >
+                  I want this
                   <svg className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </div>
+                </button>
               </div>
             </div>
           ))}
@@ -84,6 +90,13 @@ const LinearStyleFeatures = () => {
         <div className="absolute top-1/4 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
       </div>
+
+      {/* Feature Inquiry Modal */}
+      <FeatureInquiryModal 
+        isOpen={!!selectedFeature}
+        onClose={() => setSelectedFeature(null)}
+        featureTitle={selectedFeature || ""}
+      />
     </section>
   );
 };

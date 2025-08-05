@@ -2,3 +2,6 @@ project_id = "wiazpjgccgexlbtprucl"
 
 [functions.send-club-inquiry]
 verify_jwt = false
+
+[functions.send-feature-inquiry]
+verify_jwt = false
