@@ -17,7 +17,7 @@ export const PricingDropdown = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="text-gray-800 hover:text-black font-medium">
+          <Button variant="ghost" className="text-gray-800 hover:text-black font-medium p-0 h-auto hover:bg-transparent">
             Pricing
             <ChevronDown className="ml-1 h-4 w-4" />
           </Button>
