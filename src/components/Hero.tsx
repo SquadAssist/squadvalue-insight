@@ -105,28 +105,7 @@ const Hero = () => {
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within your specific team context. Our AI-powered platform predicts both on-field value and future transfer value, giving you the competitive edge in football recruitment.</p>
             
             {/* Feature cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 w-full">
-              <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-lg border border-border shadow-subtle animate-fade-up hover:shadow-md transition-all duration-300" style={{
-              animationDelay: "1000ms"
-            }}>
-                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg text-card-foreground">Transfer Value Optimization</h3>
-                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed">Identify the best value-for-money players within your transfer budget and squad needs</p>
-              </div>
-              
-              <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-lg border border-border shadow-subtle animate-fade-up hover:shadow-md transition-all duration-300" style={{
-              animationDelay: "1200ms"
-            }}>
-                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg text-card-foreground">Player Comparison</h3>
-                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed">Compare players to see who is most worth his money</p>
-              </div>
-              
-              <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-lg border border-border shadow-subtle animate-fade-up hover:shadow-md transition-all duration-300" style={{
-              animationDelay: "1400ms"
-            }}>
-                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg text-card-foreground">Player Assessment</h3>
-                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed">Unsure if a player is worth his cost? Check his value!</p>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
