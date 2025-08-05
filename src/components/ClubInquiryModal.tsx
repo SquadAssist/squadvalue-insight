@@ -62,7 +62,7 @@ export const ClubInquiryModal = ({
   return <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Club Pricing Inquiry</DialogTitle>
+          <DialogTitle>I'm interested</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <p className="text-muted-foreground">We would like to first get to know your needs. Please leave your e-mail here and we'll reach out.</p>
