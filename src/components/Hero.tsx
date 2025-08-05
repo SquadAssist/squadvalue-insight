@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 // Image sequence with football journey from analysis to trophy (removed data visualization)
 const imageSequence = [{
-  url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-  // Laptops with analysis
-  alt: "Laptop analysis for football recruitment",
+  url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+  // Data analytics dashboard
+  alt: "Data analytics dashboard for football transfer analysis",
   delay: 3000 // 3 second initial delay
 }, {
   url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018",
