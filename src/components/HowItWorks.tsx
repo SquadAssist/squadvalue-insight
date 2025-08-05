@@ -1,53 +1,61 @@
-import { LineChart, TrendingUp } from "lucide-react";
 const HowItWorks = () => {
-  return <section id="how-it-works" className="py-20 bg-blue-50">
-      <div className="container px-4 md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block py-1 px-3 bg-black/5 rounded-full text-sm font-medium text-gray-800 mb-4 animate-fade-in">
-            The Process
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up" style={{
-          animationDelay: "100ms"
-        }}>
-            How SquadAssist's AI Analytics Work
+  return (
+    <section className="py-24 bg-trust-50">
+      <div className="section-container">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
+            Why SquadAssist Works Better
           </h2>
-          <p className="text-lg text-gray-600 animate-fade-up" style={{
-          animationDelay: "200ms"
-        }}>We leverage two sophisticated AI systems to predict On-Field Value and Future Transfer Fees, providing comprehensive insights for football transfer decision-making</p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "200ms" }}>
+            Traditional scouting misses the context. We predict performance in YOUR specific tactical system and squad dynamics.
+          </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-          {/* On Field Value */}
-          <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-md animate-fade-up border border-blue-100 hover:shadow-lg transition-all duration-300" style={{
-          animationDelay: "300ms"
-        }}>
-            <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
-                <LineChart className="h-8 w-8 text-white" />
-              </div>
-            </div>
-            <h3 className="text-2xl font-semibold mb-4">On-Field Value Analysis</h3>
-            <p className="text-gray-600">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios by analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
-          </div>
-
-          {/* Future Transfer Fee */}
-          <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-md animate-fade-up border border-blue-100 hover:shadow-lg transition-all duration-300" style={{
-          animationDelay: "500ms"
-        }}>
-            <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-            </div>
-            <h3 className="text-2xl font-semibold mb-4">Future Transfer Value Prediction</h3>
-            <p className="text-gray-600">
-              SquadAssist forecasts players' transfer values in future windows by analyzing historical data from similar players. Our machine learning models identify patterns in player development and market valuations to predict long-term investment potential.
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="modern-card animate-fade-up" style={{ animationDelay: "300ms" }}>
+            <h3 className="text-xl font-semibold mb-4 text-accent">Squad-Contextual Analysis</h3>
+            <p className="text-muted-foreground mb-4">
+              We don't just analyze isolated player stats. Our AI understands how players will perform within your specific tactical system, alongside your current squad members.
             </p>
+            <ul className="space-y-3 text-sm text-foreground">
+              <li className="flex items-start">
+                <span className="text-accent mr-2">✓</span>
+                <span>Tactical system compatibility scoring</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">✓</span>
+                <span>Squad chemistry and balance impact</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">✓</span>
+                <span>Position-specific role optimization</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="modern-card animate-fade-up" style={{ animationDelay: "400ms" }}>
+            <h3 className="text-xl font-semibold mb-4 text-accent">Predictive Value Modeling</h3>
+            <p className="text-muted-foreground mb-4">
+              Beyond current ability, we forecast future performance and market value evolution. Identify players who will grow with your club and appreciate in value.
+            </p>
+            <ul className="space-y-3 text-sm text-foreground">
+              <li className="flex items-start">
+                <span className="text-accent mr-2">✓</span>
+                <span>3-year performance trajectory forecasting</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">✓</span>
+                <span>Market value appreciation prediction</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-accent mr-2">✓</span>
+                <span>ROI optimization for every transfer</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 export default HowItWorks;

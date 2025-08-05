@@ -5,19 +5,32 @@ import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
-    <section className="py-20 bg-black text-white">
-      <div className="container px-4 md:px-6">
+    <section className="py-24 bg-foreground text-white">
+      <div className="section-container">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
-            Ready to Transform Your Transfer Strategy?
+          <div className="urgency-badge bg-white/10 text-white border-white/20 mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
+            ⏰ Early access stops soon
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "200ms" }}>
+            Stop Gambling with Transfers.
+            <span className="block text-accent">Start Winning with Data.</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
-            Join the leading clubs that are using data-driven insights to make smarter transfer decisions and gain a competitive edge.
+          
+          <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: "300ms" }}>
+            Join forward-thinking clubs using AI to gain a competitive edge in player recruitment. Every day you wait, your competitors get ahead.
           </p>
-          <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: "400ms" }}>
             <Link to="/contact">
-              <Button size="lg" className="bg-white text-black hover:bg-gray-100 group">
-                Contact Us <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <Button size="lg" className="bg-white text-black hover:bg-white/90 group">
+                Contact Sales Today
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 group">
+                See Demo
               </Button>
             </Link>
           </div>
