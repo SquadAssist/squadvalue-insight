@@ -7,13 +7,12 @@ export const PricingDropdown = () => {
 
   return (
     <>
-      <Button 
-        variant="ghost" 
-        className="text-gray-800 hover:text-black font-medium hover:bg-transparent button-transition"
+      <button 
+        className="text-gray-800 hover:text-black font-medium button-transition"
         onClick={() => setIsModalOpen(true)}
       >
         Pricing
-      </Button>
+      </button>
 
       <PricingModal 
         isOpen={isModalOpen} 
