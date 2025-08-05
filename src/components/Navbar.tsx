@@ -45,7 +45,7 @@ const Navbar = () => {
       return `/#${anchor}`;
     }
   };
-  return <nav className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4 px-6 lg:px-12", isScrolled ? "bg-white/80 backdrop-blur-md shadow-subtle" : "bg-transparent")}>
+  return <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4 px-6 lg:px-12 bg-white/80 backdrop-blur-md shadow-subtle">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
