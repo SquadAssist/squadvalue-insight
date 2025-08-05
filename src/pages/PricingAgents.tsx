@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -5,6 +6,7 @@ import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 
 const PricingAgents = () => {
   const tiers = [
@@ -39,6 +41,10 @@ const PricingAgents = () => {
       popular: false
     }
   ];
+
+  useEffect(() => {
+    updatePageSEO(pageSEOConfigs.pricingAgents);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
