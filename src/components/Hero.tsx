@@ -102,7 +102,7 @@ const Hero = () => {
           <div className="w-full max-w-6xl text-center space-y-6 sm:space-y-8 animate-fade-up px-4 sm:px-6" style={{
           animationDelay: "800ms"
         }}>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within a specific team context. Our AI-powered platform predicts both on-field value and future transfer value, giving you the competitive edge in football recruitment.</p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within a specific team context. Our AI-powered platform predicts both on field value and future transfer value, giving you the competitive edge in football recruitment.</p>
             
             {/* Feature cards */}
             
