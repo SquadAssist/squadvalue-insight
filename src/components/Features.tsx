@@ -29,7 +29,7 @@ const Features = () => {
     delay: 500
   }, {
     icon: <Award className="h-8 w-8" />,
-    title: "Expert Consultation Service",
+    title: "AI Experts",
     description: "Beyond our AI platform, SquadAssist provides access to top-level football analytics experts who offer personalized consulting and strategic guidance",
     delay: 600
   }];
