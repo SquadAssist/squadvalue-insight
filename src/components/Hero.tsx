@@ -77,7 +77,7 @@ const Hero = () => {
                   
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white animate-fade-up leading-tight" style={{
                   animationDelay: "200ms"
-                }}>Predict the added value a player will create for a club</h1>
+                }}>Predict the added value a player will create</h1>
                   
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-3 sm:mt-4 md:mt-6 animate-fade-up max-w-4xl mx-auto" style={{
                   animationDelay: "400ms"
