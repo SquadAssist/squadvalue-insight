@@ -34,7 +34,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to SquadAssist
     const emailResponse = await resend.emails.send({
-      from: "SquadAssist <onboarding@resend.dev>",
+      from: "SquadAssist <hello@frontend.squadassist.ai>",
       to: ["hello@squadassist.ai"],
       subject: "New Club Pricing Inquiry",
       html: `
