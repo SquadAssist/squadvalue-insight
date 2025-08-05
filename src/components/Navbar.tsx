@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { PricingDropdown } from "./PricingDropdown";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,7 +56,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <a href={getLinkPath("features")} className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
             <a href={getLinkPath("how-it-works")} className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
-            {/* <Link to="/team" className="text-gray-800 hover:text-black font-medium button-transition">Our Team</Link> */}
+            <PricingDropdown />
             <Button>
               <Link to="/contact">Contact Us</Link>
             </Button>
@@ -79,9 +80,21 @@ const Navbar = () => {
           <a href={getLinkPath("how-it-works")} className="text-xl font-medium text-gray-800" onClick={() => setIsOpen(false)}>
             How It Works
           </a>
-          {/* <Link to="/team" className="text-xl font-medium text-gray-800" onClick={() => setIsOpen(false)}>
-            Our Team
-          </Link> */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-lg font-medium text-gray-800">Pricing</span>
+            <Link to="/pricing/agents" className="text-base text-gray-600 ml-4" onClick={() => setIsOpen(false)}>
+              Agent
+            </Link>
+            <button 
+              className="text-base text-gray-600 ml-4 text-left"
+              onClick={() => {
+                setIsOpen(false);
+                // Will be handled by the PricingDropdown component
+              }}
+            >
+              Club
+            </button>
+          </div>
           <div className="flex flex-col space-y-4 pt-6">
             <Button onClick={() => setIsOpen(false)}>
               <Link to="/contact">Contact Us</Link>
