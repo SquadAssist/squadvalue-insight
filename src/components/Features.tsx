@@ -34,7 +34,7 @@ const Features = () => {
     delay: 600
   }];
   
-  return <section id="features" className="py-20 bg-white">
+  return <section id="features" className="py-24 bg-muted/30">
       <div className="container px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block py-1 px-3 bg-black/5 rounded-full text-sm font-medium text-gray-800 mb-4 animate-fade-in">
@@ -51,14 +51,14 @@ const Features = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => <div key={index} className="bg-white p-6 rounded-xl shadow-subtle border border-gray-100 feature-card-hover animate-fade-up" style={{
+          {features.map((feature, index) => <div key={index} className="bg-card p-8 rounded-xl shadow-subtle border border-border hover:shadow-md transition-all duration-300 animate-fade-up" style={{
           animationDelay: `${feature.delay}ms`
         }}>
-              <div className="bg-black/5 p-3 rounded-lg w-fit mb-4">
+              <div className="bg-primary/10 p-3 rounded-lg w-fit mb-6 text-primary">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-card-foreground">{feature.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>)}
         </div>
       </div>

@@ -49,7 +49,7 @@ const Hero = () => {
       setAnimationComplete(true);
     }
   }, [currentImageIndex, animationComplete]);
-  return <section className="mt-4 md:mt-0 pt-8 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+  return <section className="mt-4 md:mt-0 pt-8 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-background">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center">
           {/* Full-width image sequence container with no shadows or borders */}
@@ -102,29 +102,29 @@ const Hero = () => {
           <div className="w-full max-w-3xl text-center space-y-4 md:space-y-6 animate-fade-up" style={{
           animationDelay: "800ms"
         }}>
-            <p className="text-base md:text-xl text-gray-600 px-2 md:px-0">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within your specific team context. Our AI-powered platform predicts both on-field value and future transfer value, giving you the competitive edge in football recruitment.</p>
+            <p className="text-base md:text-xl text-muted-foreground px-2 md:px-0">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within your specific team context. Our AI-powered platform predicts both on-field value and future transfer value, giving you the competitive edge in football recruitment.</p>
             
             {/* Feature cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
-              <div className="glass-card p-4 md:p-6 rounded-lg animate-fade-up" style={{
+              <div className="bg-card p-4 md:p-6 rounded-lg border border-border shadow-subtle animate-fade-up" style={{
               animationDelay: "1000ms"
             }}>
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Transfer Value Optimization</h3>
-                <p className="text-xs md:text-sm text-gray-600">Identify the best value-for-money players within your transfer budget and squad needs</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base text-card-foreground">Transfer Value Optimization</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Identify the best value-for-money players within your transfer budget and squad needs</p>
               </div>
               
-              <div className="glass-card p-4 md:p-6 rounded-lg animate-fade-up" style={{
+              <div className="bg-card p-4 md:p-6 rounded-lg border border-border shadow-subtle animate-fade-up" style={{
               animationDelay: "1200ms"
             }}>
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Player Comparison</h3>
-                <p className="text-xs md:text-sm text-gray-600">Compare players to see who is most worth his money</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base text-card-foreground">Player Comparison</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Compare players to see who is most worth his money</p>
               </div>
               
-              <div className="glass-card p-4 md:p-6 rounded-lg animate-fade-up" style={{
+              <div className="bg-card p-4 md:p-6 rounded-lg border border-border shadow-subtle animate-fade-up" style={{
               animationDelay: "1400ms"
             }}>
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base">Player Assessment</h3>
-                <p className="text-xs md:text-sm text-gray-600">Unsure if a player is worth his cost? Check his value!</p>
+                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base text-card-foreground">Player Assessment</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Unsure if a player is worth his cost? Check his value!</p>
               </div>
             </div>
           </div>

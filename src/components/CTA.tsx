@@ -11,7 +11,7 @@ const CTA = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
             Ready to Transform Your Transfer Strategy?
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
+          <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 animate-fade-up" style={{ animationDelay: "200ms" }}>
             Join the leading clubs that are using data-driven insights to make smarter transfer decisions and gain a competitive edge.
           </p>
           <div className="flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
