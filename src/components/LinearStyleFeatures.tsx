@@ -33,11 +33,12 @@ const LinearStyleFeatures = () => {
       <div className="relative w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-            Made for modern
-            <br />
+            Made for{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              football clubs
+              smart
             </span>
+            <br />
+            football clubs and agents
           </h2>
           <p className="text-lg sm:text-xl text-gray-400 animate-fade-in max-w-3xl mx-auto leading-relaxed" style={{
             animationDelay: "200ms"
