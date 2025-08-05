@@ -1,24 +1,24 @@
 import { LineChart, TrendingUp } from "lucide-react";
 const HowItWorks = () => {
-  return <section id="how-it-works" className="py-20 bg-blue-50">
-      <div className="container px-4 md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+  return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-background">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
           <div className="inline-block py-2 px-4 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6 animate-fade-in">
             The Process
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground animate-fade-up" style={{
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-foreground animate-fade-up" style={{
           animationDelay: "100ms"
         }}>
             How SquadAssist's AI Analytics Work
           </h2>
-          <p className="text-lg text-muted-foreground animate-fade-up" style={{
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground animate-fade-up max-w-3xl mx-auto leading-relaxed" style={{
           animationDelay: "200ms"
         }}>We leverage two sophisticated AI systems to predict On-Field Value and Future Transfer Fees, providing comprehensive insights for football transfer decision-making</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
           {/* On Field Value */}
-          <div className="flex flex-col items-center text-center p-8 bg-card rounded-xl shadow-subtle animate-fade-up border border-border hover:shadow-md transition-all duration-300" style={{
+          <div className="flex flex-col items-center text-center p-6 sm:p-8 lg:p-10 bg-card rounded-xl shadow-subtle animate-fade-up border border-border hover:shadow-md transition-all duration-300" style={{
           animationDelay: "300ms"
         }}>
             <div className="relative mb-6">
@@ -27,12 +27,12 @@ const HowItWorks = () => {
                 <LineChart className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-4 text-card-foreground">On-Field Value</h3>
-            <p className="text-muted-foreground leading-relaxed">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios while analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-card-foreground">On-Field Value</h3>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios while analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
           </div>
 
           {/* Future Transfer Fee */}
-          <div className="flex flex-col items-center text-center p-8 bg-card rounded-xl shadow-subtle animate-fade-up border border-border hover:shadow-md transition-all duration-300" style={{
+          <div className="flex flex-col items-center text-center p-6 sm:p-8 lg:p-10 bg-card rounded-xl shadow-subtle animate-fade-up border border-border hover:shadow-md transition-all duration-300" style={{
           animationDelay: "500ms"
         }}>
             <div className="relative mb-6">
@@ -41,8 +41,8 @@ const HowItWorks = () => {
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-4 text-card-foreground">Future Transfer Value</h3>
-            <p className="text-muted-foreground leading-relaxed">SquadAssist forecasts players' transfer values 3 years ahead by analyzing historical data from similar players. Our machine learning models identify patterns in player development and market valuations to predict long-term investment potential.</p>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-card-foreground">Future Transfer Value</h3>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">SquadAssist forecasts players' transfer values 3 years ahead by analyzing historical data from similar players. Our machine learning models identify patterns in player development and market valuations to predict long-term investment potential.</p>
           </div>
         </div>
       </div>

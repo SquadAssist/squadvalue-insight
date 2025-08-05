@@ -34,31 +34,31 @@ const Features = () => {
     delay: 600
   }];
   
-  return <section id="features" className="py-24 bg-muted/30">
-      <div className="container px-4 md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block py-1 px-3 bg-black/5 rounded-full text-sm font-medium text-gray-800 mb-4 animate-fade-in">
+  return <section id="features" className="py-16 sm:py-20 lg:py-24 bg-muted/30">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-block py-2 px-4 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6 animate-fade-in">
             Key Capabilities
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-up" style={{
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 animate-fade-up" style={{
           animationDelay: "100ms"
         }}>
             Advanced Football Transfer Intelligence
           </h2>
-          <p className="text-lg text-gray-600 animate-fade-up" style={{
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground animate-fade-up max-w-3xl mx-auto leading-relaxed" style={{
           animationDelay: "200ms"
         }}>SquadAssist uses cutting-edge AI and machine learning to revolutionize football transfer decisions. Our platform provides comprehensive player analysis, transfer value predictions, and strategic insights to help clubs and agents make smarter recruitment choices.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => <div key={index} className="bg-card p-8 rounded-xl shadow-subtle border border-border hover:shadow-md transition-all duration-300 animate-fade-up" style={{
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {features.map((feature, index) => <div key={index} className="bg-card p-6 sm:p-8 rounded-xl shadow-subtle border border-border hover:shadow-md transition-all duration-300 animate-fade-up" style={{
           animationDelay: `${feature.delay}ms`
         }}>
               <div className="bg-primary/10 p-3 rounded-lg w-fit mb-6 text-primary">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-card-foreground">{feature.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+              <h3 className="text-lg sm:text-xl font-semibold mb-3 text-card-foreground">{feature.title}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>)}
         </div>
       </div>

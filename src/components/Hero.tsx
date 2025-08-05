@@ -49,12 +49,12 @@ const Hero = () => {
       setAnimationComplete(true);
     }
   }, [currentImageIndex, animationComplete]);
-  return <section className="mt-4 md:mt-0 pt-8 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-background">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center">
-          {/* Full-width image sequence container with no shadows or borders */}
-          <div className="w-full mb-12 relative">
-            <div className="h-[400px] md:h-[500px] rounded-xl overflow-hidden mx-auto max-w-6xl">
+  return <section className="w-full pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-24 overflow-hidden bg-background">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center w-full">
+          {/* Full-width image sequence container */}
+          <div className="w-full mb-8 sm:mb-12 relative">
+            <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
               {/* Main image with transition - removed aspect ratio to prevent gray areas */}
               <img src={imageSequence[currentImageIndex].url} alt={`${imageSequence[currentImageIndex].alt} - SquadAssist AI football transfer analysis platform`} className="w-full h-full object-cover transition-opacity duration-500" />
               
@@ -67,7 +67,7 @@ const Hero = () => {
               
               {/* Overlay with heading positioned on top of the image */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <div className="text-center max-w-3xl px-4">
+                <div className="text-center w-full max-w-5xl px-4 sm:px-6 lg:px-8">
                   {/* Position the badge lower on mobile devices */}
                   <div className="inline-block animate-fade-in mt-4 md:mt-0">
                     <div className="py-1 px-3 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-white mb-2 md:mb-4">
@@ -75,21 +75,21 @@ const Hero = () => {
                     </div>
                   </div>
                   
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white animate-fade-up" style={{
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white animate-fade-up leading-tight" style={{
                   animationDelay: "200ms"
                 }}>Predict the added value a player will create for a club</h1>
                   
-                  <p className="text-sm md:text-xl text-white/90 mt-2 md:mt-4 animate-fade-up px-2 md:px-0" style={{
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-3 sm:mt-4 md:mt-6 animate-fade-up max-w-4xl mx-auto" style={{
                   animationDelay: "400ms"
                 }}>AI-powered football transfer intelligence: Predict future transfer value and sportive impact to help make the best possible transfer decisions</p>
                   
-                  <div className="mt-4 md:mt-8 animate-fade-up" style={{
+                  <div className="mt-6 sm:mt-8 animate-fade-up" style={{
                   animationDelay: "600ms"
                 }}>
                     <Link to="/contact">
-                      <Button size="sm" className="bg-white text-black hover:bg-white/90 group md:size-lg">
+                      <Button size="lg" className="bg-white text-black hover:bg-white/90 group text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4">
                         Contact Us
-                        <ArrowRight className="ml-2 h-3 w-3 md:h-4 md:w-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>
                   </div>
@@ -99,32 +99,32 @@ const Hero = () => {
           </div>
           
           {/* Content section below the image */}
-          <div className="w-full max-w-3xl text-center space-y-4 md:space-y-6 animate-fade-up" style={{
+          <div className="w-full max-w-6xl text-center space-y-6 sm:space-y-8 animate-fade-up px-4 sm:px-6" style={{
           animationDelay: "800ms"
         }}>
-            <p className="text-base md:text-xl text-muted-foreground px-2 md:px-0">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within your specific team context. Our AI-powered platform predicts both on-field value and future transfer value, giving you the competitive edge in football recruitment.</p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within your specific team context. Our AI-powered platform predicts both on-field value and future transfer value, giving you the competitive edge in football recruitment.</p>
             
             {/* Feature cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
-              <div className="bg-card p-4 md:p-6 rounded-lg border border-border shadow-subtle animate-fade-up" style={{
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 w-full">
+              <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-lg border border-border shadow-subtle animate-fade-up hover:shadow-md transition-all duration-300" style={{
               animationDelay: "1000ms"
             }}>
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base text-card-foreground">Transfer Value Optimization</h3>
-                <p className="text-xs md:text-sm text-muted-foreground">Identify the best value-for-money players within your transfer budget and squad needs</p>
+                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg text-card-foreground">Transfer Value Optimization</h3>
+                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed">Identify the best value-for-money players within your transfer budget and squad needs</p>
               </div>
               
-              <div className="bg-card p-4 md:p-6 rounded-lg border border-border shadow-subtle animate-fade-up" style={{
+              <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-lg border border-border shadow-subtle animate-fade-up hover:shadow-md transition-all duration-300" style={{
               animationDelay: "1200ms"
             }}>
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base text-card-foreground">Player Comparison</h3>
-                <p className="text-xs md:text-sm text-muted-foreground">Compare players to see who is most worth his money</p>
+                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg text-card-foreground">Player Comparison</h3>
+                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed">Compare players to see who is most worth his money</p>
               </div>
               
-              <div className="bg-card p-4 md:p-6 rounded-lg border border-border shadow-subtle animate-fade-up" style={{
+              <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-lg border border-border shadow-subtle animate-fade-up hover:shadow-md transition-all duration-300" style={{
               animationDelay: "1400ms"
             }}>
-                <h3 className="font-semibold mb-1 md:mb-2 text-sm md:text-base text-card-foreground">Player Assessment</h3>
-                <p className="text-xs md:text-sm text-muted-foreground">Unsure if a player is worth his cost? Check his value!</p>
+                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg text-card-foreground">Player Assessment</h3>
+                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground leading-relaxed">Unsure if a player is worth his cost? Check his value!</p>
               </div>
             </div>
           </div>
