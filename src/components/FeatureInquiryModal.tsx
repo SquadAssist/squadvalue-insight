@@ -20,9 +20,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { validateBusinessEmail } from "@/utils/emailValidation";
 
 const formSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
+  email: z.string()
+    .email("Please enter a valid email address")
+    .refine((email) => !validateBusinessEmail(email), {
+      message: "Please use a business email address. Disposable email addresses are not allowed."
+    }),
 });
 
 interface FeatureInquiryModalProps {
