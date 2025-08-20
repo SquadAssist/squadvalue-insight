@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="md:col-span-2">
             <img 
-              src="/logo-optimized.png" 
+              src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
               alt="SquadAssist Logo" 
               className="h-10 mb-4"
             />

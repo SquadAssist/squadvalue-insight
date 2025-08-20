@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <img src="/logo-optimized.png" alt="SquadAssist Logo" className="h-8 md:h-10" />
+            <img src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" alt="SquadAssist Logo" className="h-8 md:h-10" />
           </Link>
 
           {/* Desktop Navigation */}
