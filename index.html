@@ -28,15 +28,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="//images.unsplash.com" />
     <link rel="dns-prefetch" href="//cdn.gpteng.co" />
-    
-    <!-- Non-blocking Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap" /></noscript>
+    <link rel="dns-prefetch" href="//track.salesflare.com" />
     
     <!-- Preload LCP images for faster loading -->
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=600&fit=crop&crop=center&q=80" fetchpriority="high" />
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop&crop=center&q=80" fetchpriority="high" />
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&h=600&fit=crop&crop=center&q=80" fetchpriority="high" />
+    
+    <!-- Inline critical font loading script -->
+    <script>
+      !function(){
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap';
+        link.media = 'all';
+        document.head.appendChild(link);
+      }();
+    </script>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -161,13 +169,17 @@
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Salesflare tracking -->
-    <script src="https://track.salesflare.com/flare.js" async onload="initSalesflare()"></script>
+    <!-- Salesflare tracking - Load after page load -->
     <script>
-      function initSalesflare() {
-        var flare = new Flare();
-        flare.track("QEOQbXMp5MZagXLeDtX7WrS-HSy2JB8G827lJbxHKmwfW");
-      }
+      window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.src = 'https://track.salesflare.com/flare.js';
+        script.onload = function() {
+          var flare = new Flare();
+          flare.track("QEOQbXMp5MZagXLeDtX7WrS-HSy2JB8G827lJbxHKmwfW");
+        };
+        document.head.appendChild(script);
+      });
     </script>
     
     <!-- LinkedIn Insight Tag -->
