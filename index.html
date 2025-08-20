@@ -23,6 +23,43 @@
     <link rel="alternate" hreflang="en" href="https://squadassist.ai/" />
     <link rel="alternate" hreflang="x-default" href="https://squadassist.ai/" />
     
+    <!-- Critical CSS for immediate rendering -->
+    <style>
+      /* Critical base styles for FCP optimization */
+      * { box-sizing: border-box; }
+      body { 
+        margin: 0; 
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+        line-height: 1.5; 
+        -webkit-font-smoothing: antialiased;
+      }
+      .bg-background { background-color: #ffffff; }
+      .text-black { color: #000000; }
+      .text-white { color: #ffffff; }
+      .font-bold { font-weight: 700; }
+      .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+      .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .text-5xl { font-size: 3rem; line-height: 1; }
+      .text-6xl { font-size: 3.75rem; line-height: 1; }
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .w-full { width: 100%; }
+      .h-full { height: 100%; }
+      .fixed { position: fixed; }
+      .absolute { position: absolute; }
+      .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+      .z-50 { z-index: 50; }
+      .bg-black\/40 { background-color: rgba(0, 0, 0, 0.4); }
+      .text-center { text-align: center; }
+      .tracking-tight { letter-spacing: -0.025em; }
+      .leading-tight { line-height: 1.25; }
+      /* Hide content until fully loaded to prevent FOUC */
+      .fade-in-ready { opacity: 0; }
+      .fade-in-ready.loaded { opacity: 1; transition: opacity 0.3s ease; }
+    </style>
+    
     <!-- Performance and Preloading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,6 +81,13 @@
         link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap';
         link.media = 'all';
         document.head.appendChild(link);
+        
+        // Mark content as loaded once fonts are ready
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function() {
+            document.documentElement.classList.add('fonts-loaded');
+          });
+        }
       }();
     </script>
     
