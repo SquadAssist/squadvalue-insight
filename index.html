@@ -58,6 +58,26 @@
       /* Hide content until fully loaded to prevent FOUC */
       .fade-in-ready { opacity: 0; }
       .fade-in-ready.loaded { opacity: 1; transition: opacity 0.3s ease; }
+      
+      /* Speed Index optimization - skeleton loader */
+      .hero-skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      .hero-skeleton-text {
+        background: #e0e0e0;
+        border-radius: 4px;
+        margin: 8px 0;
+      }
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      .h-300 { height: 300px; }
+      .h-400 { height: 400px; }
+      .h-500 { height: 500px; }
+      .h-600 { height: 600px; }
     </style>
     
     <!-- Performance and Preloading -->

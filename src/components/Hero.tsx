@@ -49,6 +49,7 @@ const imageSequence = [{
 const Hero = memo(() => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   // Memoize progress calculation to reduce blocking time
   const progressWidth = useMemo(() => {
@@ -93,6 +94,11 @@ const Hero = memo(() => {
           {/* Full-width image sequence container */}
           <div className="w-full mb-8 sm:mb-12 relative">
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
+              {/* Speed Index optimization - skeleton loader */}
+              {!isImageLoaded && (
+                <div className="hero-skeleton absolute inset-0 rounded-lg sm:rounded-xl" />
+              )}
+              
               {/* Main image with transition - removed aspect ratio to prevent gray areas */}
               <img 
                 src={currentImage.url} 
@@ -102,7 +108,7 @@ const Hero = memo(() => {
                 className="w-full h-full object-cover transition-opacity duration-500 will-change-contents" 
                 fetchPriority="high" 
                 loading="eager"
-                style={{ transform: 'translateZ(0)' }}
+                onLoad={() => setIsImageLoaded(true)}
               />
               
               {/* Progress bar indicating sequence progress */}
