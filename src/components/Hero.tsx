@@ -55,8 +55,15 @@ const Hero = () => {
           {/* Full-width image sequence container */}
           <div className="w-full mb-8 sm:mb-12 relative">
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
-              {/* Main image with transition - removed aspect ratio to prevent gray areas */}
-              <img src={imageSequence[currentImageIndex].url} alt={`${imageSequence[currentImageIndex].alt} - SquadAssist AI football transfer analysis platform`} className="w-full h-full object-cover transition-opacity duration-500" />
+              {/* Main image with transition - optimized for LCP */}
+              <img 
+                src={imageSequence[currentImageIndex].url} 
+                alt={`${imageSequence[currentImageIndex].alt} - SquadAssist AI football transfer analysis platform`} 
+                className="hero-image w-full h-full object-cover transition-opacity duration-500" 
+                fetchPriority={currentImageIndex === 0 ? "high" : "low"}
+                loading={currentImageIndex === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
               
               {/* Progress bar indicating sequence progress */}
               <div className="absolute bottom-0 left-0 w-full h-1 bg-black/10">
