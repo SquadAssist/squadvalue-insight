@@ -116,9 +116,10 @@ const addStructuredData = (data: any) => {
 // Comprehensive organization structured data
 const organizationStructuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "LocalBusiness", "TechnologyCompany", "ResearchOrganization"],  
   "name": "SquadAssist",
-  "description": "AI-powered football transfer intelligence platform providing player value prediction and recruitment analytics for clubs and agents.",
+  "alternateName": "Squad Assist",
+  "description": "Leading AI-powered football transfer intelligence platform providing advanced analytics and data-driven insights for professional football clubs, agents, and sporting directors worldwide",
   "url": "https://squadassist.ai",
   "logo": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png",
   "foundingDate": "2024",
@@ -156,6 +157,66 @@ const organizationStructuredData = {
   ],
   "sameAs": [
     "https://www.linkedin.com/company/squadassist"
+  ],
+  "expertise": [
+    "Artificial Intelligence in Football",
+    "Transfer Market Analytics",
+    "Player Performance Prediction", 
+    "Squad Optimization",
+    "Football Data Science",
+    "Machine Learning for Sports",
+    "Predictive Analytics",
+    "Sports Investment Analysis"
+  ],
+  "knowsAbout": [
+    "How to predict football player performance using AI",
+    "Transfer fee prediction methods",
+    "Squad composition analysis techniques", 
+    "Football player valuation models",
+    "AI-powered scouting systems",
+    "Data-driven recruitment strategies",
+    "Player development forecasting",
+    "Transfer market trend analysis",
+    "Football Analytics",
+    "Premier League player analysis",
+    "La Liga transfer intelligence", 
+    "Serie A scouting data",
+    "Bundesliga analytics",
+    "Ligue 1 player values",
+    "Eredivisie talent identification",
+    "Championship prospects evaluation",
+    "European football leagues",
+    "Transfer Market Analysis",
+    "Player Valuation methodologies",
+    "Artificial Intelligence in Sports applications",
+    "Machine Learning algorithms for football",
+    "Sports Data Science techniques",
+    "Football Scouting technology",
+    "Player Performance Prediction models",
+    "Squad Analysis frameworks",
+    "Tactical Analysis systems",
+    "Football Investment optimization",
+    "Youth player development tracking",
+    "Injury risk assessment",
+    "Contract optimization strategies"
+  ],
+  "teaches": [
+    "How AI predicts football transfer values",
+    "Methods for analyzing player performance data",
+    "Techniques for squad optimization",
+    "Approaches to data-driven scouting",
+    "Strategies for transfer budget optimization",
+    "Ways to assess player market value",
+    "How to identify undervalued football talent",
+    "Methods for predicting player development"
+  ],
+  "serviceType": [
+    "Football Analytics Software",
+    "Player Valuation Services", 
+    "Transfer Intelligence Platform",
+    "Sports Data Analysis",
+    "AI Scouting Solutions",
+    "Squad Planning Tools"
   ]
 };
 

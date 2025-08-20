@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LinearStyleFeatures from "@/components/LinearStyleFeatures";
 import HowItWorks from "@/components/HowItWorks";
+import ExpertiseContent from "@/components/ExpertiseContent";
+import MethodologyContent from "@/components/MethodologyContent";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
@@ -22,6 +24,8 @@ const Index = () => {
         <Hero />
         <LinearStyleFeatures />
         <HowItWorks />
+        <ExpertiseContent />
+        <MethodologyContent />
         <CTA />
       </main>
       <Footer />
