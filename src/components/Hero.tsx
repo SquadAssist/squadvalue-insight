@@ -4,43 +4,43 @@ import { useEffect, useState, useMemo, memo } from "react";
 import { Link } from "react-router-dom";
 
 const imageSequence = [{
-  url: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=600&fit=crop&crop=center&q=80",
-  srcSet: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&h=300&fit=crop&crop=center&q=80 400w, https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=600&fit=crop&crop=center&q=80 800w, https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1200&h=900&fit=crop&crop=center&q=80 1200w, https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&h=1200&fit=crop&crop=center&q=80 1600w",
+  url: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=600&fit=crop&crop=center&q=80&fm=webp",
+  srcSet: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&h=300&fit=crop&crop=center&q=80&fm=webp 400w, https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=600&fit=crop&crop=center&q=80&fm=webp 800w, https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1200&h=900&fit=crop&crop=center&q=80&fm=webp 1200w, https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&h=1200&fit=crop&crop=center&q=80&fm=webp 1600w",
   sizes: "(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1440px) 1200px, 1600px",
   // Football on grass pitch
   alt: "Football on grass pitch - professional football analysis",
   delay: 0 // Remove initial delay for LCP optimization
 }, {
-  url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop&crop=center&q=80",
-  srcSet: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&h=300&fit=crop&crop=center&q=80 400w, https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop&crop=center&q=80 800w, https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&h=900&fit=crop&crop=center&q=80 1200w, https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&h=1200&fit=crop&crop=center&q=80 1600w",
+  url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop&crop=center&q=80&fm=webp",
+  srcSet: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&h=300&fit=crop&crop=center&q=80&fm=webp 400w, https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop&crop=center&q=80&fm=webp 800w, https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&h=900&fit=crop&crop=center&q=80&fm=webp 1200w, https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&h=1200&fit=crop&crop=center&q=80&fm=webp 1600w",
   sizes: "(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1440px) 1200px, 1600px",
   // Training
   alt: "Football team training",
   delay: 3000 // Start animation sequence after showing first image
 }, {
-  url: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&h=600&fit=crop&crop=center&q=80",
-  srcSet: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=400&h=300&fit=crop&crop=center&q=80 400w, https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&h=600&fit=crop&crop=center&q=80 800w, https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=1200&h=900&fit=crop&crop=center&q=80 1200w, https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=1600&h=1200&fit=crop&crop=center&q=80 1600w",
+  url: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&h=600&fit=crop&crop=center&q=80&fm=webp",
+  srcSet: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=400&h=300&fit=crop&crop=center&q=80&fm=webp 400w, https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&h=600&fit=crop&crop=center&q=80&fm=webp 800w, https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=1200&h=900&fit=crop&crop=center&q=80&fm=webp 1200w, https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=1600&h=1200&fit=crop&crop=center&q=80&fm=webp 1600w",
   sizes: "(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1440px) 1200px, 1600px",
   // Team huddle
   alt: "Football team huddle",
   delay: 2500
 }, {
-  url: "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=800&h=600&fit=crop&crop=center&q=80",
-  srcSet: "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=400&h=300&fit=crop&crop=center&q=80 400w, https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=800&h=600&fit=crop&crop=center&q=80 800w, https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=1200&h=900&fit=crop&crop=center&q=80 1200w, https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=1600&h=1200&fit=crop&crop=center&q=80 1600w",
+  url: "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=800&h=600&fit=crop&crop=center&q=80&fm=webp",
+  srcSet: "https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=400&h=300&fit=crop&crop=center&q=80&fm=webp 400w, https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=800&h=600&fit=crop&crop=center&q=80&fm=webp 800w, https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=1200&h=900&fit=crop&crop=center&q=80&fm=webp 1200w, https://images.unsplash.com/photo-1486286701208-1d58e9338013?w=1600&h=1200&fit=crop&crop=center&q=80&fm=webp 1600w",
   sizes: "(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1440px) 1200px, 1600px",
   // Alternative stadium image
   alt: "Football stadium with fans",
   delay: 2000
 }, {
-  url: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop&crop=center&q=80",
-  srcSet: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=300&fit=crop&crop=center&q=80 400w, https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop&crop=center&q=80 800w, https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&h=900&fit=crop&crop=center&q=80 1200w, https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1600&h=1200&fit=crop&crop=center&q=80 1600w",
+  url: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop&crop=center&q=80&fm=webp",
+  srcSet: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=300&fit=crop&crop=center&q=80&fm=webp 400w, https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop&crop=center&q=80&fm=webp 800w, https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&h=900&fit=crop&crop=center&q=80&fm=webp 1200w, https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1600&h=1200&fit=crop&crop=center&q=80&fm=webp 1600w",
   sizes: "(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1440px) 1200px, 1600px",
   // Shot being taken
   alt: "Football player taking a shot",
   delay: 1800
 }, {
-  url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=800&h=600&fit=crop&crop=center&q=80",
-  srcSet: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=400&h=300&fit=crop&crop=center&q=80 400w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=800&h=600&fit=crop&crop=center&q=80 800w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=1200&h=900&fit=crop&crop=center&q=80 1200w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=1600&h=1200&fit=crop&crop=center&q=80 1600w",
+  url: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=800&h=600&fit=crop&crop=center&q=80&fm=webp",
+  srcSet: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=400&h=300&fit=crop&crop=center&q=80&fm=webp 400w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=800&h=600&fit=crop&crop=center&q=80&fm=webp 800w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=1200&h=900&fit=crop&crop=center&q=80&fm=webp 1200w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=1600&h=1200&fit=crop&crop=center&q=80&fm=webp 1600w",
   sizes: "(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1440px) 1200px, 1600px",
   // Trophy as final image
   alt: "Championship trophy",
