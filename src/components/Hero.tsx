@@ -72,9 +72,10 @@ const Hero = () => {
                 srcSet={imageSequence[currentImageIndex].srcSet}
                 sizes={imageSequence[currentImageIndex].sizes}
                 alt={`${imageSequence[currentImageIndex].alt} - SquadAssist AI football transfer analysis platform`} 
-                className="w-full h-full object-cover transition-opacity duration-500" 
+                className="w-full h-full object-cover transition-opacity duration-500 will-change-contents" 
                 fetchPriority="high" 
-                loading="eager" 
+                loading="eager"
+                style={{ transform: 'translateZ(0)' }}
               />
               
               {/* Progress bar indicating sequence progress */}
