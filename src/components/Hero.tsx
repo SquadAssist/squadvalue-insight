@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, memo } from "react";
 import { Link } from "react-router-dom";
 
 const imageSequence = [{
@@ -46,9 +46,19 @@ const imageSequence = [{
   alt: "Championship trophy",
   delay: 0 // Final image stays
 }];
-const Hero = () => {
+const Hero = memo(() => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [animationComplete, setAnimationComplete] = useState(false);
+  
+  // Memoize progress calculation to reduce blocking time
+  const progressWidth = useMemo(() => {
+    return `${currentImageIndex / (imageSequence.length - 1) * 100}%`;
+  }, [currentImageIndex]);
+  
+  // Memoize current image data to prevent object recreation
+  const currentImage = useMemo(() => {
+    return imageSequence[currentImageIndex];
+  }, [currentImageIndex]);
   
   useEffect(() => {
     // Optimize timer usage to reduce main thread blocking
@@ -85,10 +95,10 @@ const Hero = () => {
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
               {/* Main image with transition - removed aspect ratio to prevent gray areas */}
               <img 
-                src={imageSequence[currentImageIndex].url} 
-                srcSet={imageSequence[currentImageIndex].srcSet}
-                sizes={imageSequence[currentImageIndex].sizes}
-                alt={`${imageSequence[currentImageIndex].alt} - SquadAssist AI football transfer analysis platform`} 
+                src={currentImage.url} 
+                srcSet={currentImage.srcSet}
+                sizes={currentImage.sizes}
+                alt={`${currentImage.alt} - SquadAssist AI football transfer analysis platform`} 
                 className="w-full h-full object-cover transition-opacity duration-500 will-change-contents" 
                 fetchPriority="high" 
                 loading="eager"
@@ -98,7 +108,7 @@ const Hero = () => {
               {/* Progress bar indicating sequence progress */}
               <div className="absolute bottom-0 left-0 w-full h-1 bg-black/10">
                 <div className="h-full bg-black transition-all duration-300 ease-out" style={{
-                width: `${currentImageIndex / (imageSequence.length - 1) * 100}%`
+                width: progressWidth
               }} />
               </div>
               
@@ -147,5 +157,5 @@ const Hero = () => {
         </div>
       </div>
     </section>;
-};
+});
 export default Hero;
