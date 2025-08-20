@@ -1,8 +1,64 @@
+import { useEffect } from "react";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { updatePageSEO } from "@/utils/seo";
+import { generateBreadcrumbStructuredData } from "@/utils/breadcrumbs";
+
 const BlogPost = () => {
+  useEffect(() => {
+    const articleSEO = {
+      title: "How AI & Analytics Improve Decision-Making in Player Recruitment | SquadAssist Blog",
+      description: "Exploring how artificial intelligence and data analytics are revolutionizing player recruitment by addressing the limitations of traditional scouting methods. Learn about machine learning, computer vision, and predictive analytics in football.",
+      keywords: "AI football scouting, player recruitment analytics, machine learning sports, computer vision football, predictive analytics soccer, football data science, AI scouting vs traditional",
+      canonical: "https://squadassist.ai/blog/ai-analytics-vs-traditional-scouting",
+      ogImage: "/lovable-uploads/f18de699-0ea1-406a-a653-98cb6f8ffcd9.png",
+      ogType: "article",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "headline": "How AI & Analytics Improve Decision-Making in Player Recruitment Compared to Traditional Scouting",
+            "description": "Exploring how artificial intelligence and data analytics are revolutionizing player recruitment by addressing the limitations of traditional scouting methods.",
+            "image": "https://squadassist.ai/lovable-uploads/f18de699-0ea1-406a-a653-98cb6f8ffcd9.png",
+            "author": {
+              "@type": "Organization",
+              "name": "SquadAssist",
+              "url": "https://squadassist.ai"
+            },
+            "publisher": {
+              "@type": "Organization", 
+              "name": "SquadAssist",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png"
+              }
+            },
+            "datePublished": "2024-12-01",
+            "dateModified": "2024-12-01",
+            "url": "https://squadassist.ai/blog/ai-analytics-vs-traditional-scouting",
+            "wordCount": 1200,
+            "articleSection": "Football Analytics",
+            "keywords": ["AI football scouting", "player recruitment", "machine learning", "sports analytics", "football data science"]
+          },
+          generateBreadcrumbStructuredData([
+            { name: "Home", url: "https://squadassist.ai/" },
+            { name: "Blog", url: "https://squadassist.ai/blog" },
+            { name: "AI Analytics vs Traditional Scouting", url: "https://squadassist.ai/blog/ai-analytics-vs-traditional-scouting" }
+          ]),
+          {
+            "@type": "Organization",
+            "name": "SquadAssist",
+            "url": "https://squadassist.ai",
+            "logo": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png"
+          }
+        ]
+      }
+    };
+    updatePageSEO(articleSEO);
+  }, []);
   return <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -38,7 +94,13 @@ const BlogPost = () => {
             How AI & Analytics Improve Decision-Making in Player Recruitment Compared to Traditional Scouting
           </h1>
           <div className="aspect-video relative overflow-hidden rounded-lg mb-8">
-            <img alt="AI Analytics in Football Scouting" className="w-full h-full object-cover" src="/lovable-uploads/f18de699-0ea1-406a-a653-98cb6f8ffcd9.png" />
+            <img 
+              alt="AI-powered football analytics dashboard showing player recruitment data, performance metrics, and predictive modeling for transfer intelligence" 
+              className="w-full h-full object-cover" 
+              src="/lovable-uploads/f18de699-0ea1-406a-a653-98cb6f8ffcd9.png"
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
         </div>
 

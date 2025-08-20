@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Mail, Send, User } from "lucide-react";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from 'emailjs-com';
 import { validateBusinessEmail } from "@/utils/emailValidation";
+import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 
 // Initialize EmailJS with your User ID
 // In a production app, these should come from environment variables
@@ -20,6 +21,10 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    updatePageSEO(pageSEOConfigs.contact);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

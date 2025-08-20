@@ -7,6 +7,7 @@ export interface SEOProps {
   ogImage?: string;
   ogType?: string;
   noindex?: boolean;
+  structuredData?: any;
 }
 
 export const updatePageSEO = (seo: SEOProps) => {
@@ -45,9 +46,15 @@ export const updatePageSEO = (seo: SEOProps) => {
   // Update Twitter Card tags
   updateMetaName('twitter:title', seo.title);
   updateMetaName('twitter:description', seo.description);
+  updateMetaName('twitter:card', 'summary_large_image');
   
   if (seo.ogImage) {
     updateMetaName('twitter:image', seo.ogImage);
+  }
+
+  // Add structured data if provided
+  if (seo.structuredData) {
+    addStructuredData(seo.structuredData);
   }
 };
 
@@ -91,6 +98,67 @@ const updateLinkTag = (rel: string, href: string) => {
   link.href = href;
 };
 
+const addStructuredData = (data: any) => {
+  // Remove existing structured data added by this function
+  const existingScript = document.querySelector('script[data-dynamic-structured-data]');
+  if (existingScript) {
+    existingScript.remove();
+  }
+  
+  // Add new structured data
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.setAttribute('data-dynamic-structured-data', 'true');
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+};
+
+// Comprehensive organization structured data
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SquadAssist",
+  "description": "AI-powered football transfer intelligence platform providing player value prediction and recruitment analytics for clubs and agents.",
+  "url": "https://squadassist.ai",
+  "logo": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png",
+  "foundingDate": "2024",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Leuven",
+    "addressCountry": "Belgium"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@squadassist.ai",
+    "contactType": "customer service"
+  },
+  "founder": [
+    {
+      "@type": "Person",
+      "name": "Wout Pauwels",
+      "jobTitle": "Co-Founder",
+      "alumniOf": "KU Leuven",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "SquadAssist"
+      }
+    },
+    {
+      "@type": "Person", 
+      "name": "Maarten Wyns",
+      "jobTitle": "Co-Founder",
+      "alumniOf": "KU Leuven",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "SquadAssist"
+      }
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/squadassist"
+  ]
+};
+
 // Preloaded page-specific SEO configurations
 export const pageSEOConfigs = {
   home: {
@@ -98,7 +166,28 @@ export const pageSEOConfigs = {
     description: "AI-powered football transfer intelligence platform. Predict player value, optimize recruitment strategy, and make data-driven transfer decisions. Advanced soccer analytics for clubs and agents.",
     keywords: "football transfer analysis, soccer player analytics, AI recruitment, transfer market intelligence, player scouting software, football data analytics, soccer transfer decisions, player value prediction",
     canonical: "https://squadassist.ai/",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed"
+    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        organizationStructuredData,
+        {
+          "@type": "SoftwareApplication",
+          "name": "SquadAssist",
+          "description": "AI-powered football transfer intelligence platform providing player value prediction and recruitment analytics.",
+          "url": "https://squadassist.ai",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          },
+          "provider": organizationStructuredData
+        }
+      ]
+    }
   },
   pricingAgents: {
     title: "Agent Pricing Plans - SquadAssist | Football Transfer Analytics",
@@ -106,34 +195,75 @@ export const pageSEOConfigs = {
     keywords: "football agent pricing, soccer analytics plans, transfer analysis subscription, agent software pricing, football scouting tools cost",
     canonical: "https://squadassist.ai/pricing/agents",
     ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
-    ogType: "article"
+    ogType: "article",
+    structuredData: organizationStructuredData
   },
   contact: {
     title: "Contact SquadAssist - Get Football Transfer Intelligence Support",
     description: "Contact SquadAssist for AI-powered football transfer analysis support. Get in touch with our team for custom solutions, pricing, and technical assistance.",
     keywords: "contact squadassist, football analytics support, transfer analysis help, soccer software contact",
     canonical: "https://squadassist.ai/contact",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed"
+    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    structuredData: organizationStructuredData
   },
   team: {
     title: "Meet the SquadAssist Team - Football Analytics Experts",
     description: "Meet the expert team behind SquadAssist's AI-powered football transfer intelligence platform. Learn about our founders and their vision for soccer analytics.",
     keywords: "squadassist team, football analytics experts, soccer technology founders, AI sports team",
     canonical: "https://squadassist.ai/team",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed"
+    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        organizationStructuredData,
+        {
+          "@type": "AboutPage",
+          "name": "Meet the SquadAssist Team",
+          "description": "Learn about the expert team behind SquadAssist's AI-powered football transfer intelligence platform.",
+          "url": "https://squadassist.ai/team",
+          "mainEntity": organizationStructuredData
+        }
+      ]
+    }
   },
   blog: {
     title: "Football Analytics Blog - SquadAssist Insights & Research",
     description: "Read the latest insights on football analytics, AI in soccer, transfer market trends, and data-driven scouting strategies from SquadAssist experts.",
     keywords: "football analytics blog, soccer AI insights, transfer market analysis, data-driven scouting, sports technology articles",
     canonical: "https://squadassist.ai/blog",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed"
+    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        organizationStructuredData,
+        {
+          "@type": "Blog",
+          "name": "SquadAssist Blog",
+          "description": "Insights on AI-powered football analytics, transfer market trends, and the future of player recruitment.",
+          "url": "https://squadassist.ai/blog",
+          "publisher": organizationStructuredData
+        }
+      ]
+    }
   },
   faq: {
     title: "FAQ - SquadAssist Football Transfer Analytics Questions",
     description: "Find answers to frequently asked questions about SquadAssist's AI-powered football transfer analysis platform, pricing, features, and how to get started.",
     keywords: "squadassist faq, football analytics questions, transfer analysis help, soccer software support",
     canonical: "https://squadassist.ai/faq",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed"
+    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@graph": [
+        organizationStructuredData,
+        {
+          "@type": "FAQPage",
+          "name": "SquadAssist Frequently Asked Questions",
+          "description": "Common questions about SquadAssist's AI-powered football transfer analysis platform.",
+          "url": "https://squadassist.ai/faq",
+          "publisher": organizationStructuredData
+        }
+      ]
+    }
   }
 };

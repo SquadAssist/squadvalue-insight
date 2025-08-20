@@ -7,10 +7,12 @@ import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
+import { addPerformanceOptimizations } from "@/utils/breadcrumbs";
 
 const Index = () => {
   useEffect(() => {
     updatePageSEO(pageSEOConfigs.home);
+    addPerformanceOptimizations();
   }, []);
 
   return (

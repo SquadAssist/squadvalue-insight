@@ -1,11 +1,16 @@
 
+import { useEffect } from "react";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 
 const Blog = () => {
+  useEffect(() => {
+    updatePageSEO(pageSEOConfigs.blog);
+  }, []);
   const articles = [
     {
       id: "ai-analytics-vs-traditional-scouting",

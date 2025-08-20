@@ -1,11 +1,16 @@
 
+import { useEffect } from "react";
 import { Linkedin, Mail, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 
 const Team = () => {
+  useEffect(() => {
+    updatePageSEO(pageSEOConfigs.team);
+  }, []);
   const teamMembers = [{
     name: "Wout Pauwels",
     role: "Co-Founder",
