@@ -49,13 +49,30 @@ const imageSequence = [{
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [animationComplete, setAnimationComplete] = useState(false);
+  
   useEffect(() => {
-    // Start the image sequence with the initial delay
+    // Optimize timer usage to reduce main thread blocking
     if (currentImageIndex < imageSequence.length - 1) {
-      const timer = setTimeout(() => {
-        setCurrentImageIndex(prevIndex => prevIndex + 1);
-      }, imageSequence[currentImageIndex].delay);
-      return () => clearTimeout(timer);
+      const delay = imageSequence[currentImageIndex].delay;
+      
+      // For immediate transitions (delay = 0), use requestIdleCallback if available
+      if (delay === 0) {
+        const callback = () => setCurrentImageIndex(prevIndex => prevIndex + 1);
+        
+        if ('requestIdleCallback' in window) {
+          const idleId = requestIdleCallback(callback);
+          return () => cancelIdleCallback(idleId);
+        } else {
+          const rafId = requestAnimationFrame(callback);
+          return () => cancelAnimationFrame(rafId);
+        }
+      } else {
+        // For delayed transitions, use setTimeout with optimization
+        const timer = setTimeout(() => {
+          setCurrentImageIndex(prevIndex => prevIndex + 1);
+        }, delay);
+        return () => clearTimeout(timer);
+      }
     } else if (currentImageIndex === imageSequence.length - 1 && !animationComplete) {
       setAnimationComplete(true);
     }
