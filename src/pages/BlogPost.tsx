@@ -33,7 +33,7 @@ const BlogPost = () => {
               "name": "SquadAssist",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png"
+                "url": "https://squadassist.ai/logo-optimized.png"
               }
             },
             "datePublished": "2024-12-01",
@@ -52,7 +52,7 @@ const BlogPost = () => {
             "@type": "Organization",
             "name": "SquadAssist",
             "url": "https://squadassist.ai",
-            "logo": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png"
+            "logo": "https://squadassist.ai/logo-optimized.png"
           }
         ]
       }
@@ -64,7 +64,7 @@ const BlogPost = () => {
       <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container flex h-16 items-center px-4 md:px-6">
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" alt="SquadAssist Logo" className="h-8" />
+            <img src="/logo-optimized.png" alt="SquadAssist Logo" className="h-8" />
           </Link>
           <div className="ml-auto">
             <Link to="/blog">

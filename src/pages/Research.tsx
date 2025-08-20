@@ -14,7 +14,7 @@ const Research = () => {
         <div className="container flex h-16 items-center px-4 md:px-6">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
+              src="/logo-optimized.png" 
               alt="SquadAssist Logo" 
               className="h-8"
             />

@@ -121,7 +121,7 @@ const organizationStructuredData = {
   "alternateName": "Squad Assist",
   "description": "Leading AI-powered football transfer intelligence platform providing advanced analytics and data-driven insights for professional football clubs, agents, and sporting directors worldwide",
   "url": "https://squadassist.ai",
-  "logo": "https://squadassist.ai/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png",
+  "logo": "https://squadassist.ai/logo-optimized.png",
   "foundingDate": "2024",
   "address": {
     "@type": "PostalAddress",
