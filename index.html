@@ -78,17 +78,6 @@
       .h-400 { height: 400px; }
       .h-500 { height: 500px; }
       .h-600 { height: 600px; }
-      
-      /* Critical content for immediate FCP */
-      #critical-content {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(10px);
-      }
-      
-      /* Show critical content immediately, hide once React loads */
-      .react-loading #critical-content { display: flex !important; }
-      .react-loaded #critical-content { display: none !important; }
     </style>
     
     <!-- Performance and Preloading -->
@@ -106,9 +95,6 @@
     
     <!-- Inline critical font loading script -->
     <script>
-      // Show critical content immediately for FCP
-      document.documentElement.classList.add('react-loading');
-      
       !function(){
         var link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -123,14 +109,6 @@
           });
         }
       }();
-      
-      // Hide critical content once React loads
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          document.documentElement.classList.remove('react-loading');
-          document.documentElement.classList.add('react-loaded');
-        }, 100);
-      });
     </script>
     
     <!-- Open Graph / Facebook -->
@@ -251,23 +229,6 @@
   </head>
 
   <body>
-    <!-- Critical content for FCP optimization -->
-    <div id="critical-content" class="fixed inset-0 z-50 bg-black/40 flex items-center justify-center" style="display: none;">
-      <div class="text-center w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div class="inline-block mb-4">
-          <div class="py-1 px-3 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-white mb-2 md:mb-4">
-            AI-Powered Transfer Intelligence
-          </div>
-        </div>
-        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white leading-tight">
-          Predict the added value a player will create
-        </h1>
-        <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-3 sm:mt-4 md:mt-6 max-w-4xl mx-auto">
-          Predict the future transfer value and sportive impact of a player to make the best possible transfer decisions by leveraging AI-powered football transfer intelligence
-        </p>
-      </div>
-    </div>
-    
     <div id="root"></div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
