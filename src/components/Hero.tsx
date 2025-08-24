@@ -88,7 +88,7 @@ const Hero = memo(() => {
       setAnimationComplete(true);
     }
   }, [currentImageIndex, animationComplete]);
-  return <section className="w-full pt-20 sm:pt-24 pb-12 sm:pb-16 md:pb-24 overflow-hidden bg-background">
+  return <section className="w-full pb-12 sm:pb-16 md:pb-24 pt-12 overflow-hidden bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
           {/* Full-width image sequence container */}
