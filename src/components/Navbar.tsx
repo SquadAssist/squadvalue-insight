@@ -1,24 +1,12 @@
 import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { PricingDropdown } from "./PricingDropdown";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -45,75 +33,140 @@ const Navbar = () => {
       return `/#${anchor}`;
     }
   };
-  return <nav className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4 px-6 lg:px-12 backdrop-blur-md shadow-subtle", isOpen ? "bg-white" : "bg-white/80")}>
-      <div className="container mx-auto">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center relative z-10">
-            <img 
-              src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
-              alt="SquadAssist Logo" 
-              className="h-8 md:h-10 object-contain"
-              onError={(e) => {
-                console.error('Logo failed to load:', e);
-                e.currentTarget.style.display = 'none';
-              }}
-            />
-          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href={getLinkPath("features")} className="text-gray-800 hover:text-black font-medium button-transition">Features</a>
-            <a href={getLinkPath("how-it-works")} className="text-gray-800 hover:text-black font-medium button-transition">How It Works</a>
-            <PricingDropdown />
-            <Button>
-              <Link to="/contact">Contact Us</Link>
-            </Button>
-          </div>
+  return (
+    <>
+      {/* Fixed Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/20 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
+                alt="SquadAssist Logo" 
+                className="h-8 w-auto"
+              />
+            </Link>
 
-          {/* Mobile Navigation Toggle */}
-          <div className="md:hidden">
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
-              className="text-gray-800 focus:outline-none p-2 -mr-2 touch-manipulation"
-              aria-label="Toggle mobile menu"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a 
+                href={getLinkPath("features")} 
+                className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+              >
+                Features
+              </a>
+              <a 
+                href={getLinkPath("how-it-works")} 
+                className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+              >
+                How It Works
+              </a>
+              <PricingDropdown />
+              <Button asChild>
+                <Link to="/contact">Contact Us</Link>
+              </Button>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+                {isOpen ? (
+                  <X className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Menu className="block h-6 w-6" aria-hidden="true" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile Navigation Menu */}
-      <div className={cn("fixed inset-0 bg-white z-60 flex flex-col pt-24 px-6 md:hidden transition-transform duration-300 ease-in-out shadow-lg", isOpen ? "translate-x-0" : "translate-x-full")}>
-        <div className="flex flex-col space-y-6">
-          <a href={getLinkPath("features")} className="text-xl font-medium text-gray-800 py-2" onClick={() => setIsOpen(false)}>
-            Features
-          </a>
-          <a href={getLinkPath("how-it-works")} className="text-xl font-medium text-gray-800 py-2" onClick={() => setIsOpen(false)}>
-            How It Works
-          </a>
-          <div className="flex flex-col space-y-2">
-            <span className="text-lg font-medium text-gray-800 py-2">Pricing</span>
-            <Link to="/pricing/agents" className="text-base text-gray-600 ml-4 py-2" onClick={() => setIsOpen(false)}>
-              Agent
-            </Link>
-            <button 
-              className="text-base text-gray-600 ml-4 text-left py-2"
-              onClick={() => {
-                setIsOpen(false);
-                // Will be handled by the PricingDropdown component
-              }}
-            >
-              Club
-            </button>
-          </div>
-          <div className="flex flex-col space-y-4 pt-6">
-            <Button onClick={() => setIsOpen(false)}>
-              <Link to="/contact">Contact Us</Link>
-            </Button>
+      {isOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-25"
+            onClick={() => setIsOpen(false)}
+          />
+          
+          {/* Menu Panel */}
+          <div className="fixed top-0 right-0 w-full max-w-sm h-full bg-white shadow-xl">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                <img 
+                  src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
+                  alt="SquadAssist Logo" 
+                  className="h-8 w-auto"
+                />
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex-1 px-4 py-6 space-y-6">
+                <a 
+                  href={getLinkPath("features")} 
+                  className="block text-lg font-medium text-gray-900 py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Features
+                </a>
+                <a 
+                  href={getLinkPath("how-it-works")} 
+                  className="block text-lg font-medium text-gray-900 py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  How It Works
+                </a>
+                
+                {/* Pricing Section */}
+                <div className="space-y-3">
+                  <span className="block text-lg font-medium text-gray-900 py-2">Pricing</span>
+                  <div className="ml-4 space-y-3">
+                    <Link 
+                      to="/pricing/agents" 
+                      className="block text-base text-gray-600 py-1"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Agent
+                    </Link>
+                    <button 
+                      className="block text-base text-gray-600 py-1 text-left"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Club
+                    </button>
+                  </div>
+                </div>
+
+                {/* Contact Button */}
+                <div className="pt-6">
+                  <Button asChild className="w-full">
+                    <Link to="/contact" onClick={() => setIsOpen(false)}>
+                      Contact Us
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>;
+      )}
+    </>
+  );
 };
+
 export default Navbar;
