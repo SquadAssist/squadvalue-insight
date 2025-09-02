@@ -45,11 +45,19 @@ const Navbar = () => {
       return `/#${anchor}`;
     }
   };
-  return <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4 px-6 lg:px-12 bg-white/80 backdrop-blur-md shadow-subtle">
+  return <nav className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4 px-6 lg:px-12 backdrop-blur-md shadow-subtle", isOpen ? "bg-white" : "bg-white/80")}>
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <img src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" alt="SquadAssist Logo" className="h-8 md:h-10" />
+          <Link to="/" className="flex items-center relative z-10">
+            <img 
+              src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
+              alt="SquadAssist Logo" 
+              className="h-8 md:h-10 object-contain"
+              onError={(e) => {
+                console.error('Logo failed to load:', e);
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           </Link>
 
           {/* Desktop Navigation */}
