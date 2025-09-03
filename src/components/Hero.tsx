@@ -12,7 +12,7 @@ const Hero = memo(() => {
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
               {/* Main background image */}
               <img 
-                src="/lovable-uploads/5c763c0c-5315-45b9-8442-07728500815f.png" 
+                src="/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png" 
                 alt="SquadAssist AI football transfer analysis platform - Blue gradient background" 
                 className="w-full h-full object-cover" 
                 fetchPriority="high" 
