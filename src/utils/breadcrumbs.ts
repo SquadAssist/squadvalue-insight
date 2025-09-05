@@ -21,8 +21,7 @@ export const addPerformanceOptimizations = () => {
   // Add preconnect for external domains
   const preconnectDomains = [
     'https://fonts.googleapis.com',
-    'https://fonts.gstatic.com',
-    'https://images.unsplash.com'
+    'https://fonts.gstatic.com'
   ];
 
   preconnectDomains.forEach(domain => {

@@ -227,7 +227,7 @@ export const pageSEOConfigs = {
     description: "AI-powered football transfer intelligence platform. Predict player value, optimize recruitment strategy, and make data-driven transfer decisions. Advanced soccer analytics for clubs and agents.",
     keywords: "football transfer analysis, soccer player analytics, AI recruitment, transfer market intelligence, player scouting software, football data analytics, soccer transfer decisions, player value prediction",
     canonical: "https://squadassist.ai/",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    ogImage: "https://squadassist.ai/lovable-uploads/34ff685f-9edb-4c2a-8ec0-7a98041c9b94.png",
     structuredData: {
       "@context": "https://schema.org",
       "@graph": [
@@ -255,7 +255,7 @@ export const pageSEOConfigs = {
     description: "Discover SquadAssist pricing plans for football agents. From free tier to elite packages, find the perfect AI-powered transfer analysis solution for your agency.",
     keywords: "football agent pricing, soccer analytics plans, transfer analysis subscription, agent software pricing, football scouting tools cost",
     canonical: "https://squadassist.ai/pricing/agents",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    ogImage: "https://squadassist.ai/lovable-uploads/34ff685f-9edb-4c2a-8ec0-7a98041c9b94.png",
     ogType: "article",
     structuredData: organizationStructuredData
   },
@@ -264,7 +264,7 @@ export const pageSEOConfigs = {
     description: "Contact SquadAssist for AI-powered football transfer analysis support. Get in touch with our team for custom solutions, pricing, and technical assistance.",
     keywords: "contact squadassist, football analytics support, transfer analysis help, soccer software contact",
     canonical: "https://squadassist.ai/contact",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    ogImage: "https://squadassist.ai/lovable-uploads/34ff685f-9edb-4c2a-8ec0-7a98041c9b94.png",
     structuredData: organizationStructuredData
   },
   team: {
@@ -272,7 +272,7 @@ export const pageSEOConfigs = {
     description: "Meet the expert team behind SquadAssist's AI-powered football transfer intelligence platform. Learn about our founders and their vision for soccer analytics.",
     keywords: "squadassist team, football analytics experts, soccer technology founders, AI sports team",
     canonical: "https://squadassist.ai/team",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    ogImage: "https://squadassist.ai/lovable-uploads/34ff685f-9edb-4c2a-8ec0-7a98041c9b94.png",
     structuredData: {
       "@context": "https://schema.org",
       "@graph": [
@@ -292,7 +292,7 @@ export const pageSEOConfigs = {
     description: "Read the latest insights on football analytics, AI in soccer, transfer market trends, and data-driven scouting strategies from SquadAssist experts.",
     keywords: "football analytics blog, soccer AI insights, transfer market analysis, data-driven scouting, sports technology articles",
     canonical: "https://squadassist.ai/blog",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    ogImage: "https://squadassist.ai/lovable-uploads/34ff685f-9edb-4c2a-8ec0-7a98041c9b94.png",
     structuredData: {
       "@context": "https://schema.org",
       "@graph": [
@@ -312,7 +312,7 @@ export const pageSEOConfigs = {
     description: "Find answers to frequently asked questions about SquadAssist's AI-powered football transfer analysis platform, pricing, features, and how to get started.",
     keywords: "squadassist faq, football analytics questions, transfer analysis help, soccer software support",
     canonical: "https://squadassist.ai/faq",
-    ogImage: "https://images.unsplash.com/photo-1600679472829-3044539ce8ed",
+    ogImage: "https://squadassist.ai/lovable-uploads/34ff685f-9edb-4c2a-8ec0-7a98041c9b94.png",
     structuredData: {
       "@context": "https://schema.org",
       "@graph": [
