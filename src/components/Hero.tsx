@@ -1,5 +1,12 @@
 import { memo } from "react";
+import { useAdaptiveVideo } from "@/hooks/use-adaptive-video";
 const Hero = memo(() => {
+  const { src, poster } = useAdaptiveVideo({
+    compressedSrc: "/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4",
+    highQualitySrc: "/lovable-uploads/SQUADASSIST_TRAILER_WEBSITE.mp4",
+    poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
+  });
+
   return <section className="w-full pb-12 sm:pb-16 md:pb-24 pt-20 sm:pt-16 overflow-hidden bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
@@ -7,7 +14,17 @@ const Hero = memo(() => {
           <div className="w-full mb-8 sm:mb-12 relative">
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
               {/* Main background video */}
-              <video src="/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4" poster="/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png" autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover" aria-label="SquadAssist AI football transfer analysis platform demonstration video" />
+              <video 
+                src={src} 
+                poster={poster} 
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                preload="metadata" 
+                className="w-full h-full object-cover" 
+                aria-label="SquadAssist AI football transfer analysis platform demonstration video" 
+              />
             </div>
           </div>
           
