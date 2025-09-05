@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { PricingDropdown } from "./PricingDropdown";
+import { PricingModal } from "./PricingModal";
+import { ClubInquiryModal } from "./ClubInquiryModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const [isClubModalOpen, setIsClubModalOpen] = useState(false);
   const location = useLocation();
 
   // Close mobile menu when route changes
@@ -119,7 +123,15 @@ const Navbar = () => {
                 
                 {/* Pricing Section */}
                 <div className="space-y-2">
-                  <span className="block text-base font-medium text-gray-900 py-2">Pricing</span>
+                  <button 
+                    className="block text-base font-medium text-gray-900 py-2 text-left hover:text-blue-600"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsPricingModalOpen(true);
+                    }}
+                  >
+                    Pricing
+                  </button>
                   <div className="ml-4 space-y-2">
                     <Link 
                       to="/pricing/agents" 
@@ -130,7 +142,10 @@ const Navbar = () => {
                     </Link>
                     <button 
                       className="block text-sm text-gray-600 py-1 text-left hover:text-blue-600"
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => {
+                        setIsOpen(false);
+                        setIsClubModalOpen(true);
+                      }}
                     >
                       Club
                     </button>
@@ -150,6 +165,17 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      
+      {/* Modals */}
+      <PricingModal 
+        isOpen={isPricingModalOpen} 
+        onClose={() => setIsPricingModalOpen(false)} 
+      />
+      
+      <ClubInquiryModal 
+        isOpen={isClubModalOpen} 
+        onClose={() => setIsClubModalOpen(false)} 
+      />
     </>
   );
 };
