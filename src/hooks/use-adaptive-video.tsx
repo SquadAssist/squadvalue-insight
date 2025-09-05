@@ -13,6 +13,33 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [videoSrc, setVideoSrc] = useState<string>('')
   const [networkQuality, setNetworkQuality] = useState<'slow' | 'fast' | 'testing'>('testing')
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Helper function to safely set video source and reload
+  const setVideoSource = (src: string, quality: 'slow' | 'fast') => {
+    console.log(`🔄 Setting video source to: ${src} (${quality})`)
+    setVideoSrc(src)
+    setNetworkQuality(quality)
+    setIsLoading(false)
+    
+    // Force video element to reload with new source
+    if (videoRef.current) {
+      console.log('🎬 Forcing video reload with new source')
+      videoRef.current.load()
+      
+      // Debug: Log what the video element is actually loading
+      setTimeout(() => {
+        if (videoRef.current) {
+          console.log('📹 Video element debug:', {
+            currentSrc: videoRef.current.currentSrc,
+            src: videoRef.current.src,
+            readyState: videoRef.current.readyState,
+            networkState: videoRef.current.networkState
+          })
+        }
+      }, 100)
+    }
+  }
 
   // Step 1: Test network quality (connection-based only)
   const testNetworkQuality = (): 'slow' | 'fast' => {
@@ -95,9 +122,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   // Step 3: Load compressed video (fallback)
   const loadCompressedVideo = () => {
     console.log('📦 === STEP 3: LOADING COMPRESSED VIDEO ===')
-    console.log('🔄 Setting video source to:', compressedSrc)
-    setVideoSrc(compressedSrc)
-    setNetworkQuality('slow')
+    setVideoSource(compressedSrc, 'slow')
   }
 
   // Main logic
@@ -116,9 +141,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         
         if (hdSuccess) {
           console.log('✅ HD video will be used')
-          console.log('🔄 Setting video source to:', highQualitySrc)
-          setVideoSrc(highQualitySrc)
-          setNetworkQuality('fast')
+          setVideoSource(highQualitySrc, 'fast')
         } else {
           console.log('❌ HD failed, falling back to compressed')
           loadCompressedVideo()
@@ -142,6 +165,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     poster,
     networkQuality,
     ref: videoRef,
-    isHDReady: networkQuality === 'fast'
+    isHDReady: networkQuality === 'fast',
+    isLoading
   }
 }
