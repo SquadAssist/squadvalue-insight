@@ -13,6 +13,8 @@ interface AdaptiveVideoState {
 }
 
 export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: AdaptiveVideoConfig) {
+  console.log('🎥 useAdaptiveVideo hook initialized', { compressedSrc, highQualitySrc })
+  
   const [state, setState] = useState<AdaptiveVideoState>({
     currentSrc: compressedSrc,
     isHDReady: false,
@@ -98,21 +100,23 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   }, [highQualitySrc, state.isHDReady])
 
   useEffect(() => {
+    console.log('🚀 useEffect triggered for adaptive video')
+    
     // Initial network quality detection
     const quality = detectNetworkQuality()
     console.log('🌐 Network quality detected:', quality)
     setState(prev => ({ ...prev, networkQuality: quality }))
 
-    // If network is fast, preload HD version after a short delay
-    if (quality === 'fast') {
-      console.log('⏱️ Setting timer to preload HD video in 1 second...')
-      const timer = setTimeout(() => {
+    // For desktop users with likely good connections, start HD preload immediately
+    const isDesktop = window.innerWidth >= 1024
+    if (isDesktop || quality === 'fast') {
+      console.log('⏱️ Starting immediate HD preload for desktop/fast connection')
+      // Start preloading HD immediately for desktop users
+      setTimeout(() => {
         preloadHighQuality()
-      }, 1000) // Wait 1 second for initial page load
-
-      return () => clearTimeout(timer)
+      }, 500) // Very short delay
     } else {
-      console.log('📵 Network quality not fast enough, staying with compressed video')
+      console.log('📵 Not desktop or fast connection, staying with compressed video')
     }
   }, [detectNetworkQuality, preloadHighQuality])
 
