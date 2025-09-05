@@ -312,7 +312,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     setVideoSource(compressedSrc, 'slow')
   }
 
-  // Main logic
+  // Main logic with retry mechanism
   useEffect(() => {
     console.log('🚀 === MAIN ADAPTIVE VIDEO LOGIC STARTED ===')
     
@@ -332,10 +332,23 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
           console.log(`📁 HD Source: ${highQualitySrc}`)
           setVideoSource(highQualitySrc, 'fast')
         } else {
-          console.log('❌ === FINAL DECISION: COMPRESSED VIDEO ===')
+          console.log('❌ === INITIAL HD ATTEMPT FAILED - LOADING COMPRESSED FIRST ===')
           console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
           console.log(`📁 Compressed Source: ${compressedSrc}`)
           loadCompressedVideo()
+          
+          // Retry HD video after 3 seconds in case it was a temporary server issue
+          console.log('🔄 === SCHEDULING HD RETRY IN 3 SECONDS ===')
+          setTimeout(async () => {
+            console.log('🔄 === RETRYING HD VIDEO AFTER DELAY ===')
+            const retryHDSuccess = await tryLoadHDVideo()
+            if (retryHDSuccess) {
+              console.log('✅ === HD VIDEO LOADED ON RETRY - SWITCHING TO HD ===')
+              setVideoSource(highQualitySrc, 'fast')
+            } else {
+              console.log('❌ === HD VIDEO STILL FAILED ON RETRY ===')
+            }
+          }, 3000)
         }
       } else {
         // Step 3: Use compressed
