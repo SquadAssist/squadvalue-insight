@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 
 interface AdaptiveVideoConfig {
   compressedSrc: string
@@ -10,25 +10,27 @@ interface AdaptiveVideoState {
   currentSrc: string
   isHDReady: boolean
   networkQuality: 'slow' | 'fast' | 'unknown'
+  shouldUpgradeOnLoop: boolean
 }
 
 export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: AdaptiveVideoConfig) {
   console.log('🎥 useAdaptiveVideo hook initialized', { compressedSrc, highQualitySrc })
   
+  const videoRef = useRef<HTMLVideoElement | null>(null)
   const [state, setState] = useState<AdaptiveVideoState>({
     currentSrc: compressedSrc,
     isHDReady: false,
-    networkQuality: 'unknown'
+    networkQuality: 'unknown',
+    shouldUpgradeOnLoop: false
   })
 
   const detectNetworkQuality = useCallback((): 'slow' | 'fast' | 'unknown' => {
     console.log('🔍 Detecting network quality...')
     
-    // Check if user prefers reduced data
+    // Check Network Information API
     if ('connection' in navigator) {
       const connection = (navigator as any).connection
       if (connection) {
-        // Use Network Information API
         const effectiveType = connection.effectiveType
         const saveData = connection.saveData
         const downlink = connection.downlink
@@ -40,98 +42,98 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
           return 'slow'
         }
         
-        // More aggressive HD detection for good connections
-        if (effectiveType === '4g' || downlink > 1.5) {
-          console.log('🚀 Fast connection detected - will upgrade to HD')
+        // Fast connection: 4G with good downlink OR high downlink speed
+        if (effectiveType === '4g' && downlink > 1.5) {
+          console.log('🚀 Fast connection detected - will use HD immediately')
           return 'fast'
-        }
-        
-        if (effectiveType === '3g' || effectiveType === '2g' || effectiveType === 'slow-2g') {
-          console.log('🐌 Slow connection detected')
-          return 'slow'
         }
       }
     }
 
-    // Fallback: be more optimistic for desktop users
-    const isMobile = window.innerWidth < 768
-    const isLowEnd = 'deviceMemory' in navigator && (navigator as any).deviceMemory < 4
+    // Fallback: Desktop users likely have good connections
+    const isDesktop = window.innerWidth >= 1024
+    console.log('📱 Device info:', { isDesktop, width: window.innerWidth })
     
-    console.log('📱 Device info:', { isMobile, isLowEnd, width: window.innerWidth })
-    
-    // Default to fast for desktop users with no connection info
-    if (!isMobile && !isLowEnd) {
+    if (isDesktop) {
       console.log('💻 Desktop detected - defaulting to HD')
       return 'fast'
     }
     
-    return isMobile || isLowEnd ? 'slow' : 'fast'
+    return 'slow'
   }, [])
 
-  const preloadHighQuality = useCallback(() => {
-    if (state.isHDReady) return
-
-    console.log('🎬 Starting HD video preload:', highQualitySrc)
+  const preloadHDForNextLoop = useCallback(() => {
+    console.log('🎬 Preloading HD video for next loop:', highQualitySrc)
     
     const video = document.createElement('video')
-    video.preload = 'metadata'
+    video.preload = 'auto'
     video.src = highQualitySrc
     
-    const handleCanPlay = () => {
-      console.log('✅ HD video ready! Switching to high quality')
-      // Force immediate state update
-      setState(prev => ({ 
-        ...prev, 
-        isHDReady: true, 
-        currentSrc: highQualitySrc 
-      }))
-      video.removeEventListener('canplaythrough', handleCanPlay)
-      video.removeEventListener('loadeddata', handleCanPlay)
+    const handleReady = () => {
+      console.log('✅ HD video preloaded successfully - ready for next loop')
+      setState(prev => ({ ...prev, isHDReady: true, shouldUpgradeOnLoop: true }))
+      cleanup()
     }
     
     const handleError = () => {
-      console.warn('❌ Failed to preload HD video, staying with compressed version')
+      console.warn('❌ Failed to preload HD video')
+      cleanup()
+    }
+    
+    const cleanup = () => {
+      video.removeEventListener('canplaythrough', handleReady)
       video.removeEventListener('error', handleError)
     }
 
-    video.addEventListener('canplaythrough', handleCanPlay)
-    video.addEventListener('loadeddata', handleCanPlay) // Additional event for better reliability
+    video.addEventListener('canplaythrough', handleReady)
     video.addEventListener('error', handleError)
     
     // Cleanup timeout
-    setTimeout(() => {
-      video.removeEventListener('canplaythrough', handleCanPlay)
-      video.removeEventListener('loadeddata', handleCanPlay)
-      video.removeEventListener('error', handleError)
-      console.log('⏰ HD video preload timeout')
-    }, 10000) // 10 second timeout
-  }, [highQualitySrc, state.isHDReady])
+    setTimeout(cleanup, 15000)
+  }, [highQualitySrc])
+
+  const handleVideoLoop = useCallback(() => {
+    if (state.shouldUpgradeOnLoop && state.isHDReady) {
+      console.log('🔄 Video looped - upgrading to HD quality')
+      setState(prev => ({ 
+        ...prev, 
+        currentSrc: highQualitySrc, 
+        shouldUpgradeOnLoop: false 
+      }))
+    }
+  }, [state.shouldUpgradeOnLoop, state.isHDReady, highQualitySrc])
 
   useEffect(() => {
     console.log('🚀 useEffect triggered for adaptive video')
     
-    // Initial network quality detection
     const quality = detectNetworkQuality()
     console.log('🌐 Network quality detected:', quality)
-    setState(prev => ({ ...prev, networkQuality: quality }))
-
-    // For desktop users with likely good connections, start HD preload immediately
-    const isDesktop = window.innerWidth >= 1024
-    if (isDesktop || quality === 'fast') {
-      console.log('⏱️ Starting immediate HD preload for desktop/fast connection')
-      // Start preloading HD immediately for desktop users
-      setTimeout(() => {
-        preloadHighQuality()
-      }, 500) // Very short delay
+    
+    if (quality === 'fast') {
+      // Fast connection: Use HD immediately
+      console.log('⚡ Fast connection - using HD video immediately')
+      setState(prev => ({ 
+        ...prev, 
+        networkQuality: quality, 
+        currentSrc: highQualitySrc,
+        isHDReady: true 
+      }))
     } else {
-      console.log('📵 Not desktop or fast connection, staying with compressed video')
+      // Slow connection: Start with compressed, preload HD for next loop
+      console.log('🐌 Slow connection - starting with compressed, preloading HD')
+      setState(prev => ({ ...prev, networkQuality: quality }))
+      setTimeout(() => {
+        preloadHDForNextLoop()
+      }, 2000) // Wait 2 seconds before starting HD preload
     }
-  }, [detectNetworkQuality, preloadHighQuality])
+  }, [detectNetworkQuality, preloadHDForNextLoop, highQualitySrc])
 
   return {
     src: state.currentSrc,
     poster,
     isHDReady: state.isHDReady,
-    networkQuality: state.networkQuality
+    networkQuality: state.networkQuality,
+    onLoop: handleVideoLoop,
+    ref: videoRef
   }
 }
