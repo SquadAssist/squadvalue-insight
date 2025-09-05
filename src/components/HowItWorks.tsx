@@ -18,8 +18,8 @@ const HowItWorks = () => {
           animationDelay: "300ms"
         }}>
             <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
+              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{backgroundColor: '#090148'}}></div>
+              <div className="rounded-full p-5 relative z-10" style={{background: 'linear-gradient(135deg, #090148, #0a0156)'}}>
                 <Trophy className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -32,8 +32,8 @@ const HowItWorks = () => {
           animationDelay: "500ms"
         }}>
             <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
+              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{backgroundColor: '#090148'}}></div>
+              <div className="rounded-full p-5 relative z-10" style={{background: 'linear-gradient(135deg, #090148, #0a0156)'}}>
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>
