@@ -82,7 +82,7 @@ const Contact = () => {
       <Navbar />
       <main className="flex-grow">
         {/* Header */}
-        <section className="bg-black text-white py-20">
+        <section className="text-white py-20" style={{ backgroundImage: 'url(/lovable-uploads/a7aa749a-4229-4871-93f0-926dae7f7845.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="container px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-up" style={{
