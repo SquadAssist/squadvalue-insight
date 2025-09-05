@@ -250,9 +250,9 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     return 'fast'
   }
 
-  // Step 2: Try to load HD video with comprehensive debugging
-  const tryLoadHDVideo = async (): Promise<boolean> => {
-    console.log('🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD ===')
+  // Step 2: Try to load HD video with retry logic
+  const tryLoadHDVideo = async (retryCount = 0, maxRetries = 3): Promise<boolean> => {
+    console.log(`🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD (Attempt ${retryCount + 1}/${maxRetries + 1}) ===`)
     
     try {
       // First check if file exists and get detailed info
@@ -269,17 +269,15 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         cacheControl: response.headers.get('cache-control')
       })
       
-      // Also check the compressed file for comparison
-      const compressedResponse = await fetch(compressedSrc, { method: 'HEAD' })
-      console.log('📋 Compressed file check result:', {
-        status: compressedResponse.status,
-        ok: compressedResponse.ok,
-        contentLength: compressedResponse.headers.get('content-length'),
-        contentType: compressedResponse.headers.get('content-type')
-      })
-      
       if (!response.ok) {
-        throw new Error(`HD file not accessible: ${response.status} ${response.statusText}`)
+        if (retryCount < maxRetries) {
+          const waitTime = (retryCount + 1) * 2000 // 2s, 4s, 6s delays
+          console.log(`⏳ HD file not ready (${response.status}), retrying in ${waitTime/1000}s...`)
+          await new Promise(resolve => setTimeout(resolve, waitTime))
+          return tryLoadHDVideo(retryCount + 1, maxRetries)
+        } else {
+          throw new Error(`HD file not accessible after ${maxRetries + 1} attempts: ${response.status} ${response.statusText}`)
+        }
       }
       
       console.log('✅ HD file is accessible')
@@ -312,7 +310,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     setVideoSource(compressedSrc, 'slow')
   }
 
-  // Main logic with retry mechanism
+  // Main logic - wait for HD when that's our decision
   useEffect(() => {
     console.log('🚀 === MAIN ADAPTIVE VIDEO LOGIC STARTED ===')
     
@@ -322,8 +320,8 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
       console.log(`🌐 Network quality result: ${quality}`)
       
       if (quality === 'fast') {
-        // Step 2: Try HD video
-        console.log('⚡ Fast connection - attempting HD video...')
+        // Step 2: Wait for HD video (with built-in retries)
+        console.log('⚡ Fast connection - waiting for HD video to become available...')
         const hdSuccess = await tryLoadHDVideo()
         
         if (hdSuccess) {
@@ -332,26 +330,13 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
           console.log(`📁 HD Source: ${highQualitySrc}`)
           setVideoSource(highQualitySrc, 'fast')
         } else {
-          console.log('❌ === INITIAL HD ATTEMPT FAILED - LOADING COMPRESSED FIRST ===')
+          console.log('❌ === HD FAILED AFTER ALL RETRIES - USING COMPRESSED ===')
           console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
           console.log(`📁 Compressed Source: ${compressedSrc}`)
           loadCompressedVideo()
-          
-          // Retry HD video after 3 seconds in case it was a temporary server issue
-          console.log('🔄 === SCHEDULING HD RETRY IN 3 SECONDS ===')
-          setTimeout(async () => {
-            console.log('🔄 === RETRYING HD VIDEO AFTER DELAY ===')
-            const retryHDSuccess = await tryLoadHDVideo()
-            if (retryHDSuccess) {
-              console.log('✅ === HD VIDEO LOADED ON RETRY - SWITCHING TO HD ===')
-              setVideoSource(highQualitySrc, 'fast')
-            } else {
-              console.log('❌ === HD VIDEO STILL FAILED ON RETRY ===')
-            }
-          }, 3000)
         }
       } else {
-        // Step 3: Use compressed
+        // Step 3: Use compressed for slow connections
         console.log('🐌 Slow connection - using compressed video')
         loadCompressedVideo()
       }
