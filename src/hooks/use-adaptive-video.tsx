@@ -40,27 +40,39 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     }
   }
 
-  // Helper function to safely set video source and reload with comprehensive debugging
+  // Helper function to safely set video source with explicit debugging
   const setVideoSource = async (src: string, quality: 'slow' | 'fast') => {
-    console.log(`🔄 === SETTING VIDEO SOURCE ===`)
-    console.log(`📹 Target source: ${src}`)
-    console.log(`🎯 Quality: ${quality}`)
+    console.log(`🚨🚨🚨 === EXPLICIT DEBUG: SETTING VIDEO SOURCE ===`)
+    console.log(`🎬 BEFORE SETTING - Current videoSrc state: ${videoSrc}`)
+    console.log(`📹 NEW Target source: ${src}`)
+    console.log(`🎯 Expected quality: ${quality}`)
     console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
+    console.log(`📅 Timestamp: ${new Date().toISOString()}`)
     
-    // Get file sizes for comparison
-    const [compressedSize, hdSize] = await Promise.all([
-      getFileSize(compressedSrc),
-      getFileSize(highQualitySrc)
+    // Test if both files are actually different
+    console.log('🔍 TESTING IF FILES ARE ACTUALLY DIFFERENT...')
+    const [compressedResponse, hdResponse] = await Promise.all([
+      fetch(compressedSrc, { method: 'HEAD' }).catch(e => ({ ok: false, error: e.message })),
+      fetch(highQualitySrc, { method: 'HEAD' }).catch(e => ({ ok: false, error: e.message }))
     ])
     
-    console.log('📊 FILE SIZE COMPARISON:', {
-      compressedSrc: `${compressedSrc} (${(compressedSize / 1024 / 1024).toFixed(2)} MB)`,
-      highQualitySrc: `${highQualitySrc} (${(hdSize / 1024 / 1024).toFixed(2)} MB)`,
-      selectedSrc: `${src} (${quality === 'fast' ? (hdSize / 1024 / 1024).toFixed(2) : (compressedSize / 1024 / 1024).toFixed(2)} MB)`
+    const compressedSize = (compressedResponse.ok && 'headers' in compressedResponse) ? compressedResponse.headers?.get('content-length') : 'ERROR'
+    const hdSize = (hdResponse.ok && 'headers' in hdResponse) ? hdResponse.headers?.get('content-length') : 'ERROR'
+    
+    console.log('🚨 CRITICAL FILE SIZE CHECK:', {
+      compressedFile: `${compressedSrc} = ${compressedSize ? (parseInt(compressedSize) / 1024 / 1024).toFixed(2) + ' MB' : 'UNKNOWN'}`,
+      hdFile: `${highQualitySrc} = ${hdSize ? (parseInt(hdSize) / 1024 / 1024).toFixed(2) + ' MB' : 'UNKNOWN'}`,
+      areDifferent: compressedSize !== hdSize,
+      selectedFile: `${src} (expecting ${quality} quality)`
     })
     
-    // Add cache-busting to prevent caching issues
-    const cacheBustedSrc = addCacheBuster(src)
+    // Check if files are the same size (indicating they might be the same file)
+    if (compressedSize === hdSize && compressedSize !== 'ERROR') {
+      console.error('🚨🚨🚨 CRITICAL ISSUE: BOTH FILES HAVE SAME SIZE! They might be the same file!')
+    }
+    
+    // Add cache buster
+    const cacheBustedSrc = `${src}?cb=${Date.now()}&debug=explicit`
     console.log('🔧 Cache-busted URL:', cacheBustedSrc)
     
     setVideoSrc(cacheBustedSrc)

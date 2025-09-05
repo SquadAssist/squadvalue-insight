@@ -7,12 +7,13 @@ const Hero = memo(() => {
     poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
   });
 
-  // Debug: Log when src changes
-  console.log('🏆 === HERO COMPONENT RENDER ===')
-  console.log(`📹 Current src from hook: ${src}`)
+  // EXPLICIT DEBUG: Log when src changes
+  console.log('🚨🚨🚨 === HERO COMPONENT EXPLICIT DEBUG ===')
+  console.log(`📹 Video src received from hook: ${src}`)
   console.log(`⏳ Is loading: ${isLoading}`)
   console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
   console.log(`🐛 Debug info:`, debugInfo)
+  console.log(`📅 Hero render timestamp: ${new Date().toISOString()}`)
 
   return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-background">
       {/* Debug Info Panel - Only show in development */}
