@@ -21,19 +21,53 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   const [videoSrc, setVideoSrc] = useState<string>('')
   const [networkQuality, setNetworkQuality] = useState<'slow' | 'fast' | 'testing'>('testing')
   const [isLoading, setIsLoading] = useState(true)
+  const [debugInfo, setDebugInfo] = useState<any>({})
 
-  // Helper function to safely set video source and reload
-  const setVideoSource = (src: string, quality: 'slow' | 'fast') => {
+  // Add cache-busting parameter to URLs
+  const addCacheBuster = (url: string) => {
+    const cacheBuster = `?cb=${Date.now()}&debug=1`
+    return url + cacheBuster
+  }
+
+  // Fetch file size for debugging
+  const getFileSize = async (url: string): Promise<number> => {
+    try {
+      const response = await fetch(url, { method: 'HEAD' })
+      const contentLength = response.headers.get('content-length')
+      return contentLength ? parseInt(contentLength) : 0
+    } catch {
+      return 0
+    }
+  }
+
+  // Helper function to safely set video source and reload with comprehensive debugging
+  const setVideoSource = async (src: string, quality: 'slow' | 'fast') => {
     console.log(`🔄 === SETTING VIDEO SOURCE ===`)
     console.log(`📹 Target source: ${src}`)
     console.log(`🎯 Quality: ${quality}`)
     console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
     
-    setVideoSrc(src)
+    // Get file sizes for comparison
+    const [compressedSize, hdSize] = await Promise.all([
+      getFileSize(compressedSrc),
+      getFileSize(highQualitySrc)
+    ])
+    
+    console.log('📊 FILE SIZE COMPARISON:', {
+      compressedSrc: `${compressedSrc} (${(compressedSize / 1024 / 1024).toFixed(2)} MB)`,
+      highQualitySrc: `${highQualitySrc} (${(hdSize / 1024 / 1024).toFixed(2)} MB)`,
+      selectedSrc: `${src} (${quality === 'fast' ? (hdSize / 1024 / 1024).toFixed(2) : (compressedSize / 1024 / 1024).toFixed(2)} MB)`
+    })
+    
+    // Add cache-busting to prevent caching issues
+    const cacheBustedSrc = addCacheBuster(src)
+    console.log('🔧 Cache-busted URL:', cacheBustedSrc)
+    
+    setVideoSrc(cacheBustedSrc)
     setNetworkQuality(quality)
     setIsLoading(false)
     
-    // Force video element to reload with new source
+    // Force video element to reload with comprehensive debugging
     if (videoRef.current) {
       const video = videoRef.current
       console.log('🎬 BEFORE reload - Video element state:', {
@@ -45,12 +79,29 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         currentTime: video.currentTime
       })
       
+      // Add comprehensive event listeners for debugging
+      const debugEvents = ['loadstart', 'loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough', 'error', 'abort', 'stalled', 'suspend', 'waiting']
+      debugEvents.forEach(eventName => {
+        video.addEventListener(eventName, (e) => {
+          console.log(`🎥 VIDEO EVENT [${eventName}]:`, {
+            src: video.src,
+            currentSrc: video.currentSrc,
+            readyState: video.readyState,
+            networkState: video.networkState,
+            videoWidth: video.videoWidth,
+            videoHeight: video.videoHeight,
+            duration: video.duration,
+            error: video.error
+          })
+        }, { once: true })
+      })
+      
       // Pause and reset before changing source
       video.pause()
       video.currentTime = 0
       
       // Change source and reload
-      video.src = src
+      video.src = cacheBustedSrc
       video.load()
       
       console.log('🎬 IMMEDIATELY AFTER reload - Video element state:', {
@@ -60,9 +111,9 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         networkState: video.networkState
       })
       
-      // Check again after a delay
-      setTimeout(() => {
-        console.log('🎬 AFTER DELAY - Video element state:', {
+      // Check again after delays to see what actually loaded
+      setTimeout(async () => {
+        console.log('🎬 AFTER 1s DELAY - Video element state:', {
           src: video.src,
           currentSrc: video.currentSrc,
           readyState: video.readyState,
@@ -72,21 +123,66 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
           duration: video.duration
         })
         
-        // Try to determine actual quality by checking video dimensions or file size
+        // Try to determine actual quality by checking video dimensions
         if (video.videoWidth && video.videoHeight) {
           const resolution = `${video.videoWidth}x${video.videoHeight}`
           console.log(`🎥 ACTUAL VIDEO RESOLUTION: ${resolution}`)
           
-          // Log if there's a mismatch
+          // Fetch actual file size of what was loaded
+          try {
+            const actualResponse = await fetch(video.currentSrc || video.src, { method: 'HEAD' })
+            const actualSize = actualResponse.headers.get('content-length')
+            console.log(`📏 ACTUAL LOADED FILE SIZE: ${actualSize ? (parseInt(actualSize) / 1024 / 1024).toFixed(2) + ' MB' : 'Unknown'}`)
+          } catch (e) {
+            console.log('❌ Could not fetch actual file size:', e)
+          }
+          
+          // Log if there's a mismatch between expected and actual
           if (quality === 'fast' && video.videoWidth < 1280) {
-            console.error('❌ MISMATCH DETECTED: Expected HD but got lower resolution!')
+            console.error('❌ CRITICAL MISMATCH: Expected HD but got lower resolution!', {
+              expected: 'HD (>=1280px width)',
+              actual: `${video.videoWidth}x${video.videoHeight}`,
+              expectedSrc: highQualitySrc,
+              actualSrc: video.currentSrc || video.src
+            })
           } else if (quality === 'slow' && video.videoWidth >= 1280) {
-            console.error('❌ MISMATCH DETECTED: Expected compressed but got HD resolution!')
+            console.error('❌ CRITICAL MISMATCH: Expected compressed but got HD resolution!', {
+              expected: 'Compressed (<1280px width)',
+              actual: `${video.videoWidth}x${video.videoHeight}`,
+              expectedSrc: compressedSrc,
+              actualSrc: video.currentSrc || video.src
+            })
           } else {
             console.log('✅ Video quality matches expectation')
           }
         }
+        
+        // Store debug info in state
+        setDebugInfo({
+          expectedQuality: quality,
+          expectedSrc: src,
+          cacheBustedSrc,
+          actualSrc: video.currentSrc || video.src,
+          resolution: video.videoWidth && video.videoHeight ? `${video.videoWidth}x${video.videoHeight}` : 'Unknown',
+          readyState: video.readyState,
+          networkState: video.networkState,
+          context: window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'
+        })
       }, 1000)
+      
+      // Additional check after 3 seconds for slower networks
+      setTimeout(() => {
+        console.log('🎬 AFTER 3s DELAY - Final video state:', {
+          src: video.src,
+          currentSrc: video.currentSrc,
+          readyState: video.readyState,
+          networkState: video.networkState,
+          videoWidth: video.videoWidth,
+          videoHeight: video.videoHeight,
+          duration: video.duration,
+          error: video.error
+        })
+      }, 3000)
     }
   }
 
@@ -142,12 +238,12 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     return 'fast'
   }
 
-  // Step 2: Try to load HD video
+  // Step 2: Try to load HD video with comprehensive debugging
   const tryLoadHDVideo = async (): Promise<boolean> => {
     console.log('🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD ===')
     
     try {
-      // First check if file exists
+      // First check if file exists and get detailed info
       console.log('📋 Checking HD file accessibility...')
       const response = await fetch(highQualitySrc, { method: 'HEAD' })
       
@@ -155,7 +251,19 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         status: response.status,
         ok: response.ok,
         contentLength: response.headers.get('content-length'),
-        contentType: response.headers.get('content-type')
+        contentType: response.headers.get('content-type'),
+        lastModified: response.headers.get('last-modified'),
+        etag: response.headers.get('etag'),
+        cacheControl: response.headers.get('cache-control')
+      })
+      
+      // Also check the compressed file for comparison
+      const compressedResponse = await fetch(compressedSrc, { method: 'HEAD' })
+      console.log('📋 Compressed file check result:', {
+        status: compressedResponse.status,
+        ok: compressedResponse.ok,
+        contentLength: compressedResponse.headers.get('content-length'),
+        contentType: compressedResponse.headers.get('content-type')
       })
       
       if (!response.ok) {
@@ -163,6 +271,21 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
       }
       
       console.log('✅ HD file is accessible')
+      
+      // Test actual network download speed by downloading a small chunk
+      console.log('🔄 Testing network download speed...')
+      const startTime = Date.now()
+      const testResponse = await fetch(highQualitySrc, { 
+        headers: { 'Range': 'bytes=0-1023' } // First 1KB
+      })
+      const downloadTime = Date.now() - startTime
+      console.log('⚡ Network test result:', {
+        downloadTime: `${downloadTime}ms`,
+        status: testResponse.status,
+        bytesDownloaded: 1024,
+        estimatedSpeed: `${(1024 / downloadTime * 1000 / 1024).toFixed(2)} KB/s`
+      })
+      
       return true
       
     } catch (error) {
@@ -222,6 +345,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     networkQuality,
     ref: videoRef,
     isHDReady: networkQuality === 'fast',
-    isLoading
+    isLoading,
+    debugInfo // Add debug info for troubleshooting
   }
 }
