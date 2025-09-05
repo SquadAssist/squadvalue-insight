@@ -14,45 +14,53 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   const [videoSrc, setVideoSrc] = useState<string>('')
   const [networkQuality, setNetworkQuality] = useState<'slow' | 'fast' | 'testing'>('testing')
 
-  // Step 1: Test network quality
+  // Step 1: Test network quality (connection-based only)
   const testNetworkQuality = (): 'slow' | 'fast' => {
-    console.log('🔍 === STEP 1: TESTING NETWORK QUALITY ===')
+    console.log('🔍 === STEP 1: TESTING CONNECTION QUALITY ===')
+    console.log('📍 Context:', {
+      isInIframe: window !== window.top,
+      windowWidth: window.innerWidth,
+      userAgent: navigator.userAgent.slice(0, 50) + '...'
+    })
     
-    // Check for save data mode first
+    // Check for save data mode first - explicit user preference for low bandwidth
     if ('connection' in navigator) {
       const connection = (navigator as any).connection
+      
       if (connection?.saveData) {
-        console.log('⚡ Save data mode enabled → SLOW')
+        console.log('⚡ Save data mode enabled → SLOW (user preference)')
         return 'slow'
       }
       
       if (connection) {
-        console.log('📊 Network API data:', {
+        console.log('📊 Network Connection API data:', {
           effectiveType: connection.effectiveType,
           downlink: connection.downlink,
           rtt: connection.rtt,
           saveData: connection.saveData
         })
         
-        // More aggressive fast detection
-        if (connection.downlink > 2 || connection.effectiveType === '4g') {
-          console.log('🚀 Good connection detected → FAST')
-          return 'fast'
+        // Detect genuinely slow connections
+        if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+          console.log('🐌 Very slow connection detected → SLOW')
+          return 'slow'
         }
+        
+        // Detect slow downlink speed
+        if (connection.downlink && connection.downlink < 1.5) {
+          console.log('📉 Low bandwidth detected → SLOW')
+          return 'slow'
+        }
+        
+        // All other cases with Network API available → FAST
+        console.log('🚀 Connection quality acceptable → FAST')
+        return 'fast'
       }
     }
 
-    // Desktop fallback
-    const isDesktop = window.innerWidth >= 1024
-    console.log('💻 Desktop check:', { isDesktop, width: window.innerWidth })
-    
-    if (isDesktop) {
-      console.log('🖥️ Desktop device → FAST')
-      return 'fast'
-    }
-    
-    console.log('📱 Mobile/poor connection → SLOW')
-    return 'slow'
+    // No Network API available - default to HD since most modern connections can handle it
+    console.log('❓ Network API unavailable → FAST (default to HD)')
+    return 'fast'
   }
 
   // Step 2: Try to load HD video
