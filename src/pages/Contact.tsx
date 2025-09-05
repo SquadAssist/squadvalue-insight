@@ -137,9 +137,9 @@ const Contact = () => {
                     {/* Message Field */}
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                        Message <span className="text-red-500">*</span>
+                        Message
                       </label>
-                      <textarea id="message" value={message} onChange={e => setMessage(e.target.value)} required rows={5} className="block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm" placeholder="How can we help with your transfer strategy?" />
+                      <textarea id="message" value={message} onChange={e => setMessage(e.target.value)} rows={5} className="block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm" placeholder="How can we help with your transfer strategy?" />
                     </div>
                     
                     {/* Submit Button */}
