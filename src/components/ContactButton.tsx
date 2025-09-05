@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ContactButton = () => {
   return (
-    <section className="py-6 bg-white">
+    <section className="pt-2 pb-6 bg-white">
       <div className="container px-4 md:px-6">
         <div className="flex justify-center">
           <Link to="/contact">
