@@ -16,25 +16,6 @@ const Hero = memo(() => {
   console.log(`📅 Hero render timestamp: ${new Date().toISOString()}`)
 
   return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-background">
-      {/* Debug Info Panel - Only show in development */}
-      {import.meta.env.DEV && debugInfo && Object.keys(debugInfo).length > 0 && (
-        <div className="fixed top-4 right-4 z-50 bg-black/90 text-white p-3 rounded-lg text-xs max-w-xs border border-gray-600">
-          <div className="font-bold mb-2 text-yellow-400">🐛 Video Debug</div>
-          <div className="space-y-1">
-            <div>Context: <span className="text-blue-300">{debugInfo.context}</span></div>
-            <div>Expected: <span className="text-green-300">{debugInfo.expectedQuality}</span></div>
-            <div>Resolution: <span className="text-purple-300">{debugInfo.resolution}</span></div>
-            <div>Ready: <span className="text-orange-300">{debugInfo.readyState}</span></div>
-            <div className="text-xs text-gray-300 mt-2 break-all">
-              Expected: {debugInfo.expectedSrc?.split('/').pop()?.slice(0, 20)}...
-            </div>
-            <div className="text-xs text-gray-300 break-all">
-              Actual: {debugInfo.actualSrc?.split('/').pop()?.slice(0, 20)}...
-            </div>
-          </div>
-        </div>
-      )}
-      
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
           {/* Full-width video container */}
