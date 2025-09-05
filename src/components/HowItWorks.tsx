@@ -1,19 +1,15 @@
-import { LineChart, TrendingUp } from "lucide-react";
+import { Trophy, TrendingUp } from "lucide-react";
 const HowItWorks = () => {
   return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-block py-2 px-4 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6 animate-fade-in">
-            The Process
-          </div>
+          
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-foreground animate-fade-up" style={{
           animationDelay: "100ms"
-        }}>
-            How SquadAssist's AI Analytics Work
-          </h2>
+        }}>How SquadAssist's AI Works</h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground animate-fade-up max-w-3xl mx-auto leading-relaxed" style={{
           animationDelay: "200ms"
-        }}>We leverage two sophisticated AI systems to predict On-Field Value and Future Transfer Fees, providing comprehensive insights for football transfer decision-making</p>
+        }}>The Sportive Impact and Future Transfer Value each have a separate AI model:</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
@@ -22,12 +18,12 @@ const HowItWorks = () => {
           animationDelay: "300ms"
         }}>
             <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
-                <LineChart className="h-8 w-8 text-white" />
+              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{backgroundColor: '#090148'}}></div>
+              <div className="rounded-full p-5 relative z-10" style={{background: 'linear-gradient(135deg, #090148, #0a0156)'}}>
+                <Trophy className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-card-foreground">On-Field Value</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-card-foreground">Sportive Impact</h3>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">SquadAssist predicts your team's expected performance outcomes with and without specific players. Our AI simulates competitive scenarios while analyzing the complete squads of all your competitors, providing accurate performance forecasting.</p>
           </div>
 
@@ -36,8 +32,8 @@ const HowItWorks = () => {
           animationDelay: "500ms"
         }}>
             <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
+              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{backgroundColor: '#090148'}}></div>
+              <div className="rounded-full p-5 relative z-10" style={{background: 'linear-gradient(135deg, #090148, #0a0156)'}}>
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>

@@ -1,62 +1,67 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { memo } from "react";
-import { Link } from "react-router-dom";
-
+import { useAdaptiveVideo } from "@/hooks/use-adaptive-video";
 const Hero = memo(() => {
-  return <section className="w-full pb-12 sm:pb-16 md:pb-24 pt-20 sm:pt-16 overflow-hidden bg-background">
+  const { src, poster, ref: videoRef, isLoading, debugInfo } = useAdaptiveVideo({
+    compressedSrc: "/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4",
+    highQualitySrc: "/lovable-uploads/SQUADASSIST_TRAILER_WEBSITE.mp4",
+    poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
+  });
+
+  // EXPLICIT DEBUG: Log when src changes
+  console.log('🚨🚨🚨 === HERO COMPONENT EXPLICIT DEBUG ===')
+  console.log(`📹 Video src received from hook: ${src}`)
+  console.log(`⏳ Is loading: ${isLoading}`)
+  console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
+  console.log(`🐛 Debug info:`, debugInfo)
+  console.log(`📅 Hero render timestamp: ${new Date().toISOString()}`)
+
+  return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-background">
+      {/* Debug Info Panel - Only show in development */}
+      {import.meta.env.DEV && debugInfo && Object.keys(debugInfo).length > 0 && (
+        <div className="fixed top-4 right-4 z-50 bg-black/90 text-white p-3 rounded-lg text-xs max-w-xs border border-gray-600">
+          <div className="font-bold mb-2 text-yellow-400">🐛 Video Debug</div>
+          <div className="space-y-1">
+            <div>Context: <span className="text-blue-300">{debugInfo.context}</span></div>
+            <div>Expected: <span className="text-green-300">{debugInfo.expectedQuality}</span></div>
+            <div>Resolution: <span className="text-purple-300">{debugInfo.resolution}</span></div>
+            <div>Ready: <span className="text-orange-300">{debugInfo.readyState}</span></div>
+            <div className="text-xs text-gray-300 mt-2 break-all">
+              Expected: {debugInfo.expectedSrc?.split('/').pop()?.slice(0, 20)}...
+            </div>
+            <div className="text-xs text-gray-300 break-all">
+              Actual: {debugInfo.actualSrc?.split('/').pop()?.slice(0, 20)}...
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
-          {/* Full-width image sequence container */}
+          {/* Full-width video container */}
           <div className="w-full mb-8 sm:mb-12 relative">
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
-              {/* Main background image */}
-              <img 
-                src="/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png" 
-                alt="SquadAssist AI football transfer analysis platform - Blue gradient background" 
+              {/* Main background video */}
+              <video 
+                ref={videoRef}
+                key={src} // Force re-render when source changes
+                src={src} 
+                poster={poster} 
+                autoPlay={!isLoading} // Only autoplay when not loading
+                muted 
+                loop 
+                playsInline 
+                // Removed preload="metadata" to prevent source conflicts
                 className="w-full h-full object-cover" 
-                fetchPriority="high" 
-                loading="eager"
+                aria-label="SquadAssist AI football transfer analysis platform demonstration video" 
               />
-              
-              {/* Overlay with heading positioned on top of the image */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <div className="text-center w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-                  {/* Position the badge lower on mobile devices */}
-                  <div className="inline-block animate-fade-in mt-4 md:mt-0">
-                    <div className="py-1 px-3 bg-white/20 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-white mb-2 md:mb-4">
-                      AI-Powered Transfer Intelligence
-                    </div>
-                  </div>
-                  
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white animate-fade-up leading-tight" style={{
-                  animationDelay: "200ms"
-                }}>Predict the added value a player will create</h1>
-                  
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-3 sm:mt-4 md:mt-6 animate-fade-up max-w-4xl mx-auto" style={{
-                  animationDelay: "400ms"
-                }}>Predict the future transfer value and sportive impact of a player to make the best possible transfer decisions by leveraging AI-powered football transfer intelligence </p>
-                  
-                  <div className="mt-6 sm:mt-8 animate-fade-up" style={{
-                  animationDelay: "600ms"
-                }}>
-                    <Link to="/contact">
-                      <Button size="lg" className="bg-white text-black hover:bg-white/90 group text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4">
-                        Contact Us
-                        <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           
-          {/* Content section below the image */}
+          {/* Content section below the video */}
           <div className="w-full max-w-6xl text-center space-y-6 sm:space-y-8 animate-fade-up px-4 sm:px-6" style={{
           animationDelay: "800ms"
         }}>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents make data-driven transfer decisions by analyzing how players will perform within a specific team context. Our AI-powered platform predicts both on field value and future transfer value, giving you the competitive edge in football recruitment.</p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents win in the transfer market. Our AI-driven platform predicts a player's sportive impact and future transfer value, giving everyone a clear view on who is the best value-for-money option in this context.</p>
             
             {/* Feature cards */}
             

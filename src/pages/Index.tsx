@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ContactButton from "@/components/ContactButton";
 import LinearStyleFeatures from "@/components/LinearStyleFeatures";
 import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
@@ -20,6 +21,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <ContactButton />
         <LinearStyleFeatures />
         <HowItWorks />
         <CTA />

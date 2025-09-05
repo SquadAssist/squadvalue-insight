@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,19 +12,18 @@ import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 // In a production app, these should come from environment variables
 const EMAILJS_SERVICE_ID = "service_hg6yrla"; // Replace with your actual EmailJS Service ID
 const EMAILJS_TEMPLATE_ID = "template_vk5c7m9"; // Replace with your actual EmailJS Template ID
-const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx"; 
-
+const EMAILJS_PUBLIC_KEY = "bUCGB5LFQr3DeMJDx";
 const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     updatePageSEO(pageSEOConfigs.contact);
   }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -36,7 +34,7 @@ const Contact = () => {
       toast({
         title: "Invalid Email",
         description: emailValidationError,
-        variant: "destructive",
+        variant: "destructive"
       });
       setIsSubmitting(false);
       return;
@@ -47,29 +45,23 @@ const Contact = () => {
       from_name: name,
       from_email: email,
       to_email: "hello@squadassist.ai",
-      message: message,
+      message: message
     };
-
     try {
       // Initialize EmailJS with the public key
       emailjs.init(EMAILJS_PUBLIC_KEY);
-      
+
       // Send email using EmailJS
-      const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams
-      );
-      
+      const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
       console.log('Email successfully sent!', response);
-      
+
       // Success
       toast({
         title: "Message sent!",
         description: "We'll get back to you as soon as possible.",
-        variant: "default",
+        variant: "default"
       });
-      
+
       // Reset form
       setEmail("");
       setName("");
@@ -80,25 +72,27 @@ const Contact = () => {
       toast({
         title: "Something went wrong",
         description: "Please try again later.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
         {/* Header */}
-        <section className="bg-black text-white py-20">
+        <section className="text-white py-20" style={{ backgroundImage: 'url(/lovable-uploads/a7aa749a-4229-4871-93f0-926dae7f7845.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="container px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "100ms" }}>
+              <h1 className="text-3xl md:text-5xl font-bold mb-6 animate-fade-up" style={{
+              animationDelay: "100ms"
+            }}>
                 Contact SquadAssist
               </h1>
-              <p className="text-lg md:text-xl text-gray-300 animate-fade-up" style={{ animationDelay: "200ms" }}>
+              <p className="text-lg md:text-xl text-gray-300 animate-fade-up" style={{
+              animationDelay: "200ms"
+            }}>
                 Ready to revolutionize your football transfer strategy? Get in touch with our team to learn how AI-powered analytics can transform your recruitment process.
               </p>
             </div>
@@ -123,14 +117,7 @@ const Contact = () => {
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                           <User className="h-5 w-5 text-gray-400" />
                         </div>
-                        <input
-                          type="text"
-                          id="name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="pl-10 block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm"
-                          placeholder="Your name"
-                        />
+                        <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} className="pl-10 block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm" placeholder="Your name" />
                       </div>
                     </div>
                     
@@ -143,54 +130,30 @@ const Contact = () => {
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                           <Mail className="h-5 w-5 text-gray-400" />
                         </div>
-                        <input
-                          type="email"
-                          id="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          className="pl-10 block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm"
-                          placeholder="you@example.com"
-                        />
+                        <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} required className="pl-10 block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm" placeholder="you@example.com" />
                       </div>
                     </div>
                     
                     {/* Message Field */}
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                        Message <span className="text-red-500">*</span>
+                        Message
                       </label>
-                      <textarea
-                        id="message"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        required
-                        rows={5}
-                        className="block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm"
-                        placeholder="How can we help with your transfer strategy?"
-                      />
+                      <textarea id="message" value={message} onChange={e => setMessage(e.target.value)} rows={5} className="block w-full rounded-md border border-gray-300 py-3 px-4 shadow-sm focus:border-black focus:ring-black sm:text-sm" placeholder="How can we help with your transfer strategy?" />
                     </div>
                     
                     {/* Submit Button */}
                     <div>
-                      <Button 
-                        type="submit" 
-                        className="w-full"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <span className="flex items-center">
+                      <Button type="submit" className="w-full" disabled={isSubmitting}>
+                        {isSubmitting ? <span className="flex items-center">
                             <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                             Sending...
-                          </span>
-                        ) : (
-                          <span className="flex items-center">
+                          </span> : <span className="flex items-center">
                             Send Message <Send className="ml-2 h-4 w-4" />
-                          </span>
-                        )}
+                          </span>}
                       </Button>
                     </div>
                   </div>
@@ -205,9 +168,7 @@ const Contact = () => {
                     <p className="text-gray-600">
                       <span className="font-medium">Location:</span> Leuven, Belgium
                     </p>
-                    <p className="text-gray-600 mt-4">
-                      Learn more about our <a href="/team" className="text-blue-600 hover:underline">expert team</a> or explore our <a href="/blog" className="text-blue-600 hover:underline">insights on football analytics</a>.
-                    </p>
+                    
                   </div>
                 </div>
               </div>
@@ -216,8 +177,6 @@ const Contact = () => {
         </section>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
