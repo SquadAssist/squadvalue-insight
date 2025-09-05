@@ -9,6 +9,13 @@ interface AdaptiveVideoConfig {
 export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: AdaptiveVideoConfig) {
   console.log('🎥 === ADAPTIVE VIDEO HOOK STARTED ===')
   console.log('📁 Video sources:', { compressedSrc, highQualitySrc })
+  console.log('🌍 CONTEXT DEBUG:', {
+    isInIframe: window !== window.top,
+    userAgent: navigator.userAgent,
+    windowSize: { width: window.innerWidth, height: window.innerHeight },
+    location: window.location.href,
+    referrer: document.referrer
+  })
   
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [videoSrc, setVideoSrc] = useState<string>('')
@@ -17,27 +24,69 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
 
   // Helper function to safely set video source and reload
   const setVideoSource = (src: string, quality: 'slow' | 'fast') => {
-    console.log(`🔄 Setting video source to: ${src} (${quality})`)
+    console.log(`🔄 === SETTING VIDEO SOURCE ===`)
+    console.log(`📹 Target source: ${src}`)
+    console.log(`🎯 Quality: ${quality}`)
+    console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
+    
     setVideoSrc(src)
     setNetworkQuality(quality)
     setIsLoading(false)
     
     // Force video element to reload with new source
     if (videoRef.current) {
-      console.log('🎬 Forcing video reload with new source')
-      videoRef.current.load()
+      const video = videoRef.current
+      console.log('🎬 BEFORE reload - Video element state:', {
+        src: video.src,
+        currentSrc: video.currentSrc,
+        readyState: video.readyState,
+        networkState: video.networkState,
+        paused: video.paused,
+        currentTime: video.currentTime
+      })
       
-      // Debug: Log what the video element is actually loading
+      // Pause and reset before changing source
+      video.pause()
+      video.currentTime = 0
+      
+      // Change source and reload
+      video.src = src
+      video.load()
+      
+      console.log('🎬 IMMEDIATELY AFTER reload - Video element state:', {
+        src: video.src,
+        currentSrc: video.currentSrc,
+        readyState: video.readyState,
+        networkState: video.networkState
+      })
+      
+      // Check again after a delay
       setTimeout(() => {
-        if (videoRef.current) {
-          console.log('📹 Video element debug:', {
-            currentSrc: videoRef.current.currentSrc,
-            src: videoRef.current.src,
-            readyState: videoRef.current.readyState,
-            networkState: videoRef.current.networkState
-          })
+        console.log('🎬 AFTER DELAY - Video element state:', {
+          src: video.src,
+          currentSrc: video.currentSrc,
+          readyState: video.readyState,
+          networkState: video.networkState,
+          videoWidth: video.videoWidth,
+          videoHeight: video.videoHeight,
+          duration: video.duration
+        })
+        
+        // Try to determine actual quality by checking video dimensions or file size
+        if (video.videoWidth && video.videoHeight) {
+          const resolution = `${video.videoWidth}x${video.videoHeight}`
+          console.log(`🎥 ACTUAL VIDEO RESOLUTION: ${resolution}`)
+          
+          // Log if there's a mismatch
+          if (quality === 'fast' && video.videoWidth < 1280) {
+            console.error('❌ MISMATCH DETECTED: Expected HD but got lower resolution!')
+          } else if (quality === 'slow' && video.videoWidth >= 1280) {
+            console.error('❌ MISMATCH DETECTED: Expected compressed but got HD resolution!')
+          } else {
+            console.log('✅ Video quality matches expectation')
+          }
         }
-      }, 100)
+      }, 1000)
     }
   }
 
@@ -60,11 +109,14 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
       }
       
       if (connection) {
-        console.log('📊 Network Connection API data:', {
+        console.log('📊 DETAILED Network Connection API data:', {
           effectiveType: connection.effectiveType,
           downlink: connection.downlink,
           rtt: connection.rtt,
-          saveData: connection.saveData
+          saveData: connection.saveData,
+          type: connection.type,
+          onchange: typeof connection.onchange,
+          context: window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'
         })
         
         // Detect genuinely slow connections
@@ -140,10 +192,14 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         const hdSuccess = await tryLoadHDVideo()
         
         if (hdSuccess) {
-          console.log('✅ HD video will be used')
+          console.log('✅ === FINAL DECISION: HD VIDEO ===')
+          console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
+          console.log(`📁 HD Source: ${highQualitySrc}`)
           setVideoSource(highQualitySrc, 'fast')
         } else {
-          console.log('❌ HD failed, falling back to compressed')
+          console.log('❌ === FINAL DECISION: COMPRESSED VIDEO ===')
+          console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
+          console.log(`📁 Compressed Source: ${compressedSrc}`)
           loadCompressedVideo()
         }
       } else {

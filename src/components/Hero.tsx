@@ -7,6 +7,12 @@ const Hero = memo(() => {
     poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
   });
 
+  // Debug: Log when src changes
+  console.log('🏆 === HERO COMPONENT RENDER ===')
+  console.log(`📹 Current src from hook: ${src}`)
+  console.log(`⏳ Is loading: ${isLoading}`)
+  console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
+
   return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
