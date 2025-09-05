@@ -7,7 +7,7 @@ const Hero = memo(() => {
     poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
   });
 
-  return <section className="w-full pb-12 sm:pb-16 md:pb-24 pt-20 sm:pt-16 overflow-hidden bg-background">
+  return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
           {/* Full-width video container */}
