@@ -79,8 +79,14 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     
     const handleCanPlay = () => {
       console.log('✅ HD video ready! Switching to high quality')
-      setState(prev => ({ ...prev, isHDReady: true, currentSrc: highQualitySrc }))
+      // Force immediate state update
+      setState(prev => ({ 
+        ...prev, 
+        isHDReady: true, 
+        currentSrc: highQualitySrc 
+      }))
       video.removeEventListener('canplaythrough', handleCanPlay)
+      video.removeEventListener('loadeddata', handleCanPlay)
     }
     
     const handleError = () => {
@@ -89,11 +95,13 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     }
 
     video.addEventListener('canplaythrough', handleCanPlay)
+    video.addEventListener('loadeddata', handleCanPlay) // Additional event for better reliability
     video.addEventListener('error', handleError)
     
     // Cleanup timeout
     setTimeout(() => {
       video.removeEventListener('canplaythrough', handleCanPlay)
+      video.removeEventListener('loadeddata', handleCanPlay)
       video.removeEventListener('error', handleError)
       console.log('⏰ HD video preload timeout')
     }, 10000) // 10 second timeout

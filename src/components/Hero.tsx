@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useAdaptiveVideo } from "@/hooks/use-adaptive-video";
 const Hero = memo(() => {
-  const { src, poster } = useAdaptiveVideo({
+  const { src, poster, isHDReady } = useAdaptiveVideo({
     compressedSrc: "/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4",
     highQualitySrc: "/lovable-uploads/SQUADASSIST_TRAILER_WEBSITE.mp4",
     poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
@@ -15,6 +15,7 @@ const Hero = memo(() => {
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
               {/* Main background video */}
               <video 
+                key={src} // Force re-render when source changes
                 src={src} 
                 poster={poster} 
                 autoPlay 
