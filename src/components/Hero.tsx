@@ -10,13 +10,17 @@ const Hero = memo(() => {
           {/* Full-width image sequence container */}
           <div className="w-full mb-8 sm:mb-12 relative">
             <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg sm:rounded-xl overflow-hidden w-full">
-              {/* Main background image */}
-              <img 
-                src="/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png" 
-                alt="SquadAssist AI football transfer analysis platform - Blue gradient background" 
-                className="w-full h-full object-cover" 
-                fetchPriority="high" 
-                loading="eager"
+              {/* Main background video */}
+              <video 
+                src="/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4"
+                poster="/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+                aria-label="SquadAssist AI football transfer analysis platform demonstration video"
               />
               
               {/* Overlay with heading positioned on top of the image */}
