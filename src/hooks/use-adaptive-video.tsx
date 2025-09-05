@@ -17,13 +17,8 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   console.log('🎥 useAdaptiveVideo hook initialized', { compressedSrc, highQualitySrc })
   
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [state, setState] = useState<AdaptiveVideoState>({
-    currentSrc: compressedSrc,
-    isHDReady: false,
-    networkQuality: 'unknown',
-    shouldUpgradeOnLoop: false
-  })
-
+  
+  // Detect network quality immediately during initialization
   const detectNetworkQuality = useCallback((): 'slow' | 'fast' | 'unknown' => {
     console.log('🔍 Detecting network quality...')
     
@@ -61,6 +56,23 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     
     return 'slow'
   }, [])
+  
+  // Detect quality immediately and set initial state accordingly
+  const initialNetworkQuality = detectNetworkQuality()
+  const shouldUseHDImmediately = initialNetworkQuality === 'fast'
+  
+  console.log('🎯 Initial video decision:', {
+    networkQuality: initialNetworkQuality,
+    willUseHD: shouldUseHDImmediately,
+    selectedSrc: shouldUseHDImmediately ? highQualitySrc : compressedSrc
+  })
+  
+  const [state, setState] = useState<AdaptiveVideoState>({
+    currentSrc: shouldUseHDImmediately ? highQualitySrc : compressedSrc,
+    isHDReady: shouldUseHDImmediately,
+    networkQuality: initialNetworkQuality,
+    shouldUpgradeOnLoop: false
+  })
 
   const preloadHDForNextLoop = useCallback(() => {
     console.log('🎬 Preloading HD video for next loop:', highQualitySrc)
@@ -197,30 +209,23 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   }, [state.shouldUpgradeOnLoop, state.isHDReady, highQualitySrc])
 
   useEffect(() => {
-    console.log('🚀 useEffect triggered for adaptive video')
+    console.log('🚀 useEffect - Current state:', {
+      currentSrc: state.currentSrc,
+      networkQuality: state.networkQuality,
+      isHDReady: state.isHDReady
+    })
     
-    const quality = detectNetworkQuality()
-    console.log('🌐 Network quality detected:', quality)
-    
-    if (quality === 'fast') {
-      // Fast connection: Use HD immediately
-      console.log('⚡ Fast connection - using HD video immediately')
-      setState(prev => ({ 
-        ...prev, 
-        networkQuality: quality, 
-        currentSrc: highQualitySrc,
-        isHDReady: true 
-      }))
-    } else {
-      // Slow connection: Start with compressed, preload HD for next loop
-      console.log('🐌 Slow connection - starting with compressed, preloading HD')
-      setState(prev => ({ ...prev, networkQuality: quality }))
+    // Only start preloading for slow connections that need HD upgrade
+    if (state.networkQuality === 'slow') {
+      console.log('🐌 Slow connection - will preload HD for next loop')
       setTimeout(() => {
         preloadHDForNextLoop()
       }, 2000) // Wait 2 seconds before starting HD preload
     }
-  }, [detectNetworkQuality, preloadHDForNextLoop, highQualitySrc])
+  }, [state.networkQuality, preloadHDForNextLoop])
 
+  console.log('📤 Returning video source:', state.currentSrc)
+  
   return {
     src: state.currentSrc,
     poster,
