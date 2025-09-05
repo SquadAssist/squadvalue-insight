@@ -1,4 +1,4 @@
-import { LineChart, TrendingUp } from "lucide-react";
+import { Trophy, TrendingUp } from "lucide-react";
 const HowItWorks = () => {
   return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -20,7 +20,7 @@ const HowItWorks = () => {
             <div className="relative mb-6">
               <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 blur-lg transform scale-110"></div>
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-full p-5 relative z-10">
-                <LineChart className="h-8 w-8 text-white" />
+                <Trophy className="h-8 w-8 text-white" />
               </div>
             </div>
             <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-card-foreground">Sportive Impact</h3>
