@@ -65,31 +65,124 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   const preloadHDForNextLoop = useCallback(() => {
     console.log('🎬 Preloading HD video for next loop:', highQualitySrc)
     
+    // First, check if the HD video file exists by trying to fetch it
+    fetch(highQualitySrc, { method: 'HEAD' })
+      .then(response => {
+        console.log('📋 HD video file check:', {
+          url: highQualitySrc,
+          status: response.status,
+          statusText: response.statusText,
+          contentLength: response.headers.get('content-length'),
+          contentType: response.headers.get('content-type')
+        })
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+        }
+      })
+      .catch(error => {
+        console.error('❌ HD video file not accessible:', error)
+        return
+      })
+    
     const video = document.createElement('video')
     video.preload = 'auto'
     video.src = highQualitySrc
     
-    const handleReady = () => {
+    // Add comprehensive event listeners for debugging
+    const handleLoadStart = () => {
+      console.log('🔄 HD video loading started')
+    }
+    
+    const handleProgress = (e: Event) => {
+      const video = e.target as HTMLVideoElement
+      if (video.buffered.length > 0) {
+        const buffered = video.buffered.end(0)
+        const duration = video.duration || 0
+        const percent = duration > 0 ? (buffered / duration * 100).toFixed(1) : 0
+        console.log(`📊 HD video loading progress: ${percent}% (${buffered.toFixed(1)}s of ${duration.toFixed(1)}s)`)
+      }
+    }
+    
+    const handleLoadedMetadata = () => {
+      console.log('📏 HD video metadata loaded:', {
+        duration: video.duration,
+        videoWidth: video.videoWidth,
+        videoHeight: video.videoHeight,
+        readyState: video.readyState
+      })
+    }
+    
+    const handleCanPlay = () => {
+      console.log('▶️ HD video can start playing (canplay event)')
+    }
+    
+    const handleCanPlayThrough = () => {
       console.log('✅ HD video preloaded successfully - ready for next loop')
       setState(prev => ({ ...prev, isHDReady: true, shouldUpgradeOnLoop: true }))
       cleanup()
     }
     
-    const handleError = () => {
-      console.warn('❌ Failed to preload HD video')
+    const handleError = (e: Event) => {
+      const video = e.target as HTMLVideoElement
+      const error = video.error
+      console.error('❌ HD video preload failed:', {
+        code: error?.code,
+        message: error?.message,
+        networkState: video.networkState,
+        readyState: video.readyState,
+        src: video.src
+      })
+      
+      // Log specific error codes
+      if (error?.code === MediaError.MEDIA_ERR_ABORTED) {
+        console.error('🛑 Video loading aborted by user')
+      } else if (error?.code === MediaError.MEDIA_ERR_NETWORK) {
+        console.error('🌐 Network error while loading video')
+      } else if (error?.code === MediaError.MEDIA_ERR_DECODE) {
+        console.error('🔧 Video decode error - file may be corrupted')
+      } else if (error?.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+        console.error('📂 Video format not supported or file not found')
+      }
+      
       cleanup()
     }
     
+    const handleStalled = () => {
+      console.warn('⏸️ HD video loading stalled')
+    }
+    
+    const handleSuspend = () => {
+      console.log('⏱️ HD video loading suspended')
+    }
+    
+    // Extended timeout for larger files
+    const timeoutId = setTimeout(() => {
+      console.warn('⏰ HD video preload timeout after 30 seconds')
+      cleanup()
+    }, 30000)
+    
     const cleanup = () => {
-      video.removeEventListener('canplaythrough', handleReady)
+      clearTimeout(timeoutId)
+      video.removeEventListener('loadstart', handleLoadStart)
+      video.removeEventListener('progress', handleProgress)
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      video.removeEventListener('canplay', handleCanPlay)
+      video.removeEventListener('canplaythrough', handleCanPlayThrough)
       video.removeEventListener('error', handleError)
+      video.removeEventListener('stalled', handleStalled)
+      video.removeEventListener('suspend', handleSuspend)
     }
 
-    video.addEventListener('canplaythrough', handleReady)
+    // Add all event listeners
+    video.addEventListener('loadstart', handleLoadStart)
+    video.addEventListener('progress', handleProgress)
+    video.addEventListener('loadedmetadata', handleLoadedMetadata)
+    video.addEventListener('canplay', handleCanPlay)
+    video.addEventListener('canplaythrough', handleCanPlayThrough)
     video.addEventListener('error', handleError)
-    
-    // Cleanup timeout
-    setTimeout(cleanup, 15000)
+    video.addEventListener('stalled', handleStalled)
+    video.addEventListener('suspend', handleSuspend)
   }, [highQualitySrc])
 
   const handleVideoLoop = useCallback(() => {
