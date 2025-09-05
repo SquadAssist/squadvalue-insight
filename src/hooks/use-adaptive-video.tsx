@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface AdaptiveVideoConfig {
   compressedSrc: string
@@ -6,232 +6,134 @@ interface AdaptiveVideoConfig {
   poster?: string
 }
 
-interface AdaptiveVideoState {
-  currentSrc: string
-  isHDReady: boolean
-  networkQuality: 'slow' | 'fast' | 'unknown'
-  shouldUpgradeOnLoop: boolean
-}
-
 export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: AdaptiveVideoConfig) {
-  console.log('🎥 useAdaptiveVideo hook initialized', { compressedSrc, highQualitySrc })
+  console.log('🎥 === ADAPTIVE VIDEO HOOK STARTED ===')
+  console.log('📁 Video sources:', { compressedSrc, highQualitySrc })
   
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  
-  // Detect network quality immediately during initialization
-  const detectNetworkQuality = useCallback((): 'slow' | 'fast' | 'unknown' => {
-    console.log('🔍 Detecting network quality...')
+  const [videoSrc, setVideoSrc] = useState<string>('')
+  const [networkQuality, setNetworkQuality] = useState<'slow' | 'fast' | 'testing'>('testing')
+
+  // Step 1: Test network quality
+  const testNetworkQuality = (): 'slow' | 'fast' => {
+    console.log('🔍 === STEP 1: TESTING NETWORK QUALITY ===')
     
-    // Check Network Information API
+    // Check for save data mode first
     if ('connection' in navigator) {
       const connection = (navigator as any).connection
+      if (connection?.saveData) {
+        console.log('⚡ Save data mode enabled → SLOW')
+        return 'slow'
+      }
+      
       if (connection) {
-        const effectiveType = connection.effectiveType
-        const saveData = connection.saveData
-        const downlink = connection.downlink
+        console.log('📊 Network API data:', {
+          effectiveType: connection.effectiveType,
+          downlink: connection.downlink,
+          rtt: connection.rtt,
+          saveData: connection.saveData
+        })
         
-        console.log('📊 Network Info:', { effectiveType, saveData, downlink })
-        
-        if (saveData) {
-          console.log('⚡ Save data enabled - using compressed video')
-          return 'slow'
-        }
-        
-        // Fast connection: 4G with good downlink OR high downlink speed
-        if (effectiveType === '4g' && downlink > 1.5) {
-          console.log('🚀 Fast connection detected - will use HD immediately')
+        // More aggressive fast detection
+        if (connection.downlink > 2 || connection.effectiveType === '4g') {
+          console.log('🚀 Good connection detected → FAST')
           return 'fast'
         }
       }
     }
 
-    // Fallback: Desktop users likely have good connections
+    // Desktop fallback
     const isDesktop = window.innerWidth >= 1024
-    console.log('📱 Device info:', { isDesktop, width: window.innerWidth })
+    console.log('💻 Desktop check:', { isDesktop, width: window.innerWidth })
     
     if (isDesktop) {
-      console.log('💻 Desktop detected - defaulting to HD')
+      console.log('🖥️ Desktop device → FAST')
       return 'fast'
     }
     
+    console.log('📱 Mobile/poor connection → SLOW')
     return 'slow'
-  }, [])
-  
-  // Detect quality immediately and set initial state accordingly
-  const initialNetworkQuality = detectNetworkQuality()
-  const shouldUseHDImmediately = initialNetworkQuality === 'fast'
-  
-  console.log('🎯 Initial video decision:', {
-    networkQuality: initialNetworkQuality,
-    willUseHD: shouldUseHDImmediately,
-    selectedSrc: shouldUseHDImmediately ? highQualitySrc : compressedSrc
-  })
-  
-  const [state, setState] = useState<AdaptiveVideoState>({
-    currentSrc: shouldUseHDImmediately ? highQualitySrc : compressedSrc,
-    isHDReady: shouldUseHDImmediately,
-    networkQuality: initialNetworkQuality,
-    shouldUpgradeOnLoop: false
-  })
+  }
 
-  const preloadHDForNextLoop = useCallback(() => {
-    console.log('🎬 Preloading HD video for next loop:', highQualitySrc)
+  // Step 2: Try to load HD video
+  const tryLoadHDVideo = async (): Promise<boolean> => {
+    console.log('🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD ===')
     
-    // First, check if the HD video file exists by trying to fetch it
-    fetch(highQualitySrc, { method: 'HEAD' })
-      .then(response => {
-        console.log('📋 HD video file check:', {
-          url: highQualitySrc,
-          status: response.status,
-          statusText: response.statusText,
-          contentLength: response.headers.get('content-length'),
-          contentType: response.headers.get('content-type')
-        })
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-        }
-      })
-      .catch(error => {
-        console.error('❌ HD video file not accessible:', error)
-        return
-      })
-    
-    const video = document.createElement('video')
-    video.preload = 'auto'
-    video.src = highQualitySrc
-    
-    // Add comprehensive event listeners for debugging
-    const handleLoadStart = () => {
-      console.log('🔄 HD video loading started')
-    }
-    
-    const handleProgress = (e: Event) => {
-      const video = e.target as HTMLVideoElement
-      if (video.buffered.length > 0) {
-        const buffered = video.buffered.end(0)
-        const duration = video.duration || 0
-        const percent = duration > 0 ? (buffered / duration * 100).toFixed(1) : 0
-        console.log(`📊 HD video loading progress: ${percent}% (${buffered.toFixed(1)}s of ${duration.toFixed(1)}s)`)
-      }
-    }
-    
-    const handleLoadedMetadata = () => {
-      console.log('📏 HD video metadata loaded:', {
-        duration: video.duration,
-        videoWidth: video.videoWidth,
-        videoHeight: video.videoHeight,
-        readyState: video.readyState
-      })
-    }
-    
-    const handleCanPlay = () => {
-      console.log('▶️ HD video can start playing (canplay event)')
-    }
-    
-    const handleCanPlayThrough = () => {
-      console.log('✅ HD video preloaded successfully - ready for next loop')
-      setState(prev => ({ ...prev, isHDReady: true, shouldUpgradeOnLoop: true }))
-      cleanup()
-    }
-    
-    const handleError = (e: Event) => {
-      const video = e.target as HTMLVideoElement
-      const error = video.error
-      console.error('❌ HD video preload failed:', {
-        code: error?.code,
-        message: error?.message,
-        networkState: video.networkState,
-        readyState: video.readyState,
-        src: video.src
+    try {
+      // First check if file exists
+      console.log('📋 Checking HD file accessibility...')
+      const response = await fetch(highQualitySrc, { method: 'HEAD' })
+      
+      console.log('📋 HD file check result:', {
+        status: response.status,
+        ok: response.ok,
+        contentLength: response.headers.get('content-length'),
+        contentType: response.headers.get('content-type')
       })
       
-      // Log specific error codes
-      if (error?.code === MediaError.MEDIA_ERR_ABORTED) {
-        console.error('🛑 Video loading aborted by user')
-      } else if (error?.code === MediaError.MEDIA_ERR_NETWORK) {
-        console.error('🌐 Network error while loading video')
-      } else if (error?.code === MediaError.MEDIA_ERR_DECODE) {
-        console.error('🔧 Video decode error - file may be corrupted')
-      } else if (error?.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
-        console.error('📂 Video format not supported or file not found')
+      if (!response.ok) {
+        throw new Error(`HD file not accessible: ${response.status} ${response.statusText}`)
       }
       
-      cleanup()
+      console.log('✅ HD file is accessible')
+      return true
+      
+    } catch (error) {
+      console.error('❌ HD video load failed:', error)
+      return false
     }
-    
-    const handleStalled = () => {
-      console.warn('⏸️ HD video loading stalled')
-    }
-    
-    const handleSuspend = () => {
-      console.log('⏱️ HD video loading suspended')
-    }
-    
-    // Extended timeout for larger files
-    const timeoutId = setTimeout(() => {
-      console.warn('⏰ HD video preload timeout after 30 seconds')
-      cleanup()
-    }, 30000)
-    
-    const cleanup = () => {
-      clearTimeout(timeoutId)
-      video.removeEventListener('loadstart', handleLoadStart)
-      video.removeEventListener('progress', handleProgress)
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
-      video.removeEventListener('canplay', handleCanPlay)
-      video.removeEventListener('canplaythrough', handleCanPlayThrough)
-      video.removeEventListener('error', handleError)
-      video.removeEventListener('stalled', handleStalled)
-      video.removeEventListener('suspend', handleSuspend)
-    }
+  }
 
-    // Add all event listeners
-    video.addEventListener('loadstart', handleLoadStart)
-    video.addEventListener('progress', handleProgress)
-    video.addEventListener('loadedmetadata', handleLoadedMetadata)
-    video.addEventListener('canplay', handleCanPlay)
-    video.addEventListener('canplaythrough', handleCanPlayThrough)
-    video.addEventListener('error', handleError)
-    video.addEventListener('stalled', handleStalled)
-    video.addEventListener('suspend', handleSuspend)
-  }, [highQualitySrc])
+  // Step 3: Load compressed video (fallback)
+  const loadCompressedVideo = () => {
+    console.log('📦 === STEP 3: LOADING COMPRESSED VIDEO ===')
+    console.log('🔄 Setting video source to:', compressedSrc)
+    setVideoSrc(compressedSrc)
+    setNetworkQuality('slow')
+  }
 
-  const handleVideoLoop = useCallback(() => {
-    if (state.shouldUpgradeOnLoop && state.isHDReady) {
-      console.log('🔄 Video looped - upgrading to HD quality')
-      setState(prev => ({ 
-        ...prev, 
-        currentSrc: highQualitySrc, 
-        shouldUpgradeOnLoop: false 
-      }))
-    }
-  }, [state.shouldUpgradeOnLoop, state.isHDReady, highQualitySrc])
-
+  // Main logic
   useEffect(() => {
-    console.log('🚀 useEffect - Current state:', {
-      currentSrc: state.currentSrc,
-      networkQuality: state.networkQuality,
-      isHDReady: state.isHDReady
-    })
+    console.log('🚀 === MAIN ADAPTIVE VIDEO LOGIC STARTED ===')
     
-    // Only start preloading for slow connections that need HD upgrade
-    if (state.networkQuality === 'slow') {
-      console.log('🐌 Slow connection - will preload HD for next loop')
-      setTimeout(() => {
-        preloadHDForNextLoop()
-      }, 2000) // Wait 2 seconds before starting HD preload
+    const executeAdaptiveLogic = async () => {
+      // Step 1: Test network
+      const quality = testNetworkQuality()
+      console.log(`🌐 Network quality result: ${quality}`)
+      
+      if (quality === 'fast') {
+        // Step 2: Try HD video
+        console.log('⚡ Fast connection - attempting HD video...')
+        const hdSuccess = await tryLoadHDVideo()
+        
+        if (hdSuccess) {
+          console.log('✅ HD video will be used')
+          console.log('🔄 Setting video source to:', highQualitySrc)
+          setVideoSrc(highQualitySrc)
+          setNetworkQuality('fast')
+        } else {
+          console.log('❌ HD failed, falling back to compressed')
+          loadCompressedVideo()
+        }
+      } else {
+        // Step 3: Use compressed
+        console.log('🐌 Slow connection - using compressed video')
+        loadCompressedVideo()
+      }
     }
-  }, [state.networkQuality, preloadHDForNextLoop])
+    
+    executeAdaptiveLogic()
+  }, [compressedSrc, highQualitySrc])
 
-  console.log('📤 Returning video source:', state.currentSrc)
-  
+  // Debug current state
+  console.log('📊 Current hook state:', { videoSrc, networkQuality })
+  console.log('📤 Returning video source:', videoSrc)
+
   return {
-    src: state.currentSrc,
+    src: videoSrc,
     poster,
-    isHDReady: state.isHDReady,
-    networkQuality: state.networkQuality,
-    onLoop: handleVideoLoop,
-    ref: videoRef
+    networkQuality,
+    ref: videoRef,
+    isHDReady: networkQuality === 'fast'
   }
 }

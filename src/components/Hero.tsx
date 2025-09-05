@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useAdaptiveVideo } from "@/hooks/use-adaptive-video";
 const Hero = memo(() => {
-  const { src, poster, onLoop } = useAdaptiveVideo({
+  const { src, poster } = useAdaptiveVideo({
     compressedSrc: "/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4",
     highQualitySrc: "/lovable-uploads/SQUADASSIST_TRAILER_WEBSITE.mp4",
     poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
@@ -23,7 +23,7 @@ const Hero = memo(() => {
                 loop 
                 playsInline 
                 preload="metadata" 
-                onEnded={onLoop} // Handle loop event for quality upgrade
+                // Video will loop automatically
                 className="w-full h-full object-cover" 
                 aria-label="SquadAssist AI football transfer analysis platform demonstration video" 
               />
