@@ -23,6 +23,16 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   const [isLoading, setIsLoading] = useState(true)
   const [debugInfo, setDebugInfo] = useState<any>({})
 
+  // Check if URL is cross-origin
+  const isCrossOrigin = (url: string): boolean => {
+    try {
+      const urlObj = new URL(url, window.location.href)
+      return urlObj.origin !== window.location.origin
+    } catch {
+      return false
+    }
+  }
+
   // Add cache-busting parameter to URLs
   const addCacheBuster = (url: string) => {
     const cacheBuster = `?cb=${Date.now()}&debug=1`
@@ -49,27 +59,6 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
     console.log(`📅 Timestamp: ${new Date().toISOString()}`)
     
-    // Test if both files are actually different
-    console.log('🔍 TESTING IF FILES ARE ACTUALLY DIFFERENT...')
-    const [compressedResponse, hdResponse] = await Promise.all([
-      fetch(compressedSrc, { method: 'HEAD' }).catch(e => ({ ok: false, error: e.message })),
-      fetch(highQualitySrc, { method: 'HEAD' }).catch(e => ({ ok: false, error: e.message }))
-    ])
-    
-    const compressedSize = (compressedResponse.ok && 'headers' in compressedResponse) ? compressedResponse.headers?.get('content-length') : 'ERROR'
-    const hdSize = (hdResponse.ok && 'headers' in hdResponse) ? hdResponse.headers?.get('content-length') : 'ERROR'
-    
-    console.log('🚨 CRITICAL FILE SIZE CHECK:', {
-      compressedFile: `${compressedSrc} = ${compressedSize ? (parseInt(compressedSize) / 1024 / 1024).toFixed(2) + ' MB' : 'UNKNOWN'}`,
-      hdFile: `${highQualitySrc} = ${hdSize ? (parseInt(hdSize) / 1024 / 1024).toFixed(2) + ' MB' : 'UNKNOWN'}`,
-      areDifferent: compressedSize !== hdSize,
-      selectedFile: `${src} (expecting ${quality} quality)`
-    })
-    
-    // Check if files are the same size (indicating they might be the same file)
-    if (compressedSize === hdSize && compressedSize !== 'ERROR') {
-      console.error('🚨🚨🚨 CRITICAL ISSUE: BOTH FILES HAVE SAME SIZE! They might be the same file!')
-    }
     
     // Add cache buster
     const cacheBustedSrc = `${src}?cb=${Date.now()}&debug=explicit`
@@ -250,9 +239,15 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     return 'fast'
   }
 
-  // Step 2: Try to load HD video with comprehensive debugging
-  const tryLoadHDVideo = async (): Promise<boolean> => {
-    console.log('🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD ===')
+  // Step 2: Try to load HD video with retry logic
+  const tryLoadHDVideo = async (retryCount = 0, maxRetries = 3): Promise<boolean> => {
+    console.log(`🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD (Attempt ${retryCount + 1}/${maxRetries + 1}) ===`)
+    
+    // Skip probes for cross-origin sources to avoid CORS issues
+    if (isCrossOrigin(highQualitySrc)) {
+      console.log('🌐 Cross-origin HD source detected - assuming availability on fast networks')
+      return true
+    }
     
     try {
       // First check if file exists and get detailed info
@@ -269,17 +264,15 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
         cacheControl: response.headers.get('cache-control')
       })
       
-      // Also check the compressed file for comparison
-      const compressedResponse = await fetch(compressedSrc, { method: 'HEAD' })
-      console.log('📋 Compressed file check result:', {
-        status: compressedResponse.status,
-        ok: compressedResponse.ok,
-        contentLength: compressedResponse.headers.get('content-length'),
-        contentType: compressedResponse.headers.get('content-type')
-      })
-      
       if (!response.ok) {
-        throw new Error(`HD file not accessible: ${response.status} ${response.statusText}`)
+        if (retryCount < maxRetries) {
+          const waitTime = (retryCount + 1) * 2000 // 2s, 4s, 6s delays
+          console.log(`⏳ HD file not ready (${response.status}), retrying in ${waitTime/1000}s...`)
+          await new Promise(resolve => setTimeout(resolve, waitTime))
+          return tryLoadHDVideo(retryCount + 1, maxRetries)
+        } else {
+          throw new Error(`HD file not accessible after ${maxRetries + 1} attempts: ${response.status} ${response.statusText}`)
+        }
       }
       
       console.log('✅ HD file is accessible')
@@ -312,7 +305,7 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
     setVideoSource(compressedSrc, 'slow')
   }
 
-  // Main logic
+  // Main logic - wait for HD when that's our decision
   useEffect(() => {
     console.log('🚀 === MAIN ADAPTIVE VIDEO LOGIC STARTED ===')
     
@@ -322,8 +315,8 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
       console.log(`🌐 Network quality result: ${quality}`)
       
       if (quality === 'fast') {
-        // Step 2: Try HD video
-        console.log('⚡ Fast connection - attempting HD video...')
+        // Step 2: Wait for HD video (with built-in retries)
+        console.log('⚡ Fast connection - waiting for HD video to become available...')
         const hdSuccess = await tryLoadHDVideo()
         
         if (hdSuccess) {
@@ -332,13 +325,13 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
           console.log(`📁 HD Source: ${highQualitySrc}`)
           setVideoSource(highQualitySrc, 'fast')
         } else {
-          console.log('❌ === FINAL DECISION: COMPRESSED VIDEO ===')
+          console.log('❌ === HD FAILED AFTER ALL RETRIES - USING COMPRESSED ===')
           console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`)
           console.log(`📁 Compressed Source: ${compressedSrc}`)
           loadCompressedVideo()
         }
       } else {
-        // Step 3: Use compressed
+        // Step 3: Use compressed for slow connections
         console.log('🐌 Slow connection - using compressed video')
         loadCompressedVideo()
       }
