@@ -23,6 +23,16 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   const [isLoading, setIsLoading] = useState(true)
   const [debugInfo, setDebugInfo] = useState<any>({})
 
+  // Check if URL is cross-origin
+  const isCrossOrigin = (url: string): boolean => {
+    try {
+      const urlObj = new URL(url, window.location.href)
+      return urlObj.origin !== window.location.origin
+    } catch {
+      return false
+    }
+  }
+
   // Add cache-busting parameter to URLs
   const addCacheBuster = (url: string) => {
     const cacheBuster = `?cb=${Date.now()}&debug=1`
@@ -232,6 +242,12 @@ export function useAdaptiveVideo({ compressedSrc, highQualitySrc, poster }: Adap
   // Step 2: Try to load HD video with retry logic
   const tryLoadHDVideo = async (retryCount = 0, maxRetries = 3): Promise<boolean> => {
     console.log(`🎬 === STEP 2: ATTEMPTING HD VIDEO LOAD (Attempt ${retryCount + 1}/${maxRetries + 1}) ===`)
+    
+    // Skip probes for cross-origin sources to avoid CORS issues
+    if (isCrossOrigin(highQualitySrc)) {
+      console.log('🌐 Cross-origin HD source detected - assuming availability on fast networks')
+      return true
+    }
     
     try {
       // First check if file exists and get detailed info

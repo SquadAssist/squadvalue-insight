@@ -3,7 +3,7 @@ import { useAdaptiveVideo } from "@/hooks/use-adaptive-video";
 const Hero = memo(() => {
   const { src, poster, ref: videoRef, isLoading, debugInfo } = useAdaptiveVideo({
     compressedSrc: "/lovable-uploads/SquadAssist_Trailer_Website_Compressed.mp4",
-    highQualitySrc: "/lovable-uploads/SQUADASSIST_TRAILER_WEBSITE.mp4",
+    highQualitySrc: "https://d1rnln83xwfrw6.cloudfront.net/SQUADASSIST_TRAILER_WEBSITE.mp4",
     poster: "/lovable-uploads/158ebda1-bd11-4ca8-9e18-691293cb87d4.png"
   });
 
