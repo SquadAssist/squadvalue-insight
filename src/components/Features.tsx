@@ -14,7 +14,7 @@ const Features = () => {
   }, {
     icon: <FileCheck className="h-12 w-12" />,
     title: "Buy a player",
-    description: "Make confident purchase decisions with data-driven insights on player value, transfer fees, and expected performance impact on your team.",
+    description: "Prioritize the players that will create most value for you within your constraints thanks to our AI-powered predictions.",
     gradient: "from-green-500 to-emerald-500",
     delay: 200
   }, {
