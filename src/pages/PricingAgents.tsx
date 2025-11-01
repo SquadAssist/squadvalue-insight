@@ -36,14 +36,8 @@ const PricingAgents = () => {
       }}>
           <div className="container px-4 md:px-6 relative z-10">
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-fade-up text-slate-50">
-                Agent Pricing Plans
-              </h1>
-              <p className="text-xl text-muted-foreground mt-4 max-w-2xl mx-auto animate-fade-up" style={{
-              animationDelay: "200ms"
-            }}>
-                Empower your football agency with AI-driven transfer intelligence. Choose the plan that fits your business needs.
-              </p>
+              <h1 className="text-4xl font-bold tracking-tight animate-fade-up text-slate-50 md:text-4xl">Choose the package that fits your agency</h1>
+              
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -85,8 +79,8 @@ const PricingAgents = () => {
             <div className="text-center mt-12 animate-fade-up" style={{
             animationDelay: "800ms"
           }}>
-              <p className="text-muted-foreground">
-                Need a custom solution? <span className="text-primary font-medium">Contact our team</span> for enterprise pricing.
+              <p className="text-white">
+                Need a custom solution? <span className="text-white font-semibold">Contact our team</span> for enterprise pricing.
               </p>
             </div>
           </div>
