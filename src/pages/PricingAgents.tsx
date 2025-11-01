@@ -18,12 +18,12 @@ const PricingAgents = () => {
     name: "Pro",
     price: "€4000/year",
     features: ["Sell a player: 500/month", "Find a player: 50 player-league analyses / month", "Find a player: 1 league/month"],
-    popular: true
+    popular: false
   }, {
     name: "Elite",
     price: "€5000/year",
     features: ["Sell a player: 1000/month", "Find a player: 100 player-league analyses / month", "Find a player: 5 leagues/month"],
-    popular: false
+    popular: true
   }];
   useEffect(() => {
     updatePageSEO(pageSEOConfigs.pricingAgents);
