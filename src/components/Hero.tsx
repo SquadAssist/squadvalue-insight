@@ -20,7 +20,7 @@ const Hero = memo(() => {
   console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`);
   console.log(`🐛 Debug info:`, debugInfo);
   console.log(`📅 Hero render timestamp: ${new Date().toISOString()}`);
-  return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden relative">
+  return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-background">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
           {/* Full-width video container */}
@@ -38,8 +38,8 @@ const Hero = memo(() => {
           {/* Content section below the video */}
           <div style={{
           animationDelay: "800ms"
-        }} className="w-full max-w-6xl text-center space-y-6 sm:space-y-8 animate-fade-up px-4 sm:px-6 text-white text-4xl font-bold">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents win in the transfer market by predicting how much value a player creates at a club.</p>
+        }} className="w-full max-w-6xl text-center space-y-6 sm:space-y-8 animate-fade-up px-4 sm:px-6 text-4xl font-bold text-white">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents win in the transfer market. Our AI-driven platform predicts a player's sportive impact and future transfer value.</p>
             
             {/* Feature cards */}
             
