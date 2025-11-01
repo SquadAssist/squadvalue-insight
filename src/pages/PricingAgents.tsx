@@ -68,7 +68,9 @@ const PricingAgents = () => {
                     
                     <div className="pt-4">
                       <Button className={`w-full ${tier.popular ? 'bg-primary hover:bg-primary/90' : ''}`} variant={tier.name === 'Free' ? 'outline' : tier.popular ? 'default' : 'outline'} asChild>
-                        <a href={`https://product.squadassist.ai/sign-up?type=agent&plan=${tier.name.toLowerCase() === 'pro' ? 'premium' : tier.name.toLowerCase()}`} target="_blank" rel="noopener noreferrer">Become Pro</a>
+                        <a href={`https://product.squadassist.ai/sign-up?type=agent&plan=${tier.name.toLowerCase() === 'pro' ? 'premium' : tier.name.toLowerCase()}`} target="_blank" rel="noopener noreferrer">
+                          {tier.name === 'Starter' ? 'Get Started' : tier.name === 'Pro' ? 'Become Pro' : 'Make Me Elite'}
+                        </a>
                       </Button>
                     </div>
                   </CardContent>
