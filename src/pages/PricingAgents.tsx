@@ -36,7 +36,7 @@ const PricingAgents = () => {
       }}>
           <div className="container px-4 md:px-6 relative z-10">
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold tracking-tight animate-fade-up text-slate-50 md:text-4xl">Start building your competitive advantage:</h1>
+              <h1 className="text-4xl font-bold tracking-tight animate-fade-up text-slate-50 md:text-4xl">Unlock your competitive advantage no</h1>
               
             </div>
 
