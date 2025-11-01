@@ -12,7 +12,7 @@ const PricingAgents = () => {
   const tiers = [{
     name: "Starter",
     price: "€2000",
-    features: ["Sell a player: 100/month", "Find a player: 5 player-league analyses / month"],
+    features: ["Convince 100 clubs per month of the value your player brings", "Find a player: 5 player-league analyses / month"],
     popular: false
   }, {
     name: "Pro",
