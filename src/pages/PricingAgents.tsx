@@ -16,8 +16,8 @@ const PricingAgents = () => {
     popular: false
   }, {
     name: "Pro",
-    price: "€2000/year",
-    features: ["Sell a player: 20/day", "Find a club: 3/week", "More premium data sources used"],
+    price: "€4000/year",
+    features: ["Sell a player: 500/month", "Find a player: 50 player-league analyses / month", "Find a player: 1 league/month"],
     popular: true
   }, {
     name: "Elite",
