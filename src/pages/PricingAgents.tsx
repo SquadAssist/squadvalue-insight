@@ -22,7 +22,7 @@ const PricingAgents = () => {
   }, {
     name: "Elite",
     price: "€5000/year",
-    features: ["Sell a player: Unlimited", "Find a club: Unlimited", "Find a player: Unlimited", "More premium data sources used"],
+    features: ["Sell a player: 1000/month", "Find a player: 100 player-league analyses / month", "Find a player: 5 leagues/month"],
     popular: false
   }];
   useEffect(() => {
