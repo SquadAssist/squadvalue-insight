@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-primary text-primary-foreground">
+    <section className="py-16 sm:py-20 lg:py-24 text-primary-foreground">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 animate-fade-up" style={{ animationDelay: "100ms" }}>
