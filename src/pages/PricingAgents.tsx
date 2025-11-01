@@ -62,7 +62,11 @@ const PricingAgents = () => {
                      <ul className="space-y-3 flex-1">
                        {tier.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-start gap-3">
                            <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                           <span className="text-sm text-muted-foreground">{feature}</span>
+                           <span className="text-sm text-muted-foreground">
+                             {feature.split(/(\d+)/).map((part, i) => 
+                               /^\d+$/.test(part) ? <strong key={i}>{part}</strong> : part
+                             )}
+                           </span>
                          </li>)}
                      </ul>
                     
