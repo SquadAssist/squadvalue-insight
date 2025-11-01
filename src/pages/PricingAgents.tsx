@@ -41,7 +41,7 @@ const PricingAgents = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {tiers.map((tier, index) => <Card key={tier.name} className={`relative ${tier.popular ? 'border-primary shadow-lg scale-105' : ''} animate-fade-up`} style={{
+              {tiers.map((tier, index) => <Card key={tier.name} className={`relative flex flex-col ${tier.popular ? 'border-primary shadow-lg scale-105' : ''} animate-fade-up`} style={{
               animationDelay: `${(index + 1) * 200}ms`
             }}>
                   {tier.popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -58,8 +58,8 @@ const PricingAgents = () => {
                     </div>
                   </CardHeader>
                   
-                  <CardContent className="space-y-4">
-                     <ul className="space-y-3">
+                  <CardContent className="flex flex-col flex-1 space-y-4">
+                     <ul className="space-y-3 flex-1">
                        {tier.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-start gap-3">
                            <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                            <span className="text-sm text-muted-foreground">{feature}</span>
