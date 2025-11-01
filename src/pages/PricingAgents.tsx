@@ -11,17 +11,17 @@ import backgroundImage from "@/assets/pricing-background.png";
 const PricingAgents = () => {
   const tiers = [{
     name: "Starter",
-    price: "€2000/year",
+    price: "€2000",
     features: ["Sell a player: 100/month", "Find a player: 5 player-league analyses / month"],
     popular: false
   }, {
     name: "Pro",
-    price: "€4000/year",
+    price: "€4000",
     features: ["Sell a player: 500/month", "Find a player: 50 player-league analyses / month", "Find a player: 1 league/month"],
     popular: false
   }, {
     name: "Elite",
-    price: "€5000/year",
+    price: "€5000",
     features: ["Sell a player: 1000/month", "Find a player: 100 player-league analyses / month", "Find a player: 5 leagues/month"],
     popular: true
   }];
@@ -54,7 +54,8 @@ const PricingAgents = () => {
                     <CardTitle className="text-2xl font-bold">{tier.name}</CardTitle>
                     <div className="mt-4">
                       <span className="text-3xl font-bold">{tier.price}</span>
-                      <span className="text-sm text-muted-foreground block mt-1">per user</span>
+                      <span className="text-sm text-muted-foreground block mt-1">/year</span>
+                      <span className="text-sm text-muted-foreground block">per user</span>
                     </div>
                   </CardHeader>
                   
