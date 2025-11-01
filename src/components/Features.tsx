@@ -8,25 +8,25 @@ const Features = () => {
   const features = [{
     icon: <Search className="h-12 w-12" />,
     title: "Find a player",
-    description: "Prioritize the players that will create most value for you within your constraints thanks to our AI-powered predictions.",
+    description: "Prioritize the players that will create most value for you within your constraints thanks to our AI-powered predictions. We predict the future transfer value, playing time and sportive impact for all players in 100 leagues and compare it to their expected cost to help you create the ideal long list.",
     gradient: "from-blue-500 to-cyan-500",
     delay: 100
   }, {
     icon: <FileCheck className="h-12 w-12" />,
     title: "Buy a player",
-    description: "Prioritize the players that will create most value for you within your constraints thanks to our AI-powered predictions.",
+    description: "Analyze the purchase of a specific player for a given fee and wage to assess whether or not he's a smart investment. This is ideal for the final decision meeting or for a first quick scan after a player is proposed.",
     gradient: "from-green-500 to-emerald-500",
     delay: 200
   }, {
     icon: <Building2 className="h-12 w-12" />,
     title: "Find a club",
-    description: "Help your players find the ideal club match where they'll thrive and maximize their market value with our club compatibility analysis.",
+    description: "Find the ideal club to move a player to (on loan or on permanent transfer). You can optimize for expected playing time, value created, club level (and more) after filtering for clubs that can afford him and countries that the player would want to move to.",
     gradient: "from-purple-500 to-pink-500",
     delay: 300
   }, {
     icon: <Handshake className="h-12 w-12" />,
     title: "Sell a player",
-    description: "Optimize player sales timing and pricing with predictive analytics that show current and future market value trends.",
+    description: "Convince a club that your player is smart investment, driving stronger interest and higher prioritization.",
     gradient: "from-orange-500 to-red-500",
     delay: 400
   }];
