@@ -62,7 +62,7 @@ const Features = () => {
                 animationDelay: `${feature.delay}ms`
               }}
             >
-              <div className={`bg-gradient-to-br ${feature.gradient} p-4 rounded-2xl w-fit mb-6 transition-transform duration-300 group-hover:scale-110`}>
+              <div className="bg-[#00004a] p-4 rounded-2xl w-fit mb-6 transition-transform duration-300 group-hover:scale-110">
                 <div className="text-white">
                   {feature.icon}
                 </div>
