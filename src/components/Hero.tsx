@@ -39,7 +39,7 @@ const Hero = memo(() => {
           <div style={{
           animationDelay: "800ms"
         }} className="w-full max-w-6xl text-center space-y-6 sm:space-y-8 animate-fade-up px-4 sm:px-6 text-white text-4xl font-bold">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents win in the transfer market. Our AI-driven platform predicts a player's sportive impact and future transfer value.</p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">SquadAssist helps football clubs and agents win in the transfer market by predicting how much value a player creates at a club.</p>
             
             {/* Feature cards */}
             
