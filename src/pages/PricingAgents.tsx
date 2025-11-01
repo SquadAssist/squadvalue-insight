@@ -54,8 +54,7 @@ const PricingAgents = () => {
                     <CardTitle className="text-2xl font-bold">{tier.name}</CardTitle>
                     <div className="mt-4">
                       <span className="text-3xl font-bold">{tier.price}</span>
-                      <span className="text-sm text-muted-foreground block mt-1">/year</span>
-                      <span className="text-sm text-muted-foreground block">per user</span>
+                      <span className="text-sm text-muted-foreground block mt-1">per year per user</span>
                     </div>
                   </CardHeader>
                   
