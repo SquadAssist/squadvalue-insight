@@ -71,7 +71,11 @@ const Navbar = () => {
               <PricingDropdown />
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-white" />
-                <Button asChild className="bg-[#5B7FFF] hover:bg-[#4A6EEE] text-black font-medium rounded-full px-8 py-6">
+                <Button 
+                  variant="default" 
+                  className="rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm md:text-base px-4 py-2 font-medium"
+                  asChild
+                >
                   <Link to="/contact">Contact us</Link>
                 </Button>
               </div>
@@ -158,7 +162,11 @@ const Navbar = () => {
 
                 {/* Contact Button */}
                 <div className="pt-4 border-t border-white/10">
-                  <Button asChild className="w-full bg-[#5B7FFF] hover:bg-[#4A6EEE] text-black font-medium rounded-full" size="sm">
+                  <Button 
+                    variant="default" 
+                    className="w-full rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm font-medium"
+                    asChild
+                  >
                     <Link to="/contact" onClick={() => setIsOpen(false)}>
                       Contact us
                     </Link>
