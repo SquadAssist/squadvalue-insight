@@ -34,7 +34,6 @@ const PricingAgents = () => {
         <section className="py-16 md:py-24 bg-cover bg-center bg-no-repeat relative" style={{
         backgroundImage: `url(${backgroundImage})`
       }}>
-          <div className="absolute inset-0 bg-background/10" />
           <div className="container px-4 md:px-6 relative z-10">
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-fade-up text-slate-50">
