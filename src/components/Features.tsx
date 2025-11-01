@@ -41,9 +41,6 @@ const Features = () => {
 
       <div className="w-full px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-block py-2 px-4 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6 animate-fade-in">
-            Practical Use Cases
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 animate-fade-up text-white" style={{
             animationDelay: "100ms"
           }}>

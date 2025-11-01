@@ -70,7 +70,6 @@ const Navbar = () => {
               </a>
               <PricingDropdown />
               <div className="flex items-center gap-3">
-                <User className="h-5 w-5 text-white" />
                 <Button 
                   variant="default" 
                   className="rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm md:text-base px-4 py-2 font-medium"
