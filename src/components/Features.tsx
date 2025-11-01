@@ -8,7 +8,7 @@ const Features = () => {
   const features = [{
     icon: <Search className="h-12 w-12" />,
     title: "Find a player",
-    description: "Discover the perfect player for your squad based on your specific needs, budget, and tactical requirements using AI-powered scouting analytics.",
+    description: "Prioritize the players that will create most value for you within your constraints thanks to our AI-powered predictions.",
     gradient: "from-blue-500 to-cyan-500",
     delay: 100
   }, {
