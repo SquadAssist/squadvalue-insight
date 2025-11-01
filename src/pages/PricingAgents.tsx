@@ -10,7 +10,7 @@ import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 import backgroundImage from "@/assets/pricing-background.png";
 const PricingAgents = () => {
   const tiers = [{
-    name: "Basic",
+    name: "Starter",
     price: "€2000/year",
     features: ["Sell a player: 100/month", "Find a player: 5 player-league analyses / month"],
     popular: false
