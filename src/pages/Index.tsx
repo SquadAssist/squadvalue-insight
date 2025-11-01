@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ContactButton from "@/components/ContactButton";
-import LinearStyleFeatures from "@/components/LinearStyleFeatures";
+import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -25,7 +25,7 @@ const Index = () => {
       <main className="flex-grow">
         <Hero />
         <ContactButton />
-        <LinearStyleFeatures />
+        <Features />
         <HowItWorks />
         <CTA />
       </main>
