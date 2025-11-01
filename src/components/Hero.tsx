@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { useAdaptiveVideo } from "@/hooks/use-adaptive-video";
-import backgroundImage from "@/assets/pricing-background.png";
 const Hero = memo(() => {
   const {
     src,
@@ -21,9 +20,7 @@ const Hero = memo(() => {
   console.log(`🌍 Context: ${window !== window.top ? 'IFRAME' : 'SEPARATE_TAB'}`);
   console.log(`🐛 Debug info:`, debugInfo);
   console.log(`📅 Hero render timestamp: ${new Date().toISOString()}`);
-  return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden bg-cover bg-center bg-no-repeat relative" style={{
-    backgroundImage: `url(${backgroundImage})`
-  }}>
+  return <section className="w-full pb-4 sm:pb-6 md:pb-8 pt-20 sm:pt-16 overflow-hidden relative">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center w-full">
           {/* Full-width video container */}

@@ -9,6 +9,7 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 import { addPerformanceOptimizations } from "@/utils/breadcrumbs";
+import backgroundImage from "@/assets/pricing-background.png";
 
 const Index = () => {
   useEffect(() => {
@@ -17,7 +18,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat bg-fixed" style={{
+      backgroundImage: `url(${backgroundImage})`
+    }}>
       <Navbar />
       <main className="flex-grow">
         <Hero />
