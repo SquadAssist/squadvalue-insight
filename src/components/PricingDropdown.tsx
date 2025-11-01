@@ -8,7 +8,7 @@ export const PricingDropdown = () => {
   return (
     <>
       <button 
-        className="text-gray-800 hover:text-black font-medium button-transition"
+        className="text-white hover:text-white/80 font-medium button-transition"
         onClick={() => setIsModalOpen(true)}
       >
         Pricing
