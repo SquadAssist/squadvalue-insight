@@ -24,7 +24,7 @@ const Footer = () => {
               className="h-10 mb-4"
             />
             <p className="text-white/70 mb-6 max-w-md">
-              SquadAssist helps football clubs make better transfer decisions through AI-powered player valuation and performance prediction.
+              SquadAssist helps football clubs and agents win in the transfer market.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.linkedin.com/company/squadassist-ai" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
