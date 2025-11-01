@@ -1,6 +1,6 @@
 import { Trophy, TrendingUp } from "lucide-react";
 const HowItWorks = () => {
-  return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-background">
+  return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
           
