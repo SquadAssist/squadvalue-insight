@@ -31,7 +31,7 @@ const PricingAgents = () => {
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <section className="py-16 md:py-24 bg-cover bg-center bg-no-repeat relative" style={{
+        <section className="pt-24 pb-16 md:py-24 bg-cover bg-center bg-no-repeat relative" style={{
         backgroundImage: `url(${backgroundImage})`
       }}>
           <div className="container px-4 md:px-6 relative z-10">
