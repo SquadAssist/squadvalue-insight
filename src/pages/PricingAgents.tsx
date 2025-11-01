@@ -12,17 +12,17 @@ const PricingAgents = () => {
   const tiers = [{
     name: "Starter",
     price: "€2000",
-    features: ["Convince 100 clubs per month of the value your player brings", "Find the best clubs to move your player to in 5 leagues each month"],
+    features: ["Convince 100 clubs per month of the value your player adds", "Find the best clubs to move your player to in 5 leagues each month"],
     popular: false
   }, {
     name: "Pro",
     price: "€4000",
-    features: ["Convince 500 clubs per month of the value your player brings", "Find the best clubs to move your player to in 50 leagues each month","Find the best players to sign in 1 league each month"],
+    features: ["Convince 500 clubs per month of the value your player adds", "Find the best clubs to move your player to in 50 leagues each month","Find the best players to sign in 1 league each month"],
     popular: false
   }, {
     name: "Elite",
     price: "€5000",
-    features: ["Convince 1000 clubs per month of the value your player brings", "Find the best clubs to move your player to in 100 leagues each month","Find the best players to sign in 5 leagues each month"],
+    features: ["Convince 1000 clubs per month of the value your player adds", "Find the best clubs to move your player to in 100 leagues each month","Find the best players to sign in 5 leagues each month"],
     popular: true
   }];
   useEffect(() => {
