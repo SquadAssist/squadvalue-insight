@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { PricingDropdown } from "./PricingDropdown";
 import { PricingModal } from "./PricingModal";
 import { ClubInquiryModal } from "./ClubInquiryModal";
+import logoWhite from "@/assets/logo-white.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,13 +42,13 @@ const Navbar = () => {
   return (
     <>
       {/* Fixed Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/20 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#00004a] border-b border-white/10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <img 
-                src="/lovable-uploads/ed32cdc5-fc36-4568-9bbb-15e8c661a9b3.png" 
+                src={logoWhite}
                 alt="SquadAssist Logo" 
                 className="h-8 w-auto"
               />
@@ -57,27 +58,33 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-8">
               <a 
                 href={getLinkPath("features")} 
-                className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                className="text-white hover:text-white/80 font-medium transition-colors"
               >
-                Features
+                How It's Used
               </a>
               <a 
                 href={getLinkPath("how-it-works")} 
-                className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                className="text-white hover:text-white/80 font-medium transition-colors"
               >
                 How It Works
               </a>
               <PricingDropdown />
-              <Button asChild>
-                <Link to="/contact">Contact Us</Link>
-              </Button>
+              <div className="flex items-center gap-3">
+                <Button 
+                  variant="default" 
+                  className="rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm md:text-base px-4 py-2 font-medium"
+                  asChild
+                >
+                  <Link to="/contact">Contact us</Link>
+                </Button>
+              </div>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white/80 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
                 aria-expanded="false"
               >
                 <span className="sr-only">Open main menu</span>
@@ -102,20 +109,20 @@ const Navbar = () => {
           />
           
           {/* Menu Panel */}
-          <div className="fixed top-16 right-4 w-80 max-w-[calc(100vw-2rem)] bg-white rounded-lg shadow-xl border border-gray-200">
+          <div className="fixed top-16 right-4 w-80 max-w-[calc(100vw-2rem)] bg-[#1a1d4a] rounded-lg shadow-xl border border-white/10">
             <div className="flex flex-col">
               {/* Navigation Links */}
               <div className="px-4 py-4 space-y-4">
                 <a 
                   href={getLinkPath("features")} 
-                  className="block text-base font-medium text-gray-900 py-2 hover:text-blue-600"
+                  className="block text-base font-medium text-white py-2 hover:text-white/80"
                   onClick={() => setIsOpen(false)}
                 >
-                  Features
+                  How It's Used
                 </a>
                 <a 
                   href={getLinkPath("how-it-works")} 
-                  className="block text-base font-medium text-gray-900 py-2 hover:text-blue-600"
+                  className="block text-base font-medium text-white py-2 hover:text-white/80"
                   onClick={() => setIsOpen(false)}
                 >
                   How It Works
@@ -124,7 +131,7 @@ const Navbar = () => {
                 {/* Pricing Section */}
                 <div className="space-y-2">
                   <button 
-                    className="block text-base font-medium text-gray-900 py-2 text-left hover:text-blue-600"
+                    className="block text-base font-medium text-white py-2 text-left hover:text-white/80"
                     onClick={() => {
                       setIsOpen(false);
                       setIsPricingModalOpen(true);
@@ -135,13 +142,13 @@ const Navbar = () => {
                   <div className="ml-4 space-y-2">
                     <Link 
                       to="/pricing/agents" 
-                      className="block text-sm text-gray-600 py-1 hover:text-blue-600"
+                      className="block text-sm text-white/70 py-1 hover:text-white"
                       onClick={() => setIsOpen(false)}
                     >
                       Agent
                     </Link>
                     <button 
-                      className="block text-sm text-gray-600 py-1 text-left hover:text-blue-600"
+                      className="block text-sm text-white/70 py-1 text-left hover:text-white"
                       onClick={() => {
                         setIsOpen(false);
                         setIsClubModalOpen(true);
@@ -153,10 +160,14 @@ const Navbar = () => {
                 </div>
 
                 {/* Contact Button */}
-                <div className="pt-4 border-t border-gray-100">
-                  <Button asChild className="w-full" size="sm">
+                <div className="pt-4 border-t border-white/10">
+                  <Button 
+                    variant="default" 
+                    className="w-full rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm font-medium"
+                    asChild
+                  >
                     <Link to="/contact" onClick={() => setIsOpen(false)}>
-                      Contact Us
+                      Contact us
                     </Link>
                   </Button>
                 </div>

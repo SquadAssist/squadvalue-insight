@@ -19,9 +19,7 @@ const LinearStyleFeatures = () => {
     description: "SquadAssist identifies high-potential players and optimal investment opportunities based on comprehensive market analysis and future value projections.",
     gradient: "from-orange-500 to-red-500"
   }];
-  return <section id="features" className="py-16 sm:py-20 lg:py-24 bg-gray-950 text-white relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-950 to-black opacity-50"></div>
+  return <section id="features" className="py-16 sm:py-20 lg:py-24 text-white relative overflow-hidden">
       
       <div className="relative w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">

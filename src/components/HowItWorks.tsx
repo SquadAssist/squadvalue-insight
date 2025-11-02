@@ -1,15 +1,15 @@
 import { Trophy, TrendingUp } from "lucide-react";
 const HowItWorks = () => {
-  return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-background">
+  return <section id="how-it-works" className="py-16 sm:py-20 lg:py-24">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
           
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-foreground animate-fade-up" style={{
+          <h2 style={{
           animationDelay: "100ms"
-        }}>How SquadAssist's AI Works</h2>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground animate-fade-up max-w-3xl mx-auto leading-relaxed" style={{
+        }} className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 animate-fade-up text-white md:text-4xl">SquadAssist predicts the value a player adds</h2>
+          <p style={{
           animationDelay: "200ms"
-        }}>The Sportive Impact and Future Transfer Value each have a separate AI model:</p>
+        }} className="text-base sm:text-lg md:text-xl animate-fade-up max-w-3xl mx-auto leading-relaxed text-white">It predicts the value created through Sportive Impact and Future Transfer Value, through separate AI models:</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
@@ -18,8 +18,12 @@ const HowItWorks = () => {
           animationDelay: "300ms"
         }}>
             <div className="relative mb-6">
-              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{backgroundColor: '#090148'}}></div>
-              <div className="rounded-full p-5 relative z-10" style={{background: 'linear-gradient(135deg, #090148, #0a0156)'}}>
+              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{
+              backgroundColor: '#090148'
+            }}></div>
+              <div className="rounded-full p-5 relative z-10" style={{
+              background: 'linear-gradient(135deg, #090148, #0a0156)'
+            }}>
                 <Trophy className="h-8 w-8 text-white" />
               </div>
             </div>
@@ -32,8 +36,12 @@ const HowItWorks = () => {
           animationDelay: "500ms"
         }}>
             <div className="relative mb-6">
-              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{backgroundColor: '#090148'}}></div>
-              <div className="rounded-full p-5 relative z-10" style={{background: 'linear-gradient(135deg, #090148, #0a0156)'}}>
+              <div className="absolute inset-0 rounded-full opacity-10 blur-lg transform scale-110" style={{
+              backgroundColor: '#090148'
+            }}></div>
+              <div className="rounded-full p-5 relative z-10" style={{
+              background: 'linear-gradient(135deg, #090148, #0a0156)'
+            }}>
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>

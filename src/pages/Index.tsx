@@ -3,12 +3,14 @@ import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ContactButton from "@/components/ContactButton";
-import LinearStyleFeatures from "@/components/LinearStyleFeatures";
+import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
+import ClientsSection from "@/components/ClientsSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
 import { addPerformanceOptimizations } from "@/utils/breadcrumbs";
+import backgroundImage from "@/assets/pricing-background.png";
 
 const Index = () => {
   useEffect(() => {
@@ -17,13 +19,16 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat bg-fixed" style={{
+      backgroundImage: `url(${backgroundImage})`
+    }}>
       <Navbar />
       <main className="flex-grow">
         <Hero />
         <ContactButton />
-        <LinearStyleFeatures />
+        <Features />
         <HowItWorks />
+        <ClientsSection />
         <CTA />
       </main>
       <Footer />
