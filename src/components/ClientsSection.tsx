@@ -15,26 +15,22 @@ const ClientsSection = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6 sm:gap-8">
               {[
                 { name: "UEFA Champions League", logo: "/league-logos/ucl.png" },
-                { name: "UEFA Europa League", logo: null },
-                { name: "Ligue 1", logo: null },
-                { name: "Eredivisie", logo: null },
-                { name: "Jupiler Pro League", logo: null },
-                { name: "Saudi Pro League", logo: null },
-                { name: "Championship", logo: null }
+                { name: "UEFA Europa League", logo: "/league-logos/uel.png" },
+                { name: "Ligue 1", logo: "/league-logos/ligue1.png" },
+                { name: "Eredivisie", logo: "/league-logos/eredivisie.png" },
+                { name: "Jupiler Pro League", logo: "/league-logos/jupiler.png" },
+                { name: "Saudi Pro League", logo: "/league-logos/spl.png" },
+                { name: "Championship", logo: "/league-logos/championship.png" }
               ].map((league, index) => (
                 <div
                   key={index}
                   className="aspect-square bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 flex items-center justify-center p-4 hover:bg-white/20 transition-all duration-300"
                 >
-                  {league.logo ? (
-                    <img 
-                      src={league.logo} 
-                      alt={league.name}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <span className="text-white/60 text-xs sm:text-sm text-center font-medium">{league.name}</span>
-                  )}
+                  <img 
+                    src={league.logo} 
+                    alt={league.name}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               ))}
             </div>
