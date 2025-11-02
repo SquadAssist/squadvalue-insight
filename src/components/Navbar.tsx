@@ -60,7 +60,7 @@ const Navbar = () => {
                 href={getLinkPath("features")} 
                 className="text-white hover:text-white/80 font-medium transition-colors"
               >
-                Features
+                How It's Used
               </a>
               <a 
                 href={getLinkPath("how-it-works")} 
@@ -118,7 +118,7 @@ const Navbar = () => {
                   className="block text-base font-medium text-white py-2 hover:text-white/80"
                   onClick={() => setIsOpen(false)}
                 >
-                  Features
+                  How It's Used
                 </a>
                 <a 
                   href={getLinkPath("how-it-works")} 
