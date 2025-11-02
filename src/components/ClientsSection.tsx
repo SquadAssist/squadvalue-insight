@@ -45,20 +45,20 @@ const ClientsSection = () => {
 
           {/* Agencies Stats Section */}
           <div className="text-center animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-white">
-              <div className="flex items-center gap-2">
-                <span className="text-3xl sm:text-4xl font-bold">€1.5B+</span>
-                <span className="text-base sm:text-lg text-white/80">in total transfer value</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 text-white">
+              <div className="flex flex-col items-center">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2">€1.5B+</span>
+                <span className="text-sm sm:text-base text-white/80">in total transfer value</span>
               </div>
-              <div className="hidden sm:block text-white/40">•</div>
-              <div className="flex items-center gap-2">
-                <span className="text-3xl sm:text-4xl font-bold">600+</span>
-                <span className="text-base sm:text-lg text-white/80">players</span>
+              <div className="hidden sm:block text-white/40 text-2xl">•</div>
+              <div className="flex flex-col items-center">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2">600+</span>
+                <span className="text-sm sm:text-base text-white/80">players</span>
               </div>
-              <div className="hidden sm:block text-white/40">•</div>
-              <div className="flex items-center gap-2">
-                <span className="text-3xl sm:text-4xl font-bold">30+</span>
-                <span className="text-base sm:text-lg text-white/80">agencies</span>
+              <div className="hidden sm:block text-white/40 text-2xl">•</div>
+              <div className="flex flex-col items-center">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2">30+</span>
+                <span className="text-sm sm:text-base text-white/80">agencies</span>
               </div>
             </div>
           </div>
