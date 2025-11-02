@@ -24,7 +24,7 @@ const ClientsSection = () => {
               ].map((league, index) => (
                 <div
                   key={index}
-                  className="aspect-square bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 flex items-center justify-center p-4 hover:bg-white/20 transition-all duration-300"
+                  className="aspect-square bg-white/20 backdrop-blur-sm rounded-lg border border-white/20 flex items-center justify-center p-4 hover:bg-white/30 transition-all duration-300"
                 >
                   <img 
                     src={league.logo} 
