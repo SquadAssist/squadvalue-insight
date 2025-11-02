@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import ContactButton from "@/components/ContactButton";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
+import ClientsSection from "@/components/ClientsSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { updatePageSEO, pageSEOConfigs } from "@/utils/seo";
@@ -27,6 +28,7 @@ const Index = () => {
         <ContactButton />
         <Features />
         <HowItWorks />
+        <ClientsSection />
         <CTA />
       </main>
       <Footer />
