@@ -36,6 +36,13 @@ const ClientsSection = () => {
             </div>
           </div>
 
+          {/* Agents Subtitle */}
+          <div className="mb-12 sm:mb-16 animate-fade-up" style={{ animationDelay: "150ms" }}>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-center text-white">
+              Leading agents are leveraging SquadAssist
+            </h3>
+          </div>
+
           {/* Agencies Stats Section */}
           <div className="text-center animate-fade-up" style={{ animationDelay: "200ms" }}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-white">
