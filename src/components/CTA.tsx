@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Calendar } from "lucide-react";
+
 const CTA = () => {
   return <section className="py-16 sm:py-20 lg:py-24 text-white">
       <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -14,11 +14,14 @@ const CTA = () => {
           <div className="flex justify-center animate-fade-up" style={{
           animationDelay: "300ms"
         }}>
-            <Link to="/contact">
-              <Button size="lg" className="bg-white text-black hover:bg-gray-100 group text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4">
-                Contact Us <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              className="bg-white text-black hover:bg-gray-100 group text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4"
+              onClick={() => window.open('https://app.lemcal.com/@wout-pauwels', '_blank')}
+            >
+              <Calendar className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+              Book a Meeting
+            </Button>
           </div>
         </div>
       </div>
