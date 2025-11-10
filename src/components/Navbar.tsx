@@ -73,9 +73,9 @@ const Navbar = () => {
                 <Button 
                   variant="default" 
                   className="rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm md:text-base px-4 py-2 font-medium"
-                  asChild
+                  onClick={() => window.open('https://app.lemcal.com/@wout-pauwels', '_blank')}
                 >
-                  <Link to="/contact">Contact us</Link>
+                  Book a Meeting
                 </Button>
               </div>
             </div>
@@ -164,11 +164,12 @@ const Navbar = () => {
                   <Button 
                     variant="default" 
                     className="w-full rounded-lg bg-white hover:bg-gray-100 text-gray-900 text-sm font-medium"
-                    asChild
+                    onClick={() => {
+                      setIsOpen(false);
+                      window.open('https://app.lemcal.com/@wout-pauwels', '_blank');
+                    }}
                   >
-                    <Link to="/contact" onClick={() => setIsOpen(false)}>
-                      Contact us
-                    </Link>
+                    Book a Meeting
                   </Button>
                 </div>
               </div>
