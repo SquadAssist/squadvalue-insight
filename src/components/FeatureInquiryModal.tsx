@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { validateBusinessEmail } from "@/utils/emailValidation";
+import { Calendar } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string()
@@ -38,6 +39,7 @@ interface FeatureInquiryModalProps {
 
 export const FeatureInquiryModal = ({ isOpen, onClose, featureTitle }: FeatureInquiryModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showBooking, setShowBooking] = useState(false);
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,13 +64,7 @@ export const FeatureInquiryModal = ({ isOpen, onClose, featureTitle }: FeatureIn
         throw error;
       }
 
-      toast({
-        title: "Thank you!",
-        description: "We've received your interest and will reach out soon.",
-      });
-      
-      form.reset();
-      onClose();
+      setShowBooking(true);
     } catch (error) {
       console.error("Error sending feature inquiry:", error);
       toast({
@@ -81,56 +77,94 @@ export const FeatureInquiryModal = ({ isOpen, onClose, featureTitle }: FeatureIn
     }
   };
 
+  const handleBookingClose = () => {
+    setShowBooking(false);
+    form.reset();
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Interested in {featureTitle}?</DialogTitle>
-        </DialogHeader>
-        <div className="space-y-4">
-          <p className="text-muted-foreground">
-            Leave your e-mail and we'll reach out to discuss how this feature can help your club.
-          </p>
-          
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="your.email@example.com" 
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <div className="flex justify-end space-x-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={onClose}
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Inquiry"}
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </div>
-      </DialogContent>
-    </Dialog>
+    <>
+      <Dialog open={isOpen && !showBooking} onOpenChange={onClose}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Interested in {featureTitle}?</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-muted-foreground">
+              Leave your e-mail and we'll reach out to discuss how this feature can help your club.
+            </p>
+            
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email Address</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="your.email@example.com" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <div className="flex justify-end space-x-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={onClose}
+                    disabled={isSubmitting}
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Inquiry"}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showBooking} onOpenChange={handleBookingClose}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Thanks for your interest!</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-6">
+            <p className="text-muted-foreground">
+              Choose a time to meet with us so we can see how we can best help you.
+            </p>
+            
+            <div className="flex flex-col gap-3">
+              <Button 
+                onClick={() => window.open('https://app.lemcal.com/@wout-pauwels', '_blank')}
+                className="w-full"
+              >
+                <Calendar className="mr-2 h-4 w-4" />
+                Book a Meeting
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={handleBookingClose}
+                className="w-full"
+              >
+                Maybe Later
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
