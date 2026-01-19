@@ -4,9 +4,10 @@ Allow: /
 # Sitemaps
 Sitemap: https://squadassist.ai/sitemap.xml
 
-# Disallow admin areas and API endpoints if any
+# Disallow admin areas, API endpoints, and pricing
 Disallow: /admin/
 Disallow: /api/
+Disallow: /pricing/
 
 # Allow social media crawlers
 User-agent: facebookexternalhit
