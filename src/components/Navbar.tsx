@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { PricingDropdown } from "./PricingDropdown";
-import { PricingModal } from "./PricingModal";
-import { ClubInquiryModal } from "./ClubInquiryModal";
 import logoWhite from "@/assets/logo-white.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
-  const [isClubModalOpen, setIsClubModalOpen] = useState(false);
   const location = useLocation();
 
   // Close mobile menu when route changes
@@ -68,7 +63,7 @@ const Navbar = () => {
               >
                 How It Works
               </a>
-              <PricingDropdown />
+              
               <div className="flex items-center gap-3">
                 <Button 
                   variant="default" 
@@ -128,36 +123,6 @@ const Navbar = () => {
                   How It Works
                 </a>
                 
-                {/* Pricing Section */}
-                <div className="space-y-2">
-                  <button 
-                    className="block text-base font-medium text-white py-2 text-left hover:text-white/80"
-                    onClick={() => {
-                      setIsOpen(false);
-                      setIsPricingModalOpen(true);
-                    }}
-                  >
-                    Pricing
-                  </button>
-                  <div className="ml-4 space-y-2">
-                    <Link 
-                      to="/pricing/agents" 
-                      className="block text-sm text-white/70 py-1 hover:text-white"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Agent
-                    </Link>
-                    <button 
-                      className="block text-sm text-white/70 py-1 text-left hover:text-white"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setIsClubModalOpen(true);
-                      }}
-                    >
-                      Club
-                    </button>
-                  </div>
-                </div>
 
                 {/* Contact Button */}
                 <div className="pt-4 border-t border-white/10">
@@ -178,16 +143,6 @@ const Navbar = () => {
         </div>
       )}
       
-      {/* Modals */}
-      <PricingModal 
-        isOpen={isPricingModalOpen} 
-        onClose={() => setIsPricingModalOpen(false)} 
-      />
-      
-      <ClubInquiryModal 
-        isOpen={isClubModalOpen} 
-        onClose={() => setIsClubModalOpen(false)} 
-      />
     </>
   );
 };

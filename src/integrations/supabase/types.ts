@@ -14,7 +14,103 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      report_views: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          id: string
+          referrer: string | null
+          report_id: string
+          user_agent: string | null
+          view_ended_at: string | null
+          view_started_at: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          referrer?: string | null
+          report_id: string
+          user_agent?: string | null
+          view_ended_at?: string | null
+          view_started_at?: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          referrer?: string | null
+          report_id?: string
+          user_agent?: string | null
+          view_ended_at?: string | null
+          view_started_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_views_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "shared_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shared_report_creators: {
+        Row: {
+          created_at: string
+          creator_email: string
+          id: string
+          report_id: string
+        }
+        Insert: {
+          created_at?: string
+          creator_email: string
+          id?: string
+          report_id: string
+        }
+        Update: {
+          created_at?: string
+          creator_email?: string
+          id?: string
+          report_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shared_report_creators_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "shared_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shared_reports: {
+        Row: {
+          club_name: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          player_name: string
+          report_data: Json
+        }
+        Insert: {
+          club_name: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          player_name: string
+          report_data: Json
+        }
+        Update: {
+          club_name?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          player_name?: string
+          report_data?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
