@@ -111,6 +111,48 @@ export type Database = {
         }
         Relationships: []
       }
+      user_player_notes: {
+        Row: {
+          attachments: Json | null
+          created_at: string
+          custom_current_club: string | null
+          custom_last_active_club: string | null
+          custom_owning_club: string | null
+          external_links: Json | null
+          extra_info: string | null
+          id: string
+          player_id: string
+          updated_at: string
+          user_email: string
+        }
+        Insert: {
+          attachments?: Json | null
+          created_at?: string
+          custom_current_club?: string | null
+          custom_last_active_club?: string | null
+          custom_owning_club?: string | null
+          external_links?: Json | null
+          extra_info?: string | null
+          id?: string
+          player_id: string
+          updated_at?: string
+          user_email: string
+        }
+        Update: {
+          attachments?: Json | null
+          created_at?: string
+          custom_current_club?: string | null
+          custom_last_active_club?: string | null
+          custom_owning_club?: string | null
+          external_links?: Json | null
+          extra_info?: string | null
+          id?: string
+          player_id?: string
+          updated_at?: string
+          user_email?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
