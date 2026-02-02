@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_fit_daily_spend: {
+        Row: {
+          alert_sent_at: string | null
+          created_at: string | null
+          date: string
+          disabled_at: string | null
+          generation_count: number
+          id: string
+          total_spend_cents: number
+          updated_at: string | null
+        }
+        Insert: {
+          alert_sent_at?: string | null
+          created_at?: string | null
+          date?: string
+          disabled_at?: string | null
+          generation_count?: number
+          id?: string
+          total_spend_cents?: number
+          updated_at?: string | null
+        }
+        Update: {
+          alert_sent_at?: string | null
+          created_at?: string | null
+          date?: string
+          disabled_at?: string | null
+          generation_count?: number
+          id?: string
+          total_spend_cents?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      find_club_results: {
+        Row: {
+          created_at: string | null
+          expires_at: string | null
+          form_data: Json
+          id: string
+          player_id: string
+          player_name: string
+          results: Json
+          user_email: string
+        }
+        Insert: {
+          created_at?: string | null
+          expires_at?: string | null
+          form_data: Json
+          id?: string
+          player_id: string
+          player_name: string
+          results: Json
+          user_email: string
+        }
+        Update: {
+          created_at?: string | null
+          expires_at?: string | null
+          form_data?: Json
+          id?: string
+          player_id?: string
+          player_name?: string
+          results?: Json
+          user_email?: string
+        }
+        Relationships: []
+      }
       report_views: {
         Row: {
           created_at: string
@@ -158,7 +224,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_ai_spend: {
+        Args: { p_cost_cents: number; p_date: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
