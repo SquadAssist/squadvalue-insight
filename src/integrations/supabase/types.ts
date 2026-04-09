@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_fit_cache: {
+        Row: {
+          cache_key: string
+          club_name: string
+          content: string
+          created_at: string | null
+          expires_at: string
+          generated_at: string | null
+          id: string
+          player_name: string
+          sources: Json | null
+        }
+        Insert: {
+          cache_key: string
+          club_name: string
+          content: string
+          created_at?: string | null
+          expires_at: string
+          generated_at?: string | null
+          id?: string
+          player_name: string
+          sources?: Json | null
+        }
+        Update: {
+          cache_key?: string
+          club_name?: string
+          content?: string
+          created_at?: string | null
+          expires_at?: string
+          generated_at?: string | null
+          id?: string
+          player_name?: string
+          sources?: Json | null
+        }
+        Relationships: []
+      }
       ai_fit_daily_spend: {
         Row: {
           alert_sent_at: string | null
@@ -47,6 +83,42 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_fit_feedback: {
+        Row: {
+          cache_key: string
+          club_name: string
+          created_at: string
+          id: string
+          is_implicit: boolean | null
+          player_name: string
+          rating: string
+          user_agent: string | null
+          user_email: string | null
+        }
+        Insert: {
+          cache_key: string
+          club_name: string
+          created_at?: string
+          id?: string
+          is_implicit?: boolean | null
+          player_name: string
+          rating: string
+          user_agent?: string | null
+          user_email?: string | null
+        }
+        Update: {
+          cache_key?: string
+          club_name?: string
+          created_at?: string
+          id?: string
+          is_implicit?: boolean | null
+          player_name?: string
+          rating?: string
+          user_agent?: string | null
+          user_email?: string | null
+        }
+        Relationships: []
+      }
       find_club_results: {
         Row: {
           created_at: string | null
@@ -77,6 +149,33 @@ export type Database = {
           player_name?: string
           results?: Json
           user_email?: string
+        }
+        Relationships: []
+      }
+      player_images: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          player_id: string
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url: string
+          player_id: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          player_id?: string
+          updated_at?: string
+          uploaded_by?: string | null
         }
         Relationships: []
       }
@@ -121,6 +220,75 @@ export type Database = {
           },
         ]
       }
+      saved_filter_presets: {
+        Row: {
+          club_name: string
+          created_at: string
+          field_name: string
+          id: string
+          is_historical: boolean
+          preset_name: string
+          user_email: string
+          values: Json
+        }
+        Insert: {
+          club_name: string
+          created_at?: string
+          field_name: string
+          id?: string
+          is_historical?: boolean
+          preset_name: string
+          user_email: string
+          values?: Json
+        }
+        Update: {
+          club_name?: string
+          created_at?: string
+          field_name?: string
+          id?: string
+          is_historical?: boolean
+          preset_name?: string
+          user_email?: string
+          values?: Json
+        }
+        Relationships: []
+      }
+      saved_reports: {
+        Row: {
+          club_name: string
+          created_at: string
+          id: string
+          mode: string
+          player_id: string | null
+          player_name: string
+          priority: number | null
+          report_data: Json
+          user_email: string
+        }
+        Insert: {
+          club_name: string
+          created_at?: string
+          id?: string
+          mode?: string
+          player_id?: string | null
+          player_name: string
+          priority?: number | null
+          report_data: Json
+          user_email: string
+        }
+        Update: {
+          club_name?: string
+          created_at?: string
+          id?: string
+          mode?: string
+          player_id?: string | null
+          player_name?: string
+          priority?: number | null
+          report_data?: Json
+          user_email?: string
+        }
+        Relationships: []
+      }
       shared_report_creators: {
         Row: {
           created_at: string
@@ -156,6 +324,7 @@ export type Database = {
           created_at: string
           expires_at: string | null
           id: string
+          organization_name: string | null
           player_name: string
           report_data: Json
         }
@@ -164,6 +333,7 @@ export type Database = {
           created_at?: string
           expires_at?: string | null
           id?: string
+          organization_name?: string | null
           player_name: string
           report_data: Json
         }
@@ -172,8 +342,36 @@ export type Database = {
           created_at?: string
           expires_at?: string | null
           id?: string
+          organization_name?: string | null
           player_name?: string
           report_data?: Json
+        }
+        Relationships: []
+      }
+      user_custom_metrics: {
+        Row: {
+          created_at: string
+          id: string
+          metric_configs: Json
+          name: string
+          updated_at: string
+          user_email: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metric_configs?: Json
+          name: string
+          updated_at?: string
+          user_email: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metric_configs?: Json
+          name?: string
+          updated_at?: string
+          user_email?: string
         }
         Relationships: []
       }
@@ -188,8 +386,10 @@ export type Database = {
           extra_info: string | null
           id: string
           player_id: string
+          report_summary: Json | null
           updated_at: string
           user_email: string
+          youtube_url: string | null
         }
         Insert: {
           attachments?: Json | null
@@ -201,8 +401,10 @@ export type Database = {
           extra_info?: string | null
           id?: string
           player_id: string
+          report_summary?: Json | null
           updated_at?: string
           user_email: string
+          youtube_url?: string | null
         }
         Update: {
           attachments?: Json | null
@@ -214,8 +416,10 @@ export type Database = {
           extra_info?: string | null
           id?: string
           player_id?: string
+          report_summary?: Json | null
           updated_at?: string
           user_email?: string
+          youtube_url?: string | null
         }
         Relationships: []
       }
