@@ -119,6 +119,27 @@ export type Database = {
         }
         Relationships: []
       }
+      club_roles: {
+        Row: {
+          club_id: string
+          description: string | null
+          id: string
+          role_name: string
+        }
+        Insert: {
+          club_id: string
+          description?: string | null
+          id?: string
+          role_name: string
+        }
+        Update: {
+          club_id?: string
+          description?: string | null
+          id?: string
+          role_name?: string
+        }
+        Relationships: []
+      }
       find_club_results: {
         Row: {
           created_at: string | null
@@ -152,6 +173,63 @@ export type Database = {
         }
         Relationships: []
       }
+      league_groups: {
+        Row: {
+          competition_ids: string[]
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          user_email: string
+        }
+        Insert: {
+          competition_ids?: string[]
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+          user_email: string
+        }
+        Update: {
+          competition_ids?: string[]
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_email?: string
+        }
+        Relationships: []
+      }
+      pipeline_stages: {
+        Row: {
+          board_type: string
+          color: string
+          created_at: string
+          id: string
+          name: string
+          position: number
+          user_email: string
+        }
+        Insert: {
+          board_type?: string
+          color?: string
+          created_at?: string
+          id?: string
+          name: string
+          position: number
+          user_email: string
+        }
+        Update: {
+          board_type?: string
+          color?: string
+          created_at?: string
+          id?: string
+          name?: string
+          position?: number
+          user_email?: string
+        }
+        Relationships: []
+      }
       player_images: {
         Row: {
           created_at: string
@@ -178,6 +256,63 @@ export type Database = {
           uploaded_by?: string | null
         }
         Relationships: []
+      }
+      report_assignments: {
+        Row: {
+          assigned_by_email: string
+          assigned_by_name: string | null
+          assigned_to_email: string
+          assigned_to_name: string | null
+          created_at: string
+          deadline: string
+          id: string
+          is_read: boolean
+          report_id: string
+          task_description: string
+          type_of_report: string | null
+        }
+        Insert: {
+          assigned_by_email: string
+          assigned_by_name?: string | null
+          assigned_to_email: string
+          assigned_to_name?: string | null
+          created_at?: string
+          deadline: string
+          id?: string
+          is_read?: boolean
+          report_id: string
+          task_description?: string
+          type_of_report?: string | null
+        }
+        Update: {
+          assigned_by_email?: string
+          assigned_by_name?: string | null
+          assigned_to_email?: string
+          assigned_to_name?: string | null
+          created_at?: string
+          deadline?: string
+          id?: string
+          is_read?: boolean
+          report_id?: string
+          task_description?: string
+          type_of_report?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_assignments_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "saved_reports"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "report_assignments_type_of_report_fkey"
+            columns: ["type_of_report"]
+            isOneToOne: false
+            referencedRelation: "scouting_templates"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       report_views: {
         Row: {
@@ -259,6 +394,7 @@ export type Database = {
           created_at: string
           id: string
           mode: string
+          pipeline_stage_id: string | null
           player_id: string | null
           player_name: string
           priority: number | null
@@ -270,6 +406,7 @@ export type Database = {
           created_at?: string
           id?: string
           mode?: string
+          pipeline_stage_id?: string | null
           player_id?: string | null
           player_name: string
           priority?: number | null
@@ -281,11 +418,152 @@ export type Database = {
           created_at?: string
           id?: string
           mode?: string
+          pipeline_stage_id?: string | null
           player_id?: string | null
           player_name?: string
           priority?: number | null
           report_data?: Json
           user_email?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_reports_pipeline_stage_id_fkey"
+            columns: ["pipeline_stage_id"]
+            isOneToOne: false
+            referencedRelation: "pipeline_stages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scouted_roles: {
+        Row: {
+          club_id: string | null
+          description: string | null
+          id: string
+          role_name: string
+        }
+        Insert: {
+          club_id?: string | null
+          description?: string | null
+          id?: string
+          role_name: string
+        }
+        Update: {
+          club_id?: string | null
+          description?: string | null
+          id?: string
+          role_name?: string
+        }
+        Relationships: []
+      }
+      scouting_reports: {
+        Row: {
+          assigned_by_user_email: string
+          assigned_to_user_email: string
+          author_email: string
+          author_name: string | null
+          club_role_id: string
+          created_at: string
+          display_club_name: string | null
+          display_player_age: number
+          id: string
+          player_id: string
+          report_data: Json
+          report_owning_club_id: string
+          report_template_id: string
+          scouted_club_id: string
+          scouted_role_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_by_user_email: string
+          assigned_to_user_email: string
+          author_email: string
+          author_name?: string | null
+          club_role_id: string
+          created_at?: string
+          display_club_name?: string | null
+          display_player_age: number
+          id?: string
+          player_id: string
+          report_data?: Json
+          report_owning_club_id: string
+          report_template_id: string
+          scouted_club_id: string
+          scouted_role_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_by_user_email?: string
+          assigned_to_user_email?: string
+          author_email?: string
+          author_name?: string | null
+          club_role_id?: string
+          created_at?: string
+          display_club_name?: string | null
+          display_player_age?: number
+          id?: string
+          player_id?: string
+          report_data?: Json
+          report_owning_club_id?: string
+          report_template_id?: string
+          scouted_club_id?: string
+          scouted_role_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      scouting_templates: {
+        Row: {
+          id: string
+          template_name: string
+          template_schema: Json
+        }
+        Insert: {
+          id?: string
+          template_name: string
+          template_schema?: Json
+        }
+        Update: {
+          id?: string
+          template_name?: string
+          template_schema?: Json
+        }
+        Relationships: []
+      }
+      shadow_11: {
+        Row: {
+          club_id: string
+          created_at: string
+          creator_user_id: string
+          formation_data: Json
+          id: string
+          is_main: boolean
+          last_modified: string
+          shadow_name: string
+        }
+        Insert: {
+          club_id: string
+          created_at?: string
+          creator_user_id: string
+          formation_data?: Json
+          id?: string
+          is_main?: boolean
+          last_modified?: string
+          shadow_name: string
+        }
+        Update: {
+          club_id?: string
+          created_at?: string
+          creator_user_id?: string
+          formation_data?: Json
+          id?: string
+          is_main?: boolean
+          last_modified?: string
+          shadow_name?: string
         }
         Relationships: []
       }
@@ -351,6 +629,7 @@ export type Database = {
       user_custom_metrics: {
         Row: {
           created_at: string
+          definition: string | null
           id: string
           metric_configs: Json
           name: string
@@ -359,6 +638,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          definition?: string | null
           id?: string
           metric_configs?: Json
           name: string
@@ -367,10 +647,32 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          definition?: string | null
           id?: string
           metric_configs?: Json
           name?: string
           updated_at?: string
+          user_email?: string
+        }
+        Relationships: []
+      }
+      user_onboarding_flags: {
+        Row: {
+          created_at: string | null
+          key: string
+          status: string
+          user_email: string
+        }
+        Insert: {
+          created_at?: string | null
+          key: string
+          status: string
+          user_email: string
+        }
+        Update: {
+          created_at?: string | null
+          key?: string
+          status?: string
           user_email?: string
         }
         Relationships: []
